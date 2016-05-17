@@ -1,0 +1,10 @@
+target/classes/
+target/generated-sources/
+target/generated-test-sources/
+target/maven-archiver/
+target/maven-status/
+target/surefire-reports/
+target/test-classes/
+.mvn/
+.idea/
+target/api-0.0.1-SNAPSHOT.jar.original
