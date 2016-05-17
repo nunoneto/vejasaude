@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by Nuno on 17/05/2016.
  */
 
-@RestController("")
+@RestController("/api/v1")
 public class MainController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String home(){
         return "Hello!!!";
     }
+
+
 
 }
