@@ -1,10 +1,7 @@
-target/classes/
-target/generated-sources/
-target/generated-test-sources/
-target/maven-archiver/
-target/maven-status/
-target/surefire-reports/
-target/test-classes/
-.mvn/
-.idea/
-target/api-0.0.1-SNAPSHOT.jar.original
+client_bo/node_modules/
+api/.idea/
+api/target/
+client_bo/bower_components/
+api/api.iml
+api/mvnw
+api/mvnw.cmd
