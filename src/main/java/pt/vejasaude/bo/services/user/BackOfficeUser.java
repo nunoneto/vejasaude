@@ -73,9 +73,6 @@ public class BackOfficeUser {
             return new StatusResponse(Status.NOK,null);
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.
-
         return new StatusResponse<Iterable<pt.vejasaude.unified.data.backofficeuser.BackOfficeUser>>(Status.OK,null,users);
     }
 
