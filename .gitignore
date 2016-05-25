@@ -6,3 +6,5 @@ api/api.iml
 api/mvnw
 api/mvnw.cmd
 target/
+.idea/
+api.iml
