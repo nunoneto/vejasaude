@@ -13,4 +13,6 @@ public interface IBackOfficeUserRepository extends CrudRepository<BackOfficeUser
 
     //implement more queries here first!
 
+    BackOfficeUser findByEmail(String email);
+
 }

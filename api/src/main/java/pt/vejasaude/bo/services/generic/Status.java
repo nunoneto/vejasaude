@@ -1,4 +1,4 @@
-package pt.vejasaude.bo.services.responses.generic;
+package pt.vejasaude.bo.services.generic;
 
 /**
  * Created by NB20301 on 24/05/2016.

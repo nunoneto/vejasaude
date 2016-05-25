@@ -1,16 +1,23 @@
-package pt.vejasaude.bo.services.responses.generic;
+package pt.vejasaude.bo.services.generic;
 
 /**
  * Created by NB20301 on 24/05/2016.
  */
-public class StatusResponse {
+public class StatusResponse<T> {
 
     private String statusMessage;
     private int statusCode;
+    private T content;
 
-    public StatusResponse(String statusMessage, int statusCode) {
+    public StatusResponse(int statusCode, String statusMessage) {
         this.statusMessage = statusMessage;
         this.statusCode = statusCode;
+    }
+
+    public StatusResponse(int statusCode, String statusMessage, T content) {
+        this.statusMessage = statusMessage;
+        this.statusCode = statusCode;
+        this.content = content;
     }
 
     public String getStatusMessage() {
