@@ -1,12 +1,11 @@
 package pt.vejasaude.bo.services.session;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pt.vejasaude.bo.services.generic.Status;
 import pt.vejasaude.bo.services.generic.StatusResponse;
+import pt.vejasaude.bo.services.session.request.ChangePasswordRequest;
+import pt.vejasaude.bo.services.session.request.SessionRequest;
 import pt.vejasaude.unified.data.backofficeuser.BackOfficeUser;
 import pt.vejasaude.unified.data.backofficeuser.IBackOfficeUserRepository;
 
@@ -36,10 +35,12 @@ public class Session {
 
     @RequestMapping(value="", method = RequestMethod.POST)
     public StatusResponse startSession(
-            @RequestParam String username,
-            @RequestParam String password,
+            @RequestBody SessionRequest login,
             HttpSession session,
             HttpServletRequest request){
+
+        String username = login.getUsername(),
+                password = login.getPassword();
 
         BackOfficeUser user = null;
         try{
@@ -73,7 +74,11 @@ public class Session {
         return new StatusResponse<BackOfficeUser>(Status.OK, "Login OK",user);
     }
 
-
+    /**
+     * End the present session, if any
+     * @param request
+     * @return
+     */
     @RequestMapping(method = RequestMethod.DELETE)
     public StatusResponse endSession(
             HttpServletRequest request){
@@ -90,6 +95,30 @@ public class Session {
         request.getSession();
 
         return new StatusResponse<BackOfficeUser>(Status.OK, null);
+    }
+
+    @RequestMapping(value="/password", method = RequestMethod.POST)
+    public StatusResponse changePassword(
+            HttpServletRequest request,
+            @RequestBody ChangePasswordRequest req){
+
+        if(req.getCurrentPassword().isEmpty() || req.getNewPassword().isEmpty())
+            return new StatusResponse<BackOfficeUser>(Status.NOK, "Preencha todos os campos");
+
+        if(req.getCurrentPassword().equals(req.getNewPassword()))
+            return new StatusResponse<BackOfficeUser>(Status.NOK, "A atual e nova password são idênticas");
+
+        BackOfficeUser user = (BackOfficeUser) request.getSession().getAttribute(BO_SESSION);
+        if(user == null || user.getUsername().isEmpty())
+            return new StatusResponse<BackOfficeUser>(Status.NOK, "Não foi possível alterar a sua password");
+
+        if(!user.getPassword().equals(req.getCurrentPassword()))
+            return new StatusResponse<BackOfficeUser>(Status.NOK, "A password atual inserida não coincide com a password atual do utilizador");
+
+        user.setPassword(req.getNewPassword());
+        userRepo.save(user);
+
+        return new StatusResponse<BackOfficeUser>(Status.OK, null, user);
     }
 
 

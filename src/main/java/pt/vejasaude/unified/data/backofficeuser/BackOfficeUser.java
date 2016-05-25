@@ -101,4 +101,24 @@ public class BackOfficeUser implements Serializable{
     public static int getMaxPasswordWrongTries() {
         return MAX_PASSWORD_WRONG_TRIES;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPrettyName(String prettyName) {
+        this.prettyName = prettyName;
+    }
+
+    public void setWrongPasswordTries(int wrongPasswordTries) {
+        this.wrongPasswordTries = wrongPasswordTries;
+    }
 }
