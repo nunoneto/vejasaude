@@ -1,12 +1,17 @@
 package pt.vejasaude.bo.services.generic;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by NB20301 on 24/05/2016.
  */
 public class StatusResponse<T> {
 
+    @JsonProperty
     private String statusMessage;
+    @JsonProperty
     private int statusCode;
+    @JsonProperty
     private T content;
 
     public StatusResponse(int statusCode, String statusMessage) {

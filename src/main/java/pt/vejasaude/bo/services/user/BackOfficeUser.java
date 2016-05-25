@@ -9,6 +9,10 @@ import pt.vejasaude.bo.services.generic.StatusResponse;
 import pt.vejasaude.bo.services.user.request.CreateNewUserRequest;
 import pt.vejasaude.unified.data.backofficeuser.IBackOfficeUserRepository;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -62,7 +66,7 @@ public class BackOfficeUser {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public StatusResponse getAll(){
+    public StatusResponse getAll() throws IOException {
 
         Iterable<pt.vejasaude.unified.data.backofficeuser.BackOfficeUser> users = null;
 

@@ -1,5 +1,6 @@
 package pt.vejasaude.unified.data.backofficeuser;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import pt.vejasaude.bo.services.user.request.CreateNewUserRequest;
 
@@ -27,7 +28,7 @@ public class BackOfficeUser implements Serializable{
     private String username;
 
     @Column
-    @JsonIgnoreProperties
+    @JsonIgnore
     private String password;
 
     @Column
@@ -53,6 +54,7 @@ public class BackOfficeUser implements Serializable{
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.email = user.getEmail();
+        this.prettyName = user.getPrettyName();
         this.wrongPasswordTries = 0;
     }
 
