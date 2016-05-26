@@ -15,7 +15,7 @@ var LoginComponent = (function () {
         this.sessionService = sessionService;
     }
     LoginComponent.prototype.doLogin = function () {
-        this.sessionService.login();
+        this.sessionService.login(this.username, this.password);
     };
     LoginComponent.prototype.eventHandler = function (event) {
         if (event.keyCode == 13) {

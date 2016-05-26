@@ -8,6 +8,8 @@ import { SessionService } from '../services/session.service';
 })
 export class LoginComponent { 
   
+  username: string;
+  password: string;
   rememberMe : boolean;
   
   constructor(private sessionService:SessionService){
@@ -15,7 +17,7 @@ export class LoginComponent {
   }
   
   doLogin(){
-    this.sessionService.login();
+    this.sessionService.login(this.username,this.password);
   }
   
   eventHandler(event) {
