@@ -19,25 +19,28 @@ export class SessionService extends APIService{
     constructor (private http: Http) {
         super();
         this.url = this.relativeUrl + "/session";
+        this.activeUser = null;
     }
     
     /** ------------------ Login ------------------- **/
     
-    public login(username:string, password:string): Promise<APIResponse>{
+    public login(username:string, password:string): Promise<User>{
 
-        return new Promise((resolve, reject)=>{  
+        return new Promise<User>((resolve, reject)=>{  
             
             this.http.post(
                 this.url,
                 JSON.stringify({
                     username: username,
                     password: password 
-                }),{headers: this.headers}).toPromise()
+                }),this.options).toPromise()
             .then(resp => {
-                if(this.status(resp))
-                    resolve(resp.json().content);
-                else
-                    reject(resp.json().statusMessage);
+                var body = resp.json();
+                if(this.status(resp)){
+                    this.activeUser = new User(body.content);
+                    resolve(this.activeUser);
+                }else
+                    reject(body.statusMessage);
             })
             .catch(err => {
                 reject(null);
@@ -55,8 +58,26 @@ export class SessionService extends APIService{
     
     /** ------------------ Get Session ------------------- **/
 
-    getSession(){
-        
+    getSession(): Promise<User>{
+        return new Promise<User>((resolve,reject) => {
+            
+            if(this.activeUser != null){
+                resolve(this.activeUser);
+            }else{
+                this.http.get(this.url,this.options).toPromise()
+                .then(resp => {
+                    var body = resp.json();
+                    if(this.status(resp)){
+                        this.activeUser = new User(body.content);
+                        resolve(this.activeUser);
+                    }else
+                        reject(body.statusCode);
+                })
+                .catch(err => reject());
+            }
+                
+            
+        });
     }
 
     
