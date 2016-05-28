@@ -15,7 +15,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var basichttp_service_1 = require('./basichttp.service');
+var api_service_1 = require('./api.service');
+require('rxjs/add/operator/toPromise');
 var SessionService = (function (_super) {
     __extends(SessionService, _super);
     function SessionService(http) {
@@ -23,14 +24,32 @@ var SessionService = (function (_super) {
         this.http = http;
         this.url = this.relativeUrl + "/session";
     }
+    /** ------------------ Login ------------------- **/
     SessionService.prototype.login = function (username, password) {
-        this.http.post(this.url, JSON.stringify({
-            username: username,
-            password: password
-        }));
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.url, JSON.stringify({
+                username: username,
+                password: password
+            }), { headers: _this.headers }).toPromise()
+                .then(function (resp) {
+                if (_this.status(resp))
+                    resolve(resp.json().content);
+                else
+                    reject(resp.json().statusMessage);
+            })
+                .catch(function (err) {
+                reject(null);
+            });
+        });
     };
+    /** ------------------ Change Password ------------------- **/
     SessionService.prototype.changePassword = function (currentPassword, newPassword) {
     };
+    /** ------------------ Get Session ------------------- **/
+    SessionService.prototype.getSession = function () {
+    };
+    /** ------------------ Logout ------------------- **/
     SessionService.prototype.logout = function () {
     };
     SessionService = __decorate([
@@ -38,6 +57,6 @@ var SessionService = (function (_super) {
         __metadata('design:paramtypes', [http_1.Http])
     ], SessionService);
     return SessionService;
-}(basichttp_service_1.BasicHttpService));
+}(api_service_1.APIService));
 exports.SessionService = SessionService;
 //# sourceMappingURL=session.service.js.map

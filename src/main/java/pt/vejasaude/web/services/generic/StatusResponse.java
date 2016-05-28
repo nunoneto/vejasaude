@@ -1,4 +1,4 @@
-package pt.vejasaude.bo.services.generic;
+package pt.vejasaude.web.services.generic;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

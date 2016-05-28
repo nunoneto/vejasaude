@@ -1,11 +1,11 @@
-package pt.vejasaude.bo.services.session;
+package pt.vejasaude.web.services.session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pt.vejasaude.bo.services.generic.Status;
-import pt.vejasaude.bo.services.generic.StatusResponse;
-import pt.vejasaude.bo.services.session.request.ChangePasswordRequest;
-import pt.vejasaude.bo.services.session.request.SessionRequest;
+import pt.vejasaude.web.services.generic.Status;
+import pt.vejasaude.web.services.generic.StatusResponse;
+import pt.vejasaude.web.services.session.request.ChangePasswordRequest;
+import pt.vejasaude.web.services.session.request.SessionRequest;
 import pt.vejasaude.unified.data.backofficeuser.BackOfficeUser;
 import pt.vejasaude.unified.data.backofficeuser.IBackOfficeUserRepository;
 
@@ -22,7 +22,7 @@ public class Session {
     @Autowired
     IBackOfficeUserRepository userRepo;
 
-    private final static String BO_SESSION = "BO_SESSION";
+    public final static String BO_SESSION = "BO_SESSION";
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -119,6 +119,11 @@ public class Session {
         userRepo.save(user);
 
         return new StatusResponse<BackOfficeUser>(Status.OK, null, user);
+    }
+
+    @RequestMapping(value="/denied",method = RequestMethod.GET)
+    public StatusResponse unallowed(){
+        return new StatusResponse(Status.NOT_AUTHENTICATED,"No session found");
     }
 
 

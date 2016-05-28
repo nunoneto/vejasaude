@@ -1,22 +1,13 @@
-package pt.vejasaude.bo.services.user;
+package pt.vejasaude.web.services.user;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.tomcat.util.modeler.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pt.vejasaude.Utils;
-import pt.vejasaude.bo.services.generic.Status;
-import pt.vejasaude.bo.services.generic.StatusResponse;
-import pt.vejasaude.bo.services.user.request.CreateNewUserRequest;
-import pt.vejasaude.bo.services.user.request.UpdateUserRequest;
+import pt.vejasaude.web.services.generic.Status;
+import pt.vejasaude.web.services.generic.StatusResponse;
+import pt.vejasaude.web.services.user.request.CreateNewUserRequest;
+import pt.vejasaude.web.services.user.request.UpdateUserRequest;
 import pt.vejasaude.unified.data.backofficeuser.IBackOfficeUserRepository;
-
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by NB20301 on 25/05/2016.
@@ -68,7 +59,7 @@ public class BackOfficeUser {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public StatusResponse getAll() throws IOException {
+    public StatusResponse getAll() {
 
         Iterable<pt.vejasaude.unified.data.backofficeuser.BackOfficeUser> users = null;
 

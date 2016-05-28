@@ -1,4 +1,4 @@
-package pt.vejasaude.bo.services.user.request;
+package pt.vejasaude.web.services.user.request;
 
 /**
  * Created by NB20301 on 25/05/2016.

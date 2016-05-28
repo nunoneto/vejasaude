@@ -1,8 +1,7 @@
 package pt.vejasaude.unified.data.backofficeuser;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import pt.vejasaude.bo.services.user.request.CreateNewUserRequest;
+import pt.vejasaude.web.services.user.request.CreateNewUserRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -35,6 +34,7 @@ public class BackOfficeUser implements Serializable{
     private String email, sessionID, prettyName;
 
     @Column
+    @JsonIgnore
     private int wrongPasswordTries;
 
 

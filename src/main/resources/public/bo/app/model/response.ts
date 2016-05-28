@@ -1,4 +1,4 @@
-export class Response{
+export class APIResponse{
     
     statusCode: number;
     statusMessage: string;

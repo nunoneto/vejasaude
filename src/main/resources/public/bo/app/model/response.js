@@ -1,10 +1,10 @@
 "use strict";
-var Response = (function () {
-    function Response(statusCode, statusMessage) {
+var APIResponse = (function () {
+    function APIResponse(statusCode, statusMessage) {
         this.statusCode = statusCode;
         this.statusMessage = statusMessage;
     }
-    return Response;
+    return APIResponse;
 }());
-exports.Response = Response;
+exports.APIResponse = APIResponse;
 //# sourceMappingURL=response.js.map

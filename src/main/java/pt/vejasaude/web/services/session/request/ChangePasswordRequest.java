@@ -1,4 +1,4 @@
-package pt.vejasaude.bo.services.session.request;
+package pt.vejasaude.web.services.session.request;
 
 /**
  * Created by NB20301 on 25/05/2016.
