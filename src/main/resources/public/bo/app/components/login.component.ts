@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { HomeComponent } from './home.component';
-import { Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { OnActivate, Router, RouteSegment, RouteTree, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
 @RouteConfig([
   {
@@ -18,25 +18,26 @@ import { Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angul
   directives: [ROUTER_DIRECTIVES]
 })
 
-export class LoginComponent { 
+export class LoginComponent implements OnActivate{ 
   
-  username: string;
-  password: string;
-  rememberMe: boolean;
+  private currSegment: RouteSegment;
+  private username: string;
+  private password: string;
+  private rememberMe: boolean;
   
   constructor(private sessionService:SessionService, private router:Router){  }
   
   doLogin(){
     this.sessionService.login(this.username,this.password)
       .then(user =>{
-        //redirect user to homepage
+        //TODO redirect user to homepage
         console.log(user);
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl(['./home'],currSegment);
 
 
       })
       .catch(err => {
-        //show error message
+        //TODO show error message
         console.log(err);
       });
   }
@@ -48,7 +49,12 @@ export class LoginComponent {
   } 
   
   remember(event){
+    //TODO: store preference
     console.log(event.target.checked);
+  }
+
+  routerOnActivate(curr: RouteSegment, prev: RouteSegment, currTree: RouteTree) {
+    this.currSegment = curr;
   }
 
   
