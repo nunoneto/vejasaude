@@ -8,24 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var MenuBarComponent = (function () {
-    function MenuBarComponent(router) {
-        this.router = router;
+var core_1 = require("@angular/core");
+var ListUsersComponent = (function () {
+    function ListUsersComponent() {
     }
-    MenuBarComponent.prototype.openMenu = function (menu) {
-        //this.router.navigate();
+    ListUsersComponent.prototype.ngOnInit = function () {
     };
-    MenuBarComponent = __decorate([
+    ListUsersComponent = __decorate([
         core_1.Component({
-            selector: 'bo-menubar',
-            templateUrl: 'views/menubar.html',
-            providers: [router_1.ROUTER_PROVIDERS]
+            templateUrl: 'views/menus/users/list-users.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
-    ], MenuBarComponent);
-    return MenuBarComponent;
+        __metadata('design:paramtypes', [])
+    ], ListUsersComponent);
+    return ListUsersComponent;
 }());
-exports.MenuBarComponent = MenuBarComponent;
-//# sourceMappingURL=menubar.component.js.map
+exports.ListUsersComponent = ListUsersComponent;
+//# sourceMappingURL=users.component.js.map

@@ -9,7 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var menubar_component_1 = require('./menubar.component');
+var router_1 = require('@angular/router');
+var users_component_1 = require('./menus/users.component');
 var HomeComponent = (function () {
     function HomeComponent() {
     }
@@ -17,10 +18,16 @@ var HomeComponent = (function () {
         core_1.Component({
             selector: 'bo-home',
             templateUrl: 'views/home.html',
+            providers: [
+                router_1.ROUTER_PROVIDERS
+            ],
             directives: [
-                menubar_component_1.MenuBarComponent
+                router_1.ROUTER_DIRECTIVES
             ]
-        }), 
+        }),
+        router_1.Routes([
+            { path: '/users', component: users_component_1.ListUsersComponent }
+        ]), 
         __metadata('design:paramtypes', [])
     ], HomeComponent);
     return HomeComponent;
