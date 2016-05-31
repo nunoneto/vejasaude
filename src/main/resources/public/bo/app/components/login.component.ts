@@ -1,42 +1,33 @@
 import { Component } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { HomeComponent } from './home.component';
-import { Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { OnActivate, Router, RouteSegment, RouteTree } from '@angular/router';
 
-@RouteConfig([
-  {
-    path: '/home',
-    name: 'Home',
-    component: HomeComponent
-  }
-])
 
 @Component({
-  selector: 'bo-login',
   templateUrl: 'views/login.html',
-  providers: [SessionService, ROUTER_PROVIDERS],
-  directives: [ROUTER_DIRECTIVES]
+  providers: [SessionService],
 })
 
-export class LoginComponent { 
+export class LoginComponent implements OnActivate{ 
   
   username: string;
   password: string;
   rememberMe: boolean;
+  private currSegment: RouteSegment;
   
-  constructor(private sessionService:SessionService, private router:Router){  }
-  
+  constructor(private sessionService:SessionService, private router: Router){  }
+    
+  routerOnActivate(curr: RouteSegment, prev: RouteSegment, currTree: RouteTree) {
+    this.currSegment = curr;
+  }
+    
   doLogin(){
     this.sessionService.login(this.username,this.password)
       .then(user =>{
-        //redirect user to homepage
-        console.log(user);
-        this.router.navigateByUrl('/home');
-
-
+        this.router.navigate(['/home'],this.currSegment);
       })
       .catch(err => {
-        //show error message
         console.log(err);
       });
   }

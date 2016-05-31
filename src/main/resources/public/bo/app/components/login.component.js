@@ -10,23 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var session_service_1 = require('../services/session.service');
-var home_component_1 = require('./home.component');
-var router_deprecated_1 = require('@angular/router-deprecated');
+var router_1 = require('@angular/router');
 var LoginComponent = (function () {
     function LoginComponent(sessionService, router) {
         this.sessionService = sessionService;
         this.router = router;
     }
+    LoginComponent.prototype.routerOnActivate = function (curr, prev, currTree) {
+        this.currSegment = curr;
+    };
     LoginComponent.prototype.doLogin = function () {
         var _this = this;
         this.sessionService.login(this.username, this.password)
             .then(function (user) {
-            //redirect user to homepage
-            console.log(user);
-            _this.router.navigateByUrl('/home');
+            _this.router.navigate(['/home'], _this.currSegment);
         })
             .catch(function (err) {
-            //show error message
             console.log(err);
         });
     };
@@ -39,20 +38,11 @@ var LoginComponent = (function () {
         console.log(event.target.checked);
     };
     LoginComponent = __decorate([
-        router_deprecated_1.RouteConfig([
-            {
-                path: '/home',
-                name: 'Home',
-                component: home_component_1.HomeComponent
-            }
-        ]),
         core_1.Component({
-            selector: 'bo-login',
             templateUrl: 'views/login.html',
-            providers: [session_service_1.SessionService, router_deprecated_1.ROUTER_PROVIDERS],
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
+            providers: [session_service_1.SessionService],
         }), 
-        __metadata('design:paramtypes', [session_service_1.SessionService, router_deprecated_1.Router])
+        __metadata('design:paramtypes', [session_service_1.SessionService, router_1.Router])
     ], LoginComponent);
     return LoginComponent;
 }());

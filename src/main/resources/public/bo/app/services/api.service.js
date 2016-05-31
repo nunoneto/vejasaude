@@ -5,6 +5,7 @@ var APIService = (function () {
     function APIService() {
         this.relativeUrl = "http://localhost:8082/api/v1";
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.options = { headers: this.headers };
     }
     APIService.prototype.status = function (resp) {
         return resp.json().statusCode == status_1.Status.OK;

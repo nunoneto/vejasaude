@@ -9,21 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var menubar_component_1 = require('./menubar.component');
-var HomeComponent = (function () {
-    function HomeComponent() {
+var router_1 = require('@angular/router');
+var MenuBarComponent = (function () {
+    function MenuBarComponent(router) {
+        this.router = router;
     }
-    HomeComponent = __decorate([
+    MenuBarComponent.prototype.openMenu = function (menu) {
+        //this.router.navigate();
+    };
+    MenuBarComponent = __decorate([
         core_1.Component({
-            selector: 'bo-home',
-            templateUrl: 'views/home.html',
-            directives: [
-                menubar_component_1.MenuBarComponent
-            ]
+            selector: 'bo-menubar',
+            templateUrl: 'views/menubar.html',
+            providers: [router_1.ROUTER_PROVIDERS]
         }), 
-        __metadata('design:paramtypes', [])
-    ], HomeComponent);
-    return HomeComponent;
+        __metadata('design:paramtypes', [router_1.Router])
+    ], MenuBarComponent);
+    return MenuBarComponent;
 }());
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+exports.MenuBarComponent = MenuBarComponent;
+//# sourceMappingURL=menubar.component.js.map

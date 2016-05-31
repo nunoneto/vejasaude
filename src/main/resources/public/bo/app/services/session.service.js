@@ -17,12 +17,14 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var api_service_1 = require('./api.service');
 require('rxjs/add/operator/toPromise');
+var user_1 = require('../model/user');
 var SessionService = (function (_super) {
     __extends(SessionService, _super);
     function SessionService(http) {
         _super.call(this);
         this.http = http;
         this.url = this.relativeUrl + "/session";
+        this.activeUser = null;
     }
     /** ------------------ Login ------------------- **/
     SessionService.prototype.login = function (username, password) {
@@ -31,12 +33,15 @@ var SessionService = (function (_super) {
             _this.http.post(_this.url, JSON.stringify({
                 username: username,
                 password: password
-            }), { headers: _this.headers }).toPromise()
+            }), _this.options).toPromise()
                 .then(function (resp) {
-                if (_this.status(resp))
-                    resolve(resp.json().content);
+                var body = resp.json();
+                if (_this.status(resp)) {
+                    _this.activeUser = new user_1.User(body.content);
+                    resolve(_this.activeUser);
+                }
                 else
-                    reject(resp.json().statusMessage);
+                    reject(body.statusMessage);
             })
                 .catch(function (err) {
                 reject(null);
@@ -48,6 +53,25 @@ var SessionService = (function (_super) {
     };
     /** ------------------ Get Session ------------------- **/
     SessionService.prototype.getSession = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.activeUser != null) {
+                resolve(_this.activeUser);
+            }
+            else {
+                _this.http.get(_this.url, _this.options).toPromise()
+                    .then(function (resp) {
+                    var body = resp.json();
+                    if (_this.status(resp)) {
+                        _this.activeUser = new user_1.User(body.content);
+                        resolve(_this.activeUser);
+                    }
+                    else
+                        reject(body.statusCode);
+                })
+                    .catch(function (err) { return reject(); });
+            }
+        });
     };
     /** ------------------ Logout ------------------- **/
     SessionService.prototype.logout = function () {
