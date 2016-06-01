@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var session_service_1 = require('../services/session.service');
+var alert_component_1 = require('./ui/alert.component');
 var router_1 = require('@angular/router');
 var LoginComponent = (function () {
     function LoginComponent(sessionService, router) {
@@ -27,6 +28,8 @@ var LoginComponent = (function () {
         })
             .catch(function (err) {
             console.log(err);
+            _this.alertType = alert_component_1.Type.DANGER;
+            _this.alertMessage = err;
         });
     };
     LoginComponent.prototype.eventHandler = function (event) {
@@ -41,6 +44,7 @@ var LoginComponent = (function () {
         core_1.Component({
             templateUrl: 'views/login.html',
             providers: [session_service_1.SessionService],
+            directives: [alert_component_1.AlertComponent]
         }), 
         __metadata('design:paramtypes', [session_service_1.SessionService, router_1.Router])
     ], LoginComponent);
