@@ -10,26 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var session_service_1 = require('../services/session.service');
-var alert_component_1 = require('./ui/alert.component');
+var alert_1 = require('./ui/alert/alert');
 var router_1 = require('@angular/router');
 var LoginComponent = (function () {
     function LoginComponent(sessionService, router) {
         this.sessionService = sessionService;
         this.router = router;
+        this.alert = new alert_1.Alert();
     }
     LoginComponent.prototype.routerOnActivate = function (curr, prev, currTree) {
         this.currSegment = curr;
     };
     LoginComponent.prototype.doLogin = function () {
         var _this = this;
+        this.alert.setVisible(false);
         this.sessionService.login(this.username, this.password)
             .then(function (user) {
             _this.router.navigate(['/home'], _this.currSegment);
         })
             .catch(function (err) {
             console.log(err);
-            _this.alertType = alert_component_1.Type.DANGER;
-            _this.alertMessage = err;
+            _this.alert.type = alert_1.Type.DANGER;
+            _this.alert.message = err;
+            _this.alert.setVisible(true);
         });
     };
     LoginComponent.prototype.eventHandler = function (event) {
@@ -44,7 +47,7 @@ var LoginComponent = (function () {
         core_1.Component({
             templateUrl: 'views/login.html',
             providers: [session_service_1.SessionService],
-            directives: [alert_component_1.AlertComponent]
+            directives: [alert_1.AlertComponent]
         }), 
         __metadata('design:paramtypes', [session_service_1.SessionService, router_1.Router])
     ], LoginComponent);

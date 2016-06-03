@@ -9,37 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var common_1 = require('@angular/common');
+var alert_model_1 = require('./alert.model');
 var AlertComponent = (function () {
     function AlertComponent() {
-        this.visible = true;
     }
-    AlertComponent.prototype.toggle = function (visible) {
-        this.visible = visible;
-    };
-    AlertComponent.prototype.setType = function (type) {
-        this.type = type;
-    };
-    AlertComponent.prototype.setMessage = function (message) {
-        this.message = message;
-    };
-    AlertComponent.prototype.change = function (type, message) {
-        this.type = type;
-        this.message = message;
-    };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', String)
-    ], AlertComponent.prototype, "type", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], AlertComponent.prototype, "message", void 0);
+        __metadata('design:type', alert_model_1.Alert)
+    ], AlertComponent.prototype, "alert", void 0);
     AlertComponent = __decorate([
         core_1.Component({
             selector: 'alert',
-            template: '<div class="alert" [ngClass]="{hidden: visible, type: type}" role="alert">{{message}}</div>',
-            directives: [common_1.NgClass]
+            template: '<div class="alert {{alert.type}} {{alert.visible}}" role="alert">{{alert.message}}</div>',
         }), 
         __metadata('design:paramtypes', [])
     ], AlertComponent);

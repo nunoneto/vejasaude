@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { HomeComponent } from './home.component';
-import { AlertComponent, Type } from './ui/alert.component';
+import { AlertComponent, Type, Alert } from './ui/alert/alert';
 import { OnActivate, Router, RouteSegment, RouteTree } from '@angular/router';
 
 
@@ -19,24 +19,28 @@ export class LoginComponent implements OnActivate{
   private currSegment: RouteSegment;
   
   //alert props
-  alertMessage:string;
-  alertType:string;
+  alert:Alert;
   
-  constructor(private sessionService:SessionService, private router: Router){  }
+  constructor(private sessionService:SessionService, private router: Router){ 
+    this.alert = new Alert();
+   }
     
   routerOnActivate(curr: RouteSegment, prev: RouteSegment, currTree: RouteTree) {
     this.currSegment = curr;
   }
     
   doLogin(){
+    this.alert.setVisible(false);
     this.sessionService.login(this.username,this.password)
       .then(user =>{
         this.router.navigate(['/home'],this.currSegment);
       })
       .catch(err => {
         console.log(err);
-        this.alertType = Type.DANGER;
-        this.alertMessage = err;
+        this.alert.type = Type.DANGER;
+        this.alert.message = err;
+        this.alert.setVisible(true);
+        
       });
   }
   
