@@ -2,10 +2,7 @@ package pt.vejasaude.unified.data.backofficeuser;
 
 import pt.vejasaude.web.services.user.request.CreateNewUserRequest;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -22,10 +19,12 @@ public class Doctor implements Serializable {
     @Column
     private String name;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name="IdSpecialty")
     private MedicalSpecialty Specialty;
 
-    @Column
+    @OneToOne
+    @JoinColumn(name="idCurriculum")
     private CurriculumVitae Curriculum;
 
     public Doctor() {
@@ -36,12 +35,14 @@ public class Doctor implements Serializable {
         Specialty = specialty;
         Curriculum = curriculum;
     }
+    /*
     public Doctor(CreateNewDoctorRequest doctor){
         this.username = doctor.getUsername();
         this.name = doctor.getPassword();
         this.Specialty = doctor.getSpecialty();
         this.Curriculum = doctor.getCurriculum();
     }
+    */
 
 
 
