@@ -14,7 +14,7 @@ import pt.vejasaude.unified.data.backofficeuser.IBackOfficeUserRepository;
  */
 @RestController
 @RequestMapping("/api/v1/bouser")
-public class BackOfficeUser {
+public class BackOfficeUserController {
 
     @Autowired
     IBackOfficeUserRepository userRepo;

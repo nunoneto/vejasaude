@@ -40,7 +40,7 @@ public class Doctor implements Serializable {
         Curriculum = curriculum;
     }
     /*
-    public Doctor(CreateNewDoctorRequest doctor){
+    public DoctorController(CreateNewDoctorRequest doctor){
         this.username = doctor.getUsername();
         this.name = doctor.getName();
     }
