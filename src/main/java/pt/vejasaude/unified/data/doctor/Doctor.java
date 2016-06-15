@@ -22,11 +22,13 @@ public class Doctor implements Serializable {
     @Column
     private String name;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name="IdSpecialty")
     private MedicalSpecialty Specialty;
 
-    @Column
-    @JoinColumn
+
+    @OneToOne
+    @JoinColumn(name="idCurriculum")
     private CurriculumVitae Curriculum;
 
     public Doctor() {
@@ -37,10 +39,12 @@ public class Doctor implements Serializable {
         Specialty = specialty;
         Curriculum = curriculum;
     }
+    /*
     public Doctor(CreateNewDoctorRequest doctor){
         this.username = doctor.getUsername();
         this.name = doctor.getName();
     }
+    */
 
     public String getUsername() {return username;
     }

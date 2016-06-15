@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {Routes , Router, ROUTER_PROVIDERS, ROUTER_DIRECTIVES} from '@angular/router';
 import { LoginComponent } from './login.component'
 import { HomeComponent } from './home.component'
+import { ListUsersComponent } from './menus/users.component'
 import { SessionService } from '../services/session.service';
 
 
@@ -15,6 +16,7 @@ import { SessionService } from '../services/session.service';
 @Routes([
     { path: '/login', component: LoginComponent },
     { path: '/home', component: HomeComponent },
+    { path: '/users', component: ListUsersComponent },
 ])
 
 
