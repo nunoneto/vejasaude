@@ -9,16 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var users_service_1 = require("../../services/users.service");
 var ListUsersComponent = (function () {
-    function ListUsersComponent() {
+    function ListUsersComponent(userService) {
+        this.userService = userService;
     }
     ListUsersComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.getUsers()
+            .then(function (users) { return _this.users = users; })
+            .catch(function (err) { return console.log(err); });
     };
     ListUsersComponent = __decorate([
         core_1.Component({
-            templateUrl: 'views/menus/users/list-users.html'
+            templateUrl: 'views/menus/users/list-users.html',
+            providers: [users_service_1.UserService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [users_service_1.UserService])
     ], ListUsersComponent);
     return ListUsersComponent;
 }());

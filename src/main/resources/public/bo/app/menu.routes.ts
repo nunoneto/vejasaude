@@ -6,7 +6,6 @@ export const MenuRoutes: RouterConfig = [
   {
     path: 'home',
     component: HomeComponent,
-    terminal: true,
     children: [
         {
             path: 'users',

@@ -16,29 +16,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var api_service_1 = require('./api.service');
 var http_1 = require('@angular/http');
-var UsersService = (function (_super) {
-    __extends(UsersService, _super);
-    function UsersService(http) {
+var user_1 = require('../model/user');
+var UserService = (function (_super) {
+    __extends(UserService, _super);
+    function UserService(http) {
         _super.call(this);
         this.http = http;
         this.url = this.relativeUrl + "/bouser";
     }
-    UsersService.prototype.getUsers = function () {
-        return null;
+    UserService.prototype.getUsers = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http
+                .get(_this.url, _this.options)
+                .toPromise()
+                .then(function (response) {
+                var body = response.json();
+                if (_this.status(response)) {
+                    _this.users = _this.mapResponseToUsers(body.content);
+                    resolve(_this.users);
+                }
+                else
+                    reject(body.statusMessage);
+            })
+                .catch(function (err) { return reject(null); });
+        });
     };
-    UsersService.prototype.findUser = function () {
+    UserService.prototype.findUser = function (id) {
+        return true;
     };
-    UsersService.prototype.createUser = function () {
+    UserService.prototype.createUser = function () {
     };
-    UsersService.prototype.updateUser = function () {
+    UserService.prototype.updateUser = function () {
     };
-    UsersService.prototype.deleteUser = function () {
+    UserService.prototype.deleteUser = function (id) {
+        return true;
     };
-    UsersService = __decorate([
+    UserService.prototype.mapResponseToUsers = function (content) {
+        return content.map(function (item) { return new user_1.User(item); });
+    };
+    UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], UsersService);
-    return UsersService;
+    ], UserService);
+    return UserService;
 }(api_service_1.APIService));
-exports.UsersService = UsersService;
+exports.UserService = UserService;
 //# sourceMappingURL=users.service.js.map

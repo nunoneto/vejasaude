@@ -5,7 +5,6 @@ exports.MenuRoutes = [
     {
         path: 'home',
         component: home_component_1.HomeComponent,
-        terminal: true,
         children: [
             {
                 path: 'users',
