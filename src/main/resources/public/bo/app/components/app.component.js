@@ -10,8 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require('@angular/router');
-var login_component_1 = require('./login.component');
-var home_component_1 = require('./home.component');
 var session_service_1 = require('../services/session.service');
 var AppComponent = (function () {
     function AppComponent(sessionService, router) {
@@ -25,24 +23,20 @@ var AppComponent = (function () {
             .catch(function (err) { return _this.login(); });
     };
     AppComponent.prototype.home = function () {
-        console.log("Going Home!");
-        this.router.navigate(['/home']);
+        console.info("Going Home!");
+        this.router.navigate(['home']);
     };
     AppComponent.prototype.login = function () {
-        console.log("Back to loign you fool!");
-        this.router.navigate(['/login']);
+        console.info("Back to login you fool!");
+        this.router.navigate(['login']);
     };
     AppComponent = __decorate([
         core_1.Component({
             template: '<router-outlet></router-outlet>',
             selector: 'vejasaude-bo',
-            providers: [session_service_1.SessionService, router_1.ROUTER_PROVIDERS],
+            providers: [session_service_1.SessionService],
             directives: [router_1.ROUTER_DIRECTIVES]
-        }),
-        router_1.Routes([
-            { path: '/login', component: login_component_1.LoginComponent },
-            { path: '/home', component: home_component_1.HomeComponent },
-        ]), 
+        }), 
         __metadata('design:paramtypes', [session_service_1.SessionService, router_1.Router])
     ], AppComponent);
     return AppComponent;
