@@ -4,11 +4,13 @@ import { HomeComponent } from './components/home.component'
 import { AppComponent } from './components/app.component'
 import { ListUsersComponent } from './components/menus/users.component'
 
+import { MenuRoutes } from './menu.routes'
+
 export const routes: RouterConfig = [
     { path: '', component: AppComponent },
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent },
-    { path: 'users', component: ListUsersComponent },
+    ...MenuRoutes
 ];
 
 export const APP_ROUTER_PROVIDERS = [

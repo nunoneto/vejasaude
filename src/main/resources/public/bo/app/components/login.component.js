@@ -18,16 +18,12 @@ var LoginComponent = (function () {
         this.router = router;
         this.alert = new alert_1.Alert();
     }
-    //routerOnActivate(curr: RouteSegment, prev: RouteSegment, currTree: RouteTree) {
-    //  this.currSegment = curr;
-    //}
     LoginComponent.prototype.doLogin = function () {
         var _this = this;
         this.alert.setVisible(false);
         this.sessionService.login(this.username, this.password)
             .then(function (user) {
-            _this.router.navigate(['/home']);
-            //this.router.navigate(['/home'],this.currSegment);
+            _this.router.navigate(['home']);
         })
             .catch(function (err) {
             console.log(err);

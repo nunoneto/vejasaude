@@ -16,7 +16,6 @@ export class LoginComponent {
   username: string;
   password: string;
   rememberMe: boolean;
-  //private currSegment: RouteSegment;
   
   //alert props
   alert:Alert;
@@ -24,17 +23,12 @@ export class LoginComponent {
   constructor(private sessionService:SessionService, private router: Router){ 
     this.alert = new Alert();
    }
-    
-  //routerOnActivate(curr: RouteSegment, prev: RouteSegment, currTree: RouteTree) {
-  //  this.currSegment = curr;
-  //}
-    
+        
   doLogin(){
     this.alert.setVisible(false);
     this.sessionService.login(this.username,this.password)
       .then(user =>{
-        this.router.navigate(['/home']);
-        //this.router.navigate(['/home'],this.currSegment);
+        this.router.navigate(['home']);
       })
       .catch(err => {
         console.log(err);
