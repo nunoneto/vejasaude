@@ -1,8 +1,8 @@
 package pt.vejasaude.web.services.doctor.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import pt.vejasaude.unified.data.backofficeuser.CurriculumVitae;
-import pt.vejasaude.unified.data.backofficeuser.MedicalSpecialty;
+import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
+import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.doctor.Doctor;
 
 import java.io.Serializable;

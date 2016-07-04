@@ -1,9 +1,8 @@
 package pt.vejasaude.unified.data.doctor;
 
-import pt.vejasaude.unified.data.backofficeuser.CurriculumVitae;
-import pt.vejasaude.unified.data.backofficeuser.MedicalSpecialty;
+import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
+import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
-import pt.vejasaude.web.services.user.request.CreateNewUserRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,11 +24,11 @@ public class Doctor implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="IdSpecialty")
-    private MedicalSpecialty Specialty;
+    private MedicalSpecialty specialty;
 
     @OneToOne
     @JoinColumn(name="idCurriculum")
-    private CurriculumVitae Curriculum;
+    private CurriculumVitae curriculum;
 
     public Doctor(String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
         this.name = name;
@@ -62,18 +61,17 @@ public class Doctor implements Serializable {
     }
 
     public MedicalSpecialty getSpecialty() {
-        return Specialty;
-    }
-
-    public void setSpecialty(MedicalSpecialty specialty) {
-        Specialty = specialty;
+        return specialty;
     }
 
     public CurriculumVitae getCurriculum() {
-        return Curriculum;
+        return curriculum;
     }
 
     public void setCurriculum(CurriculumVitae curriculum) {
-        Curriculum = curriculum;
+        curriculum = curriculum;
     }
+
+    public void setSpecialty(MedicalSpecialty specialty) {specialty = specialty;}
+
 }

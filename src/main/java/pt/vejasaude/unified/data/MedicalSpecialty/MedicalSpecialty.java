@@ -1,4 +1,4 @@
-package pt.vejasaude.unified.data.backofficeuser;
+package pt.vejasaude.unified.data.MedicalSpecialty;
 
 import pt.vejasaude.web.services.MedicalSpecialty.request.CreateNewSpecialtyRequest;
 
