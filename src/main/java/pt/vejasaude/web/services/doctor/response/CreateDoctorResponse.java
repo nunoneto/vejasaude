@@ -1,10 +1,8 @@
 package pt.vejasaude.web.services.doctor.response;
 
-import pt.vejasaude.unified.data.backofficeuser.CurriculumVitae;
-import pt.vejasaude.unified.data.backofficeuser.MedicalSpecialty;
+import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
+import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.doctor.Doctor;
-
-import javax.persistence.*;
 
 /**
  * Created by fmorais on 15/06/2016.

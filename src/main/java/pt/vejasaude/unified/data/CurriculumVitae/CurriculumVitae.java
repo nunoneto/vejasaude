@@ -1,4 +1,4 @@
-package pt.vejasaude.unified.data.backofficeuser;
+package pt.vejasaude.unified.data.CurriculumVitae;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +12,21 @@ import java.io.Serializable;
 @Entity
 @Table
 public class CurriculumVitae implements Serializable{
+
+
     @Id
     @Column
     private int idCurriculum;
 
 
     public CurriculumVitae(int idCurriculum) {
+        this.idCurriculum = idCurriculum;
+    }
+    public int getIdCurriculum() {
+        return idCurriculum;
+    }
+
+    public void setIdCurriculum(int idCurriculum) {
         this.idCurriculum = idCurriculum;
     }
 }
