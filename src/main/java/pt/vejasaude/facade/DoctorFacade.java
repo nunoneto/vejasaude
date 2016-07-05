@@ -2,7 +2,6 @@ package pt.vejasaude.facade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pt.vejasaude.unified.data.backofficeuser.BackOfficeUser;
 import pt.vejasaude.unified.data.doctor.Doctor;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;

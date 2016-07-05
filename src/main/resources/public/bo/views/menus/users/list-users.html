@@ -1,1 +1,35 @@
-<h1>Users</h1>
+
+<br>
+<div class="panel panel-default">
+<div class="panel-heading">Users</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Editar</th>
+                <th>Apagar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>
+                    {{user.username}}
+                </td>
+                <td>
+                    {{user.prettyName}}
+                </td>
+                <td>
+                    {{user.email}}
+                </td>
+                <td>
+                    <a class="fa fa-pencil"></a>
+                </td>
+                <td>
+                    <a class="fa fa-trash-o"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
