@@ -30,6 +30,6 @@ public class DoctorFacade implements IDoctorFacade{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return newDoctor;
     }
 }
