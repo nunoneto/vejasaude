@@ -1,0 +1,17 @@
+<div *ngIf="user">
+    <div class="page-header">
+    <h1>Eidtar <small>{{user.prettyName}}</small></h1>
+    </div>
+
+    <form (submit)="editUser($event)">
+        <div class="form-group input-group">
+            <label>Nome</label>
+            <input type="text" name="prettyName" ngControl="prettyName" [(ngModel)]="user.prettyName" placeholder="Nome" required/>
+        </div>
+        <div class="form-group input-group">
+            <label>Email</label>
+            <input type="text" name="email" ngControl="email" [(ngModel)]="user.email" placeholder="email" required/>
+        </div>
+        <button type="submit">Guardar</button>
+    </form>
+</div>

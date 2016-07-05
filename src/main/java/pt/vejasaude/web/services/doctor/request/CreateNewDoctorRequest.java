@@ -1,5 +1,11 @@
 package pt.vejasaude.web.services.doctor.request;
 
+import pt.vejasaude.unified.data.backofficeuser.CurriculumVitae;
+import pt.vejasaude.unified.data.backofficeuser.MedicalSpecialty;
+
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+
 /**
  * Created by fmorais on 15/06/2016.
  */
@@ -8,11 +14,11 @@ public class CreateNewDoctorRequest {
 
     private String name;
 
-    private Integer idSpecialty;
+    private int idSpecialty;
 
-    private Integer idCurriculum;
+    private int idCurriculum;
 
-    public Integer getIdCurriculum() {
+    public int getIdCurriculum() {
         return idCurriculum;
     }
 
@@ -36,11 +42,11 @@ public class CreateNewDoctorRequest {
         this.name = name;
     }
 
-    public Integer getIdSpecialty() {
+    public int getIdSpecialty() {
         return idSpecialty;
     }
 
-    public void setIdSpecialty(Integer idSpecialty) {
+    public void setIdSpecialty(int idSpecialty) {
         this.idSpecialty = idSpecialty;
     }
 }

@@ -16,19 +16,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var api_service_1 = require('./api.service');
 var http_1 = require('@angular/http');
-var user_1 = require('../model/user');
-var UserService = (function (_super) {
-    __extends(UserService, _super);
-    function UserService(http) {
+var doctor_1 = require('../model/doctor');
+var DoctorService = (function (_super) {
+    __extends(DoctorService, _super);
+    function DoctorService(http) {
         _super.call(this);
         this.http = http;
-        this.url = this.relativeUrl + "/bouser";
+        this.url = this.relativeUrl + "/doctor";
     }
-    UserService.prototype.getUsers = function () {
+    DoctorService.prototype.getAll = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            if (_this.users != null) {
-                resolve(_this.users);
+            if (_this.doctors != null) {
+                resolve(_this.doctors);
                 return;
             }
             _this.http
@@ -37,8 +37,8 @@ var UserService = (function (_super) {
                 .then(function (response) {
                 var body = response.json();
                 if (_this.status(response)) {
-                    _this.users = _this.mapResponseToUsers(body.content);
-                    resolve(_this.users);
+                    _this.doctors = _this.mapResponseToDoctors(body.content);
+                    resolve(_this.doctors);
                 }
                 else
                     reject(body.statusMessage);
@@ -46,12 +46,12 @@ var UserService = (function (_super) {
                 .catch(function (err) { return reject(null); });
         });
     };
-    UserService.prototype.findUser = function (id) {
+    DoctorService.prototype.find = function (id) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            if (_this.users != null) {
+            if (_this.doctors != null) {
                 var user = _this._findUser(id);
-                user ? resolve(user) : reject("user not found");
+                user ? resolve(user) : reject("doctor not found");
                 return;
             }
             _this.http
@@ -60,9 +60,9 @@ var UserService = (function (_super) {
                 .then(function (response) {
                 var body = response.json();
                 if (_this.status(response)) {
-                    _this.users = _this.mapResponseToUsers(body.content);
+                    _this.doctors = _this.mapResponseToDoctors(body.content);
                     var user = _this._findUser(id);
-                    user ? resolve(user) : reject("user not found");
+                    user ? resolve(user) : reject("doctor not found");
                 }
                 else
                     reject(body.statusMessage);
@@ -70,30 +70,30 @@ var UserService = (function (_super) {
                 .catch(function (err) { return reject(null); });
         });
     };
-    UserService.prototype.createUser = function () {
+    DoctorService.prototype.create = function () {
     };
-    UserService.prototype.updateUser = function () {
+    DoctorService.prototype.update = function () {
     };
-    UserService.prototype.deleteUser = function (id) {
+    DoctorService.prototype.delete = function (id) {
         return true;
     };
-    UserService.prototype.mapResponseToUsers = function (content) {
-        return content.map(function (item) { return new user_1.User(item); });
+    DoctorService.prototype.mapResponseToDoctors = function (content) {
+        return content.map(function (item) { return new doctor_1.Doctor(item); });
     };
-    UserService.prototype._findUser = function (username) {
-        var _user = null;
-        this.users.forEach(function (user) {
-            if (user.username === username) {
-                _user = user;
+    DoctorService.prototype._findUser = function (id) {
+        var _doctor = null;
+        this.doctors.forEach(function (doctor) {
+            if (doctor.id === id) {
+                _doctor = doctor;
             }
         });
-        return _user;
+        return _doctor;
     };
-    UserService = __decorate([
+    DoctorService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], UserService);
-    return UserService;
+    ], DoctorService);
+    return DoctorService;
 }(api_service_1.APIService));
-exports.UserService = UserService;
-//# sourceMappingURL=users.service.js.map
+exports.DoctorService = DoctorService;
+//# sourceMappingURL=doctor.service.js.map

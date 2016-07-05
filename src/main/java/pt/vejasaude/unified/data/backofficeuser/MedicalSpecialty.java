@@ -1,4 +1,4 @@
-package pt.vejasaude.unified.data.MedicalSpecialty;
+package pt.vejasaude.unified.data.backofficeuser;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

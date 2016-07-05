@@ -9,32 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var router_1 = require('@angular/router');
 var users_service_1 = require("../../services/users.service");
-var ListUsersComponent = (function () {
-    function ListUsersComponent(userService, router, route) {
+var router_1 = require('@angular/router');
+var UserEditComponent = (function () {
+    function UserEditComponent(userService, route) {
         this.userService = userService;
-        this.router = router;
         this.route = route;
     }
-    ListUsersComponent.prototype.ngOnInit = function () {
+    UserEditComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.userService.getUsers()
-            .then(function (users) { return _this.users = users; })
-            .catch(function (err) { return console.log(err); });
+        this.sub = this.route.params.subscribe(function (params) {
+            _this.username = params['id'];
+            _this.userService.findUser(_this.username)
+                .then(function (user) { return _this.user = user; })
+                .catch(function (err) { return console.error(err); });
+        });
     };
-    ListUsersComponent.prototype.editUser = function (user) {
-        this.router.navigate(['/users', user.username]);
+    UserEditComponent.prototype.editUser = function (event) {
     };
-    ListUsersComponent = __decorate([
+    UserEditComponent = __decorate([
         core_1.Component({
-            templateUrl: 'views/menus/users/list-users.html',
+            templateUrl: 'views/menus/users/edit-user.html',
             providers: [users_service_1.UserService],
-            directives: [router_1.ROUTER_DIRECTIVES]
         }), 
-        __metadata('design:paramtypes', [users_service_1.UserService, router_1.Router, router_1.ActivatedRoute])
-    ], ListUsersComponent);
-    return ListUsersComponent;
+        __metadata('design:paramtypes', [users_service_1.UserService, router_1.ActivatedRoute])
+    ], UserEditComponent);
+    return UserEditComponent;
 }());
-exports.ListUsersComponent = ListUsersComponent;
-//# sourceMappingURL=users.component.js.map
+exports.UserEditComponent = UserEditComponent;
+//# sourceMappingURL=users.edit.component.js.map

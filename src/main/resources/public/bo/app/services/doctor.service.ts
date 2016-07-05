@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { APIService } from './api.service'
 import { Http } from '@angular/http';
-import { User } from '../model/user';
+import { Doctor } from '../model/doctor';
 import { Observable } from 'rxjs/Observable';
 import { APIResponse } from "../model/response"
 
 @Injectable()
-export class UserService extends APIService{
+export class DoctorService extends APIService{
     
     private url:string;
-    private users: User[];   
+    private doctors: Doctor[];   
      
     constructor(private http: Http){
         super();
-        this.url = this.relativeUrl + "/bouser";
+        this.url = this.relativeUrl + "/doctor";
     }
     
-    getUsers(): Promise<User[]>{
+    getAll(): Promise<Doctor[]>{
 
-        return new Promise<User[]>((resolve,reject) => {
+        return new Promise<Doctor[]>((resolve,reject) => {
             
-            if(this.users != null){
-                resolve(this.users);
+            if(this.doctors != null){
+                resolve(this.doctors);
                 return;
             }
 
@@ -32,8 +32,8 @@ export class UserService extends APIService{
 
                     var body = response.json();
                     if(this.status(response)){
-                        this.users = this.mapResponseToUsers(body.content);
-                        resolve(this.users);
+                        this.doctors = this.mapResponseToDoctors(body.content);
+                        resolve(this.doctors);
                     }else
                         reject(body.statusMessage);
                 })
@@ -41,11 +41,11 @@ export class UserService extends APIService{
         });
     }
     
-    findUser(id: string): Promise<User>{
-        return new Promise<User>((resolve,reject) => {
-            if(this.users != null){
+    find(id: number): Promise<Doctor>{
+        return new Promise<Doctor>((resolve,reject) => {
+            if(this.doctors != null){
                 var user = this._findUser(id);
-                user ? resolve(user) : reject("user not found");
+                user ? resolve(user) : reject("doctor not found");
                 return;
             }
             
@@ -55,9 +55,9 @@ export class UserService extends APIService{
                 .then(response => {
                     var body = response.json();
                     if(this.status(response)){
-                        this.users = this.mapResponseToUsers(body.content);
+                        this.doctors = this.mapResponseToDoctors(body.content);
                         var user = this._findUser(id);
-                        user ? resolve(user) : reject("user not found");
+                        user ? resolve(user) : reject("doctor not found");
                     }else
                         reject(body.statusMessage);
                 })
@@ -65,29 +65,29 @@ export class UserService extends APIService{
         });
     }
     
-    createUser(){
+    create(){
         
     }
     
-    updateUser(){
+    update(){
         
     }
     
-    deleteUser(id: number):boolean{
+    delete(id: number):boolean{
         return true;
     }
 
-    mapResponseToUsers(content): User[]{
-        return content.map(item => new User(item));
+    mapResponseToDoctors(content): Doctor[]{
+        return content.map(item => new Doctor(item));
     }
 
-    private _findUser(username: string): User{
-        let _user = null;
-        this.users.forEach(function(user){
-            if(user.username === username){
-                _user = user;
+    private _findUser(id: number): Doctor{
+        let _doctor = null;
+        this.doctors.forEach(function(doctor){
+            if(doctor.id === id){
+                _doctor = doctor;
             }
         });
-        return _user;
+        return _doctor;
     }
 }

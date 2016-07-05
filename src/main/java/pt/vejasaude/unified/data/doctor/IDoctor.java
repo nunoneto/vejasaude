@@ -6,6 +6,6 @@ import pt.vejasaude.unified.data.backofficeuser.BackOfficeUser;
 /**
  * Created by fmorais on 08/06/2016.
  */
-public interface IDoctor extends CrudRepository<Doctor, String> {
+public interface IDoctor extends CrudRepository<BackOfficeUser, String> {
 
 }

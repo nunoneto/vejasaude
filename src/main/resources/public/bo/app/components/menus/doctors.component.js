@@ -10,31 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require('@angular/router');
-var users_service_1 = require("../../services/users.service");
-var ListUsersComponent = (function () {
-    function ListUsersComponent(userService, router, route) {
-        this.userService = userService;
+var doctor_service_1 = require("../../services/doctor.service");
+var ListDoctorsComponent = (function () {
+    function ListDoctorsComponent(doctorService, router, route) {
+        this.doctorService = doctorService;
         this.router = router;
         this.route = route;
     }
-    ListUsersComponent.prototype.ngOnInit = function () {
+    ListDoctorsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.userService.getUsers()
-            .then(function (users) { return _this.users = users; })
+        this.doctorService.getAll()
+            .then(function (doctors) { return _this.doctors = doctors; })
             .catch(function (err) { return console.log(err); });
     };
-    ListUsersComponent.prototype.editUser = function (user) {
-        this.router.navigate(['/users', user.username]);
+    ListDoctorsComponent.prototype.editUser = function (doctor) {
+        this.router.navigate(['/doctor', doctor.id]);
     };
-    ListUsersComponent = __decorate([
+    ListDoctorsComponent = __decorate([
         core_1.Component({
-            templateUrl: 'views/menus/users/list-users.html',
-            providers: [users_service_1.UserService],
+            templateUrl: 'views/menus/doctors/list-doctors.html',
+            providers: [doctor_service_1.DoctorService],
             directives: [router_1.ROUTER_DIRECTIVES]
         }), 
-        __metadata('design:paramtypes', [users_service_1.UserService, router_1.Router, router_1.ActivatedRoute])
-    ], ListUsersComponent);
-    return ListUsersComponent;
+        __metadata('design:paramtypes', [doctor_service_1.DoctorService, router_1.Router, router_1.ActivatedRoute])
+    ], ListDoctorsComponent);
+    return ListDoctorsComponent;
 }());
-exports.ListUsersComponent = ListUsersComponent;
-//# sourceMappingURL=users.component.js.map
+exports.ListDoctorsComponent = ListDoctorsComponent;
+//# sourceMappingURL=doctors.component.js.map

@@ -19,7 +19,6 @@ public class BackOfficeUserController {
     @Autowired
     IBackOfficeUserRepository userRepo;
 
-
     /**
      * Creates a new back office user
      * @param user

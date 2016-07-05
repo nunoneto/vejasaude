@@ -1,7 +1,7 @@
 package pt.vejasaude.unified.data.doctor;
 
-import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
-import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
+import pt.vejasaude.unified.data.backofficeuser.CurriculumVitae;
+import pt.vejasaude.unified.data.backofficeuser.MedicalSpecialty;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
 import pt.vejasaude.web.services.user.request.CreateNewUserRequest;
 
@@ -17,31 +17,27 @@ public class Doctor implements Serializable {
 
     @Id
     @Column
-    private String username;
+    private int id;
 
     @Column
     private String name;
 
     @ManyToOne
     @JoinColumn(name="IdSpecialty")
-    private MedicalSpecialty specialty;
+    private MedicalSpecialty Specialty;
 
 
     @OneToOne
     @JoinColumn(name="idCurriculum")
-    private CurriculumVitae curriculum;
+    private CurriculumVitae Curriculum;
 
-    public Doctor(String username, String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
-        this.username = username;
-        this.name = name;
-        this.specialty = specialty;
-        this.curriculum = curriculum;
+    public Doctor() {
     }
-    public Doctor(CreateNewDoctorRequest doctor){
-        this.username = doctor.getUsername();
-        this.name = doctor.getName();
-        //specialty = doctor.getIdSpecialty();
-        //curriculum = doctor.getIdCurriculum();
+    public Doctor(int id, String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
+        this.id = id;
+        this.name = name;
+        Specialty = specialty;
+        Curriculum = curriculum;
     }
     /*
     public DoctorController(CreateNewDoctorRequest doctor){
@@ -50,26 +46,35 @@ public class Doctor implements Serializable {
     }
     */
 
-    public String getUsername() {return username;
+    public int getId() {
+        return id;
     }
 
-    public String getName() {return name;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public MedicalSpecialty getSpecialty() {return specialty;
+    public String getName() {
+        return name;
     }
 
-    public CurriculumVitae getCurriculum() {return curriculum;
-    }
-    public void setUsername(String username) {this.username = username;
-    }
-
-    public void setName(String name) {this.name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setCurriculum(CurriculumVitae curriculum) {curriculum = curriculum;
+    public MedicalSpecialty getSpecialty() {
+        return Specialty;
     }
 
-    public void setSpecialty(MedicalSpecialty specialty) {specialty = specialty;
+    public void setSpecialty(MedicalSpecialty specialty) {
+        Specialty = specialty;
+    }
+
+    public CurriculumVitae getCurriculum() {
+        return Curriculum;
+    }
+
+    public void setCurriculum(CurriculumVitae curriculum) {
+        Curriculum = curriculum;
     }
 }

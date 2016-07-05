@@ -3,13 +3,8 @@ package pt.vejasaude.facade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.vejasaude.unified.data.doctor.Doctor;
-import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
-import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.doctor.IDoctor;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
-import pt.vejasaude.web.services.doctor.response.CreateDoctorResponse;
-import pt.vejasaude.web.services.generic.Status;
-import pt.vejasaude.web.services.generic.StatusResponse;
 
 /**
  * Created by fmorais on 15/06/2016.
@@ -20,16 +15,7 @@ public class DoctorFacade implements IDoctorFacade{
     private IDoctor doctorDAO;
 
     @Override
-    public Doctor createDoctor(CreateNewDoctorRequest request, MedicalSpecialty speciality, CurriculumVitae curriculum) {
-        Doctor newDoctor = null;
-        try{
-
-            newDoctor = new Doctor(request.getName(),request.getUsername(),speciality,curriculum);
-            doctorDAO.save(newDoctor);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return newDoctor;
+    public Doctor createDoctor(CreateNewDoctorRequest request) {
+        return null;
     }
 }
