@@ -17,7 +17,8 @@ public class Doctor implements Serializable {
 
     @Id
     @Column
-    private String username;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column
     private String name;
@@ -26,19 +27,16 @@ public class Doctor implements Serializable {
     @JoinColumn(name="IdSpecialty")
     private MedicalSpecialty specialty;
 
-
     @OneToOne
     @JoinColumn(name="idCurriculum")
     private CurriculumVitae curriculum;
 
-    public Doctor(String username, String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
-        this.username = username;
+    public Doctor(String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
         this.name = name;
         this.specialty = specialty;
         this.curriculum = curriculum;
     }
     public Doctor(CreateNewDoctorRequest doctor){
-        this.username = doctor.getUsername();
         this.name = doctor.getName();
         //specialty = doctor.getIdSpecialty();
         //curriculum = doctor.getIdCurriculum();
@@ -49,9 +47,7 @@ public class Doctor implements Serializable {
         this.name = doctor.getName();
     }
     */
-
-    public String getUsername() {return username;
-    }
+    public int getId() {return id;}
 
     public String getName() {return name;
     }
@@ -60,8 +56,6 @@ public class Doctor implements Serializable {
     }
 
     public CurriculumVitae getCurriculum() {return curriculum;
-    }
-    public void setUsername(String username) {this.username = username;
     }
 
     public void setName(String name) {this.name = name;

@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 public class CreateDoctorResponse implements Serializable{
     @JsonProperty
-    private String username;
+    private int id;
     @JsonProperty
     private String name;
     @JsonProperty
@@ -23,8 +23,7 @@ public class CreateDoctorResponse implements Serializable{
     public static CreateDoctorResponse of (Doctor doctor)
     {
         CreateDoctorResponse doctorResponse = new CreateDoctorResponse();
-
-        doctorResponse.username = doctor.getUsername();
+        doctorResponse.id = doctor.getId();
         doctorResponse.name = doctor.getName();
         doctorResponse.Curriculum = doctor.getCurriculum();
         doctorResponse.Specialty = doctor.getSpecialty();

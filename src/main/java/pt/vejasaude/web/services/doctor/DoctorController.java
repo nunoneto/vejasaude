@@ -35,7 +35,7 @@ public class DoctorController {
     public StatusResponse<CreateDoctorResponse> createDoctor(@RequestBody CreateNewDoctorRequest request) {
 
 
-        if (request.getUsername().isEmpty() || request.getName().isEmpty())
+        if (request.getName().isEmpty())
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, "Preencha os campos obrigatórios");
 
         if (request.getIdSpecialty() == null)

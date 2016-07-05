@@ -24,7 +24,7 @@ public class DoctorFacade implements IDoctorFacade{
         Doctor newDoctor = null;
         try{
 
-            newDoctor = new Doctor(request.getName(),request.getUsername(),speciality,curriculum);
+            newDoctor = new Doctor(request.getName(),speciality,curriculum);
             doctorDAO.save(newDoctor);
 
         }catch (Exception e){
