@@ -1,9 +1,8 @@
 package pt.vejasaude.unified.data.backofficeuser;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import pt.vejasaude.web.services.MedicalSpecialty.request.CreateNewSpecialtyRequest;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -13,37 +12,30 @@ import java.io.Serializable;
 @Table
 public class MedicalSpecialty implements Serializable {
 
+
     @Id
     @Column
-    private int IdSpecialty;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column
-    private String Specialty;
-
-    @Column
-    private String Description;
+    private String specialty;
 
     public MedicalSpecialty(int idSpecialty, String specialty, String description) {
-        IdSpecialty = idSpecialty;
-        Specialty = specialty;
-        Description = description;
-    }
-    public int getIdSpecialty() {return IdSpecialty;
+        idSpecialty = idSpecialty;
+        specialty = specialty;
     }
 
-    public void setIdSpecialty(int idSpecialty) {IdSpecialty = idSpecialty;
+    public MedicalSpecialty(CreateNewSpecialtyRequest request) {
+        id = request.getId();
+        specialty = request.getSpecialty();
     }
 
-    public String getSpecialty() {return Specialty;
+    public int getId() {
+        return id;
     }
 
-    public void setSpecialty(String specialty) {Specialty = specialty;
-    }
+    public String getSpecialty() {return specialty;}
 
-    public String getDescription() {return Description;
-    }
-
-    public void setDescription(String description) {Description = description;
-    }
-
+    public void setSpecialty(String specialty) {specialty = specialty;}
 }

@@ -17,6 +17,7 @@ public class Doctor implements Serializable {
 
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column
@@ -26,18 +27,19 @@ public class Doctor implements Serializable {
     @JoinColumn(name="IdSpecialty")
     private MedicalSpecialty Specialty;
 
-
     @OneToOne
     @JoinColumn(name="idCurriculum")
     private CurriculumVitae Curriculum;
 
-    public Doctor() {
-    }
-    public Doctor(int id, String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
-        this.id = id;
+    public Doctor(String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
         this.name = name;
-        Specialty = specialty;
-        Curriculum = curriculum;
+        this.specialty = specialty;
+        this.curriculum = curriculum;
+    }
+    public Doctor(CreateNewDoctorRequest doctor){
+        this.name = doctor.getName();
+        //specialty = doctor.getIdSpecialty();
+        //curriculum = doctor.getIdCurriculum();
     }
     /*
     public DoctorController(CreateNewDoctorRequest doctor){
@@ -45,10 +47,7 @@ public class Doctor implements Serializable {
         this.name = doctor.getName();
     }
     */
-
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id;}
 
     public void setId(int id) {
         this.id = id;
