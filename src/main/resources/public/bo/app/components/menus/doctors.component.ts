@@ -21,8 +21,12 @@ export class ListDoctorsComponent implements OnInit{
         .catch(err => console.log(err));
     }
 
-    editUser(doctor: Doctor){
-        this.router.navigate(['/doctor',doctor.id]);
+    editDoctor(doctor: Doctor){
+        this.router.navigate(['home/doctors',doctor.id]);
+    }
+
+    goToCurriculum(doctor: Doctor){
+        this.router.navigate(['home/curriculum',doctor.curriculum.id]);
     }
 
     

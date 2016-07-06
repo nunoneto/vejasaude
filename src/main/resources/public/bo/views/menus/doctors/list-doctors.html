@@ -17,13 +17,14 @@
                     {{doctor.name}}
                 </td>
                 <td>
-                    {{doctor.specialityName}}
+                    {{doctor.specialty.specialty}}
+
                 </td>
                 <td>
-                    {{doctor.curriculumName}}
+                    <a class="fa fa-pencil" (click)="goToCurriculum(doctor)"></a>
                 </td>
                 <td>
-                    <a class="fa fa-pencil" (click)="editUser(user)"></a>
+                    <a class="fa fa-pencil" (click)="editDoctor(doctor)"></a>
                 </td>
                 <td>
                     <a class="fa fa-trash-o"></a>

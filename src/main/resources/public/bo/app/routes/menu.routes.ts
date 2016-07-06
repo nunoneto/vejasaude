@@ -1,6 +1,7 @@
 import { RouterConfig } from '@angular/router';
 import { HomeComponent } from '../components/home.component'
 import { ListUsersComponent } from '../components/menus/users.component'
+import { ListDoctorsComponent } from '../components/menus/doctors.component'
 import { UserEditComponent } from '../components/menus/users.edit.component'
 
 export const MenuRoutes: RouterConfig = [
@@ -11,6 +12,10 @@ export const MenuRoutes: RouterConfig = [
         {
             path: 'users',
             component: ListUsersComponent,
+        },
+        {
+            path: 'doctors',
+            component: ListDoctorsComponent,
         }
     ]
   }

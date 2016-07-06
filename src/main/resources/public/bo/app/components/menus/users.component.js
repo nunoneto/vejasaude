@@ -24,7 +24,7 @@ var ListUsersComponent = (function () {
             .catch(function (err) { return console.log(err); });
     };
     ListUsersComponent.prototype.editUser = function (user) {
-        this.router.navigate(['/users', user.username]);
+        this.router.navigate(['home/users', user.username]);
     };
     ListUsersComponent = __decorate([
         core_1.Component({

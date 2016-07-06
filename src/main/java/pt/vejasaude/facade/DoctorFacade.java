@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.doctor.Doctor;
-import pt.vejasaude.unified.data.doctor.IDoctor;
+import pt.vejasaude.unified.data.doctor.IDoctorRespository;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
 
 /**
@@ -14,7 +14,7 @@ import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
 @Service
 public class DoctorFacade implements IDoctorFacade{
     @Autowired
-    private IDoctor doctorDAO;
+    private IDoctorRespository doctorDAO;
 
     @Override
     public Doctor createDoctor(CreateNewDoctorRequest request, MedicalSpecialty speciality, CurriculumVitae curriculum) {
@@ -27,5 +27,10 @@ public class DoctorFacade implements IDoctorFacade{
             e.printStackTrace();
         }
         return newDoctor;
+    }
+
+    @Override
+    public Iterable<Doctor> getAll() {
+        return doctorDAO.findAll();
     }
 }

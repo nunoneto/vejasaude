@@ -1,4 +1,4 @@
-package pt.vejasaude.web.services.MedicalSpecialty;
+package pt.vejasaude.web.services.speciality;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pt.vejasaude.facade.ISpecialtyFacade;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
-import pt.vejasaude.web.services.MedicalSpecialty.request.CreateNewSpecialtyRequest;
-import pt.vejasaude.web.services.MedicalSpecialty.response.CreateNewSpecialtyResponse;
+import pt.vejasaude.web.services.speciality.request.CreateNewSpecialtyRequest;
+import pt.vejasaude.web.services.speciality.response.CreateNewSpecialtyResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
 
@@ -35,5 +35,10 @@ public class SpecialtyController {
             e.printStackTrace();
             return new StatusResponse<CreateNewSpecialtyResponse>(Status.NOK, null);
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public StatusResponse<Iterable<MedicalSpecialty>> getAll(){
+        return new StatusResponse<>(Status.OK,null,specialtyFacade.getAll());
     }
 }

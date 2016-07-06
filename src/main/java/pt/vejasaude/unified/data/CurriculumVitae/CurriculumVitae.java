@@ -1,9 +1,6 @@
 package pt.vejasaude.unified.data.CurriculumVitae;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -13,13 +10,19 @@ import java.io.Serializable;
 @Table
 public class CurriculumVitae implements Serializable{
 
-
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column
     private String name;
+
+    public CurriculumVitae() {}
+
+    public CurriculumVitae(int idCurriculum) {
+        this.id = idCurriculum;
+    }
 
     public int getId() {
         return id;
@@ -29,14 +32,11 @@ public class CurriculumVitae implements Serializable{
         this.id = id;
     }
 
-    public CurriculumVitae(int idCurriculum) {
-        this.id = idCurriculum;
-    }
-    public int getIdCurriculum() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setIdCurriculum(int idCurriculum) {
-        this.id = idCurriculum;
+    public void setName(String name) {
+        this.name = name;
     }
 }

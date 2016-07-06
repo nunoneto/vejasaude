@@ -30,6 +30,8 @@ public class Doctor implements Serializable {
     @JoinColumn(name="idCurriculum")
     private CurriculumVitae curriculum;
 
+    public Doctor(){}
+
     public Doctor(String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
         this.name = name;
         this.specialty = specialty;
@@ -37,15 +39,8 @@ public class Doctor implements Serializable {
     }
     public Doctor(CreateNewDoctorRequest doctor){
         this.name = doctor.getName();
-        //specialty = doctor.getIdSpecialty();
-        //curriculum = doctor.getIdCurriculum();
     }
-    /*
-    public DoctorController(CreateNewDoctorRequest doctor){
-        this.username = doctor.getUsername();
-        this.name = doctor.getName();
-    }
-    */
+
     public int getId() {return id;}
 
     public void setId(int id) {

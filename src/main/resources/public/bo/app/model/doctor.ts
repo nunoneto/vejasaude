@@ -1,15 +1,19 @@
+import { Speciality } from "./speciality";
+import { Curriculum } from "./curriculum";
+
+
 export class Doctor{
     
     id: number;
     name: string;
-    speciality: number;
-    curriculum: number;
+    specialty: Speciality;
+    curriculum: Curriculum;
   
     //JSON constructor
     constructor(jsonData:any){
         this.name = jsonData.name;
-        this.speciality = jsonData.speciality;
-        this.curriculum = jsonData.curriculum;
+        this.specialty = new Speciality(jsonData.specialty);
+        this.curriculum = new Curriculum(jsonData.curriculum);
         this.id = jsonData.id;
     }
     

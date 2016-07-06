@@ -1,4 +1,4 @@
-package pt.vejasaude.web.services.MedicalSpecialty.request;
+package pt.vejasaude.web.services.speciality.request;
 
 /**
  * Created by fmorais on 05/07/2016.

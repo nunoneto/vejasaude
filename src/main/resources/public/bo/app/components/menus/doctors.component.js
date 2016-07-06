@@ -23,8 +23,11 @@ var ListDoctorsComponent = (function () {
             .then(function (doctors) { return _this.doctors = doctors; })
             .catch(function (err) { return console.log(err); });
     };
-    ListDoctorsComponent.prototype.editUser = function (doctor) {
-        this.router.navigate(['/doctor', doctor.id]);
+    ListDoctorsComponent.prototype.editDoctor = function (doctor) {
+        this.router.navigate(['home/doctors', doctor.id]);
+    };
+    ListDoctorsComponent.prototype.goToCurriculum = function (doctor) {
+        this.router.navigate(['home/curriculum', doctor.curriculum.id]);
     };
     ListDoctorsComponent = __decorate([
         core_1.Component({
