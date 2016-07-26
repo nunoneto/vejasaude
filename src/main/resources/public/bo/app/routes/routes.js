@@ -12,6 +12,6 @@ exports.routes = [
     { path: 'home', component: home_component_1.HomeComponent }
 ].concat(menu_routes_1.MenuRoutes, users_routes_1.UserRoutes, doctors_routes_1.DoctorRoutes);
 exports.APP_ROUTER_PROVIDERS = [
-    router_1.provideRouter(exports.routes)
+    router_1.provideRouter(exports.routes, { enableTracing: true })
 ];
 //# sourceMappingURL=routes.js.map
