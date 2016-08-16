@@ -1,4 +1,4 @@
-package pt.vejasaude.web.services.MedicalSpecialty.response;
+package pt.vejasaude.web.services.medicalSpecialty.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;

@@ -5,6 +5,7 @@ import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
 
 import javax.persistence.*;
+import javax.print.Doc;
 import java.io.Serializable;
 
 /**
@@ -15,7 +16,7 @@ import java.io.Serializable;
 public class Doctor implements Serializable {
 
     @Id
-    @Column
+    @Column(name="idDoctor")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
@@ -23,12 +24,14 @@ public class Doctor implements Serializable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="IdSpecialty")
+    @JoinColumn(name="idSpecialty")
     private MedicalSpecialty specialty;
 
     @OneToOne
     @JoinColumn(name="idCurriculum")
     private CurriculumVitae curriculum;
+
+    public Doctor(){};
 
     public Doctor(String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
         this.name = name;
@@ -40,12 +43,6 @@ public class Doctor implements Serializable {
         //specialty = doctor.getIdSpecialty();
         //curriculum = doctor.getIdCurriculum();
     }
-    /*
-    public DoctorController(CreateNewDoctorRequest doctor){
-        this.username = doctor.getUsername();
-        this.name = doctor.getName();
-    }
-    */
     public int getId() {return id;}
 
     public void setId(int id) {

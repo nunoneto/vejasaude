@@ -1,12 +1,7 @@
 package pt.vejasaude.web.services.doctor;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.xml.DocumentDefaultsDefinition;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import pt.vejasaude.facade.DoctorFacade;
+import org.springframework.web.bind.annotation.*;
 import pt.vejasaude.facade.IDoctorFacade;
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.CurriculumVitae.ICurriculumVitae;
@@ -14,7 +9,9 @@ import pt.vejasaude.unified.data.MedicalSpecialty.IMedicalSpecialty;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.doctor.Doctor;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
+import pt.vejasaude.web.services.doctor.request.UpdateDoctorRequest;
 import pt.vejasaude.web.services.doctor.response.CreateDoctorResponse;
+import pt.vejasaude.web.services.doctor.response.UpdateDoctorResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
 
@@ -34,7 +31,6 @@ public class DoctorController {
     @RequestMapping(method = RequestMethod.POST)
     public StatusResponse<CreateDoctorResponse> createDoctor(@RequestBody CreateNewDoctorRequest request) {
 
-
         if (request.getName().isEmpty())
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, "Preencha os campos obrigatórios");
 
@@ -42,7 +38,7 @@ public class DoctorController {
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, "ERROR");
 
         MedicalSpecialty specialty = medicalSpecialty.findOne(request.getIdSpecialty());
-        if (specialty != null) {
+        if (specialty == null) {
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, "Especialidade não existe");
         }
         if (request.getIdCurriculum() == null) {
@@ -51,7 +47,7 @@ public class DoctorController {
 
         CurriculumVitae curriculum = curriculumVitae.findOne(request.getIdCurriculum());
 
-        if (curriculum != null) {
+        if (curriculum == null) {
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, "Curriculo não existe");
         }
 
@@ -65,5 +61,37 @@ public class DoctorController {
             e.printStackTrace();
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, null);
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public StatusResponse getAll() {
+        Iterable<Doctor> doctors = doctorFacade.getAll ();
+        return new StatusResponse<Iterable<Doctor>>(Status.OK,null,doctors);
+    }
+
+    @RequestMapping (value = "/{id}", method = RequestMethod.POST)
+    public StatusResponse<UpdateDoctorResponse> updateDoctor (
+            @PathVariable String id,
+            @RequestBody UpdateDoctorRequest changes) {
+
+        Doctor doctor = doctorFacade.findOne(id);
+        if (doctor == null)
+            return new StatusResponse(Status.NOK,"A entidade não existe");
+        if (changes.getName().isEmpty())
+            return new StatusResponse(Status.NOK, "Sem alterações");
+        if (!changes.getName().isEmpty())
+            doctor.setName(changes.getName());
+        CurriculumVitae curriculum = curriculumVitae.findOne(changes.getIdCurriculum());
+        if (curriculum != null)
+            doctor.setCurriculum(curriculum);
+
+        MedicalSpecialty specialty = medicalSpecialty.findOne(changes.getIdSpecialty());
+
+        if (specialty != null)
+            doctor.setSpecialty(specialty);
+
+        doctorFacade.updateDoctor(doctor);
+
+        return new StatusResponse<UpdateDoctorResponse> (Status.NOK, null);
     }
 }

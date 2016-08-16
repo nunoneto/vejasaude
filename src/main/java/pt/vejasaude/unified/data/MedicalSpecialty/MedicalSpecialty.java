@@ -1,6 +1,6 @@
 package pt.vejasaude.unified.data.MedicalSpecialty;
 
-import pt.vejasaude.web.services.MedicalSpecialty.request.CreateNewSpecialtyRequest;
+import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,13 +14,15 @@ public class MedicalSpecialty implements Serializable {
 
 
     @Id
-    @Column
+    @Column(name="idSpecialty")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column
     private String specialty;
+    public MedicalSpecialty() {
 
+    }
     public MedicalSpecialty(int idSpecialty, String specialty, String description) {
         idSpecialty = idSpecialty;
         specialty = specialty;

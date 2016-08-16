@@ -7,17 +7,11 @@ public class CreateNewDoctorRequest {
 
     private String name;
 
-    private Integer idSpecialty;
+    private Integer idSpecialty,idCurriculum;
 
-    private Integer idCurriculum;
+    public Integer getIdCurriculum() {return idCurriculum;}
 
-    public Integer getIdCurriculum() {
-        return idCurriculum;
-    }
-
-    public void setIdCurriculum(int idCurriculum) {
-        this.idCurriculum = idCurriculum;
-    }
+    public void setIdCurriculum(int idCurriculum) {this.idCurriculum = idCurriculum;}
 
     public String getName() { return name;}
 

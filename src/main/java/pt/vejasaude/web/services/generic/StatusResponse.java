@@ -1,6 +1,7 @@
 package pt.vejasaude.web.services.generic;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import pt.vejasaude.unified.data.doctor.Doctor;
 
 /**
  * Created by NB20301 on 24/05/2016.
