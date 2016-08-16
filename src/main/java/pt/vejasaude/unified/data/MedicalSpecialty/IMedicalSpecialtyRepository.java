@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Created by fmorais on 28/06/2016.
  */
-public interface IMedicalSpecialty extends CrudRepository<MedicalSpecialty, Integer> {
+public interface IMedicalSpecialtyRepository extends CrudRepository<MedicalSpecialty, Integer> {
 }

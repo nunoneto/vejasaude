@@ -8,5 +8,5 @@ import pt.vejasaude.web.services.curriculumVitae.request.CreateNewCurriculumRequ
  */
 public interface ICurriculumFacade {
     CurriculumVitae createCurriculum (CreateNewCurriculumRequest request);
-
+    Iterable<CurriculumVitae> getAll();
 }

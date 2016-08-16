@@ -3,8 +3,7 @@ package pt.vejasaude.facade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
-import pt.vejasaude.unified.data.CurriculumVitae.ICurriculumVitae;
-import pt.vejasaude.unified.data.doctor.IDoctor;
+import pt.vejasaude.unified.data.CurriculumVitae.ICurriculumVitaeRepository;
 import pt.vejasaude.web.services.curriculumVitae.request.CreateNewCurriculumRequest;
 
 /**
@@ -13,7 +12,7 @@ import pt.vejasaude.web.services.curriculumVitae.request.CreateNewCurriculumRequ
 @Service
 public class CurriculumFacade implements ICurriculumFacade {
     @Autowired
-    private ICurriculumVitae curriculumDAO;
+    private ICurriculumVitaeRepository curriculumDAO;
 
     @Override
     public CurriculumVitae createCurriculum(CreateNewCurriculumRequest request) {
@@ -26,5 +25,10 @@ public class CurriculumFacade implements ICurriculumFacade {
                 e.printStackTrace();
             }
                 return newCurriculumVitae;
+    }
+
+    @Override
+    public Iterable<CurriculumVitae> getAll() {
+        return null;
     }
 }

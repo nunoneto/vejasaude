@@ -2,9 +2,10 @@ package pt.vejasaude.facade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pt.vejasaude.unified.data.MedicalSpecialty.IMedicalSpecialty;
+import pt.vejasaude.unified.data.MedicalSpecialty.IMedicalSpecialtyRepository;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequest;
+
 
 /**
  * Created by fmorais on 05/07/2016.
@@ -12,7 +13,7 @@ import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequ
 @Service
 public class SpecialtyFacade implements ISpecialtyFacade{
     @Autowired
-    private IMedicalSpecialty specialtyDAO;
+    private IMedicalSpecialtyRepository specialtyDAO;
 
     @Override
     public MedicalSpecialty createSpecialty(CreateNewSpecialtyRequest request) {
@@ -24,5 +25,10 @@ public class SpecialtyFacade implements ISpecialtyFacade{
             e.printStackTrace();
         }
         return newMedicalSpecialty;
+    }
+
+    @Override
+    public Iterable<MedicalSpecialty> getAll() {
+        return specialtyDAO.findAll();
     }
 }

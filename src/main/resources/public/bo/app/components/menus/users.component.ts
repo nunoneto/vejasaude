@@ -22,7 +22,7 @@ export class ListUsersComponent implements OnInit{
     }
 
     editUser(user){
-        this.router.navigate(['/users',user.username]);
+        this.router.navigate(['../home/users',user.username]);
     }
 
     

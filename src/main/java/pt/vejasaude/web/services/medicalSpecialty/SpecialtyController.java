@@ -32,4 +32,8 @@ public class SpecialtyController {
             return new StatusResponse<CreateNewSpecialtyResponse>(Status.NOK, null);
         }
     }
+    @RequestMapping(method = RequestMethod.GET)
+    public StatusResponse<Iterable<MedicalSpecialty>> getAll(){
+        return new StatusResponse<>(Status.OK,null,specialtyFacade.getAll());
+    }
 }

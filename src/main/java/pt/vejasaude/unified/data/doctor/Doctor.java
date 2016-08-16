@@ -33,16 +33,16 @@ public class Doctor implements Serializable {
 
     public Doctor(){};
 
+
     public Doctor(String name, MedicalSpecialty specialty, CurriculumVitae curriculum) {
         this.name = name;
         this.specialty = specialty;
         this.curriculum = curriculum;
     }
-    public Doctor(CreateNewDoctorRequest doctor){
+    public Doctor(CreateNewDoctorRequest doctor) {
         this.name = doctor.getName();
-        //specialty = doctor.getIdSpecialty();
-        //curriculum = doctor.getIdCurriculum();
     }
+
     public int getId() {return id;}
 
     public void setId(int id) {

@@ -1,7 +1,5 @@
 package pt.vejasaude.unified.data.MedicalSpecialty;
-
 import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequest;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -20,9 +18,8 @@ public class MedicalSpecialty implements Serializable {
 
     @Column
     private String specialty;
-    public MedicalSpecialty() {
+    public MedicalSpecialty() {}
 
-    }
     public MedicalSpecialty(int idSpecialty, String specialty, String description) {
         idSpecialty = idSpecialty;
         specialty = specialty;

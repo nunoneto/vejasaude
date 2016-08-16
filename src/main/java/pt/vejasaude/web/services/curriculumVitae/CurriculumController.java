@@ -35,4 +35,8 @@ public class CurriculumController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public StatusResponse<Iterable<CurriculumVitae>> getAll(){
+        return new StatusResponse<>(Status.OK,null,curriculumFacade.getAll());
+    }
 }
