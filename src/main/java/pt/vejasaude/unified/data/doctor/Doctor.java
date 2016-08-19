@@ -65,10 +65,12 @@ public class Doctor implements Serializable {
         return curriculum;
     }
 
-    public void setCurriculum(CurriculumVitae curriculum) {
-        curriculum = curriculum;
+    public void setCurriculum(CurriculumVitae pCurriculum) {
+        curriculum = pCurriculum;
     }
 
-    public void setSpecialty(MedicalSpecialty specialty) {specialty = specialty;}
+    public void setSpecialty(MedicalSpecialty pSpecialty) {
+        specialty = pSpecialty;
+    }
 
 }

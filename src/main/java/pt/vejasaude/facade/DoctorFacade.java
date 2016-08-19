@@ -45,10 +45,10 @@ public class DoctorFacade implements IDoctorFacade{
         return doctors;
     }
     @Override
-    public Doctor findOne(String id){
+    public Doctor findOne(int idDoctor){
         Doctor doctor = null;
         try{
-            doctor = doctorDAO.findOne(id);
+            doctor = doctorDAO.findOne(idDoctor);
         }catch (Exception e){
             e.printStackTrace();
         }

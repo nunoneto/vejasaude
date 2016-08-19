@@ -74,25 +74,25 @@ public class DoctorController {
     public StatusResponse<UpdateDoctorResponse> updateDoctor (
             @PathVariable String id,
             @RequestBody UpdateDoctorRequest changes) {
-
-        Doctor doctor = doctorFacade.findOne(id);
+        int idDoctor = Integer.parseInt(id);
+        Doctor doctor = doctorFacade.findOne(idDoctor);
         if (doctor == null)
             return new StatusResponse(Status.NOK,"A entidade não existe");
         if (changes.getName().isEmpty())
             return new StatusResponse(Status.NOK, "Sem alterações");
         if (!changes.getName().isEmpty())
             doctor.setName(changes.getName());
+        if (changes.getIdSpecialty() == null)
+            return new StatusResponse<>(Status.NOK, "ERROR");
         CurriculumVitae curriculum = curriculumVitae.findOne(changes.getIdCurriculum());
         if (curriculum != null)
             doctor.setCurriculum(curriculum);
-
+        if (changes.getIdSpecialty() == null)
+            return new StatusResponse<>(Status.NOK, "ERROR");
         MedicalSpecialty specialty = medicalSpecialty.findOne(changes.getIdSpecialty());
-
         if (specialty != null)
             doctor.setSpecialty(specialty);
-
         doctorFacade.updateDoctor(doctor);
-
         return new StatusResponse<UpdateDoctorResponse> (Status.NOK, null);
     }
 }

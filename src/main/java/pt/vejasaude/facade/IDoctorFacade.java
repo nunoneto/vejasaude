@@ -11,7 +11,7 @@ import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
 public interface IDoctorFacade {
     Doctor createDoctor (CreateNewDoctorRequest request, MedicalSpecialty speciality, CurriculumVitae curriculum);
     Iterable<Doctor> getAll();
-    Doctor findOne(String id);
+    Doctor findOne(int id);
     Doctor updateDoctor(Doctor changes);
 
 }
