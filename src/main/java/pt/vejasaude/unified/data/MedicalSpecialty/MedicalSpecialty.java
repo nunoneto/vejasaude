@@ -31,5 +31,5 @@ public class MedicalSpecialty implements Serializable {
 
     public String getSpecialty() {return specialty;}
 
-    public void setSpecialty(String specialty) {specialty = specialty;}
+    public void setSpecialty(String pSpecialty) {specialty = pSpecialty;}
 }

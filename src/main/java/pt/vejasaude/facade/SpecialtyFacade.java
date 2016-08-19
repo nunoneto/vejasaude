@@ -31,4 +31,15 @@ public class SpecialtyFacade implements ISpecialtyFacade{
     public Iterable<MedicalSpecialty> getAll() {
         return specialtyDAO.findAll();
     }
+
+    @Override
+    public MedicalSpecialty updateSpecialty(MedicalSpecialty changes) {
+
+        try{
+            specialtyDAO.save(changes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return changes;
+    }
 }

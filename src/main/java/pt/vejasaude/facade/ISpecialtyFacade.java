@@ -10,6 +10,6 @@ import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequ
 public interface ISpecialtyFacade {
 
     MedicalSpecialty createSpecialty (CreateNewSpecialtyRequest request);
-
     Iterable<MedicalSpecialty> getAll();
+    MedicalSpecialty updateSpecialty(MedicalSpecialty changes);
 }

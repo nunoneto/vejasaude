@@ -12,7 +12,7 @@ import pt.vejasaude.web.services.medicalSpecialty.response.CreateNewSpecialtyRes
 /**
  * Created by fmorais on 16/08/2016.
  */
-@RequestMapping ("/api/v1/specialty")
+
 public class CreateNewSpecialtyRequest {
 
     private String specialty;
@@ -20,8 +20,4 @@ public class CreateNewSpecialtyRequest {
     public String getSpecialty() {return specialty;}
 
     public void setSpecialty(String specialty) {this.specialty = specialty;}
-
-
-
-
 }

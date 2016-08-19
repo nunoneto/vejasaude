@@ -7,9 +7,7 @@ public class UpdateDoctorRequest
 {
     private String name;
 
-    private Integer idSpecialty;
-
-    private Integer idCurriculum;
+    private Integer idSpecialty, idCurriculum;
 
     public String getName() {return name;}
 

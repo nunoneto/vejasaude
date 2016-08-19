@@ -1,15 +1,15 @@
 package pt.vejasaude.web.services.medicalSpecialty;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pt.vejasaude.facade.ISpecialtyFacade;
+import pt.vejasaude.unified.data.MedicalSpecialty.IMedicalSpecialtyRepository;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
 import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequest;
+import pt.vejasaude.web.services.medicalSpecialty.request.UpdateSpecialtyRequest;
 import pt.vejasaude.web.services.medicalSpecialty.response.CreateNewSpecialtyResponse;
+import pt.vejasaude.web.services.medicalSpecialty.response.UpdateSpecialtyResponse;
 
 /**
  * Created by fmorais on 16/08/2016.
@@ -19,6 +19,8 @@ import pt.vejasaude.web.services.medicalSpecialty.response.CreateNewSpecialtyRes
 public class SpecialtyController {
     @Autowired
     private ISpecialtyFacade specialtyFacade;
+    @Autowired
+    private IMedicalSpecialtyRepository medicalSpecialtyRep;
 
     @RequestMapping(method = RequestMethod.POST)
     public StatusResponse<CreateNewSpecialtyResponse> createSpecialty (@RequestBody CreateNewSpecialtyRequest request) {
@@ -39,4 +41,36 @@ public class SpecialtyController {
     public StatusResponse<Iterable<MedicalSpecialty>> getAll(){
         return new StatusResponse<>(Status.OK,null,specialtyFacade.getAll());
     }
+
+    @RequestMapping (value = "/{id}", method = RequestMethod.POST)
+    public StatusResponse<UpdateSpecialtyResponse> updateSpecialty (
+            @PathVariable String id,
+            @RequestBody UpdateSpecialtyRequest changes){
+        int idSpecialty = Integer.parseInt(id);
+        MedicalSpecialty  specialty = medicalSpecialtyRep.findOne(idSpecialty);
+        if (specialty == null)
+            return new StatusResponse(Status.NOK,"A especialidade não existe");
+        if (changes.getSpecialty().isEmpty())
+            return new StatusResponse(Status.NOK,"Sem alterações");
+        else
+            specialty.setSpecialty(changes.getSpecialty());
+        specialtyFacade.updateSpecialty(specialty);
+        UpdateSpecialtyResponse updateSpecialtyResponse = UpdateSpecialtyResponse.of(specialty);
+        return new StatusResponse<UpdateSpecialtyResponse>(Status.OK,"Alteração efetuada com sucesso",updateSpecialtyResponse);
+    }
+
+     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+     public StatusResponse removeSpecialty (@PathVariable String id) {
+         int idSpecialty = Integer.parseInt(id);
+         MedicalSpecialty specialty = medicalSpecialtyRep.findOne(idSpecialty);
+         if (specialty == null)
+             return new StatusResponse(Status.NOK,"A especialidade escolhida não existe");
+         try{
+             medicalSpecialtyRep.delete(idSpecialty);
+         }catch (Exception e){
+             e.printStackTrace();
+             return new StatusResponse(Status.NOK,e.getMessage());
+         }
+         return new StatusResponse(Status.OK,"Especialidade eliminada");
+     }
 }
