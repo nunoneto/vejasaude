@@ -67,10 +67,10 @@ public class SpecialtyController {
              return new StatusResponse(Status.NOK,"A especialidade escolhida não existe");
          try{
              medicalSpecialtyRep.delete(idSpecialty);
+             return new StatusResponse(Status.OK,"Especialidade eliminada");
          }catch (Exception e){
              e.printStackTrace();
              return new StatusResponse(Status.NOK,e.getMessage());
          }
-         return new StatusResponse(Status.OK,"Especialidade eliminada");
      }
 }
