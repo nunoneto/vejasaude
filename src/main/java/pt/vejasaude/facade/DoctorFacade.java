@@ -5,13 +5,8 @@ import org.springframework.stereotype.Service;
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.doctor.Doctor;
-import pt.vejasaude.unified.data.doctor.IDoctorRespository;
+import pt.vejasaude.unified.data.doctor.IDoctorRepository;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
-import pt.vejasaude.web.services.doctor.request.UpdateDoctorRequest;
-import pt.vejasaude.web.services.generic.Status;
-
-import javax.print.Doc;
-import java.util.Iterator;
 
 /**
  * Created by fmorais on 15/06/2016.
@@ -19,7 +14,7 @@ import java.util.Iterator;
 @Service
 public class DoctorFacade implements IDoctorFacade{
     @Autowired
-    private IDoctorRespository doctorDAO;
+    private IDoctorRepository doctorDAO;
 
     @Override
     public Doctor createDoctor(CreateNewDoctorRequest request, MedicalSpecialty speciality, CurriculumVitae curriculum) {

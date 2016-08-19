@@ -26,12 +26,7 @@ public class MedicalSpecialty implements Serializable {
     }
 
     public MedicalSpecialty(CreateNewSpecialtyRequest request) {
-        id = request.getId();
         specialty = request.getSpecialty();
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getSpecialty() {return specialty;}

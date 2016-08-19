@@ -15,12 +15,7 @@ import pt.vejasaude.web.services.medicalSpecialty.response.CreateNewSpecialtyRes
 @RequestMapping ("/api/v1/specialty")
 public class CreateNewSpecialtyRequest {
 
-    private int id;
     private String specialty;
-
-    public int getId() {return id;}
-
-    public void setId(int id) {this.id = id;}
 
     public String getSpecialty() {return specialty;}
 

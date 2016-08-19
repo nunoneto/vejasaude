@@ -2,6 +2,7 @@ package pt.vejasaude.web.services.doctor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pt.vejasaude.facade.DoctorFacade;
 import pt.vejasaude.facade.IDoctorFacade;
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.CurriculumVitae.ICurriculumVitaeRepository;
@@ -14,6 +15,7 @@ import pt.vejasaude.web.services.doctor.response.CreateDoctorResponse;
 import pt.vejasaude.web.services.doctor.response.UpdateDoctorResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
+import pt.vejasaude.unified.data.doctor.IDoctorRepository;
 
 /**
  * Created by fmorais on 15/06/2016.
@@ -22,11 +24,13 @@ import pt.vejasaude.web.services.generic.StatusResponse;
 @RestController
 public class DoctorController {
     @Autowired
-    private IDoctorFacade doctorFacade;
+    private DoctorFacade doctorFacade;
     @Autowired
-    private IMedicalSpecialtyRepository medicalSpecialty;
+    private IDoctorRepository doctorRep;
     @Autowired
-    private ICurriculumVitaeRepository curriculumVitae;
+    private IMedicalSpecialtyRepository medicalSpecialtyRep;
+    @Autowired
+    private ICurriculumVitaeRepository curriculumVitaeRep;
 
     @RequestMapping(method = RequestMethod.POST)
     public StatusResponse<CreateDoctorResponse> createDoctor(@RequestBody CreateNewDoctorRequest request) {
@@ -37,7 +41,7 @@ public class DoctorController {
         if (request.getIdSpecialty() == null)
             return new StatusResponse<>(Status.NOK, "ERROR");
 
-        MedicalSpecialty specialty = medicalSpecialty.findOne(request.getIdSpecialty());
+        MedicalSpecialty specialty = medicalSpecialtyRep.findOne(request.getIdSpecialty());
 
         if (specialty == null) {
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, "Especialidade não existe");
@@ -46,7 +50,7 @@ public class DoctorController {
             return new StatusResponse<>(Status.NOK, "ERROR");
         }
 
-        CurriculumVitae curriculum = curriculumVitae.findOne(request.getIdCurriculum());
+        CurriculumVitae curriculum = curriculumVitaeRep.findOne(request.getIdCurriculum());
 
         if (curriculum == null) {
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, "Curriculo não existe");
@@ -75,7 +79,7 @@ public class DoctorController {
             @PathVariable String id,
             @RequestBody UpdateDoctorRequest changes) {
         int idDoctor = Integer.parseInt(id);
-        Doctor doctor = doctorFacade.findOne(idDoctor);
+        Doctor doctor = doctorRep.findOne(idDoctor);
         if (doctor == null)
             return new StatusResponse(Status.NOK,"A entidade não existe");
         if (changes.getName().isEmpty())
@@ -84,15 +88,33 @@ public class DoctorController {
             doctor.setName(changes.getName());
         if (changes.getIdSpecialty() == null)
             return new StatusResponse<>(Status.NOK, "ERROR");
-        CurriculumVitae curriculum = curriculumVitae.findOne(changes.getIdCurriculum());
+        CurriculumVitae curriculum = curriculumVitaeRep.findOne(changes.getIdCurriculum());
         if (curriculum != null)
             doctor.setCurriculum(curriculum);
         if (changes.getIdSpecialty() == null)
             return new StatusResponse<>(Status.NOK, "ERROR");
-        MedicalSpecialty specialty = medicalSpecialty.findOne(changes.getIdSpecialty());
+        MedicalSpecialty specialty = medicalSpecialtyRep.findOne(changes.getIdSpecialty());
         if (specialty != null)
             doctor.setSpecialty(specialty);
         doctorFacade.updateDoctor(doctor);
         return new StatusResponse<UpdateDoctorResponse> (Status.NOK, null);
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public StatusResponse removeUser(@PathVariable String id){
+        int idDoctor = Integer.parseInt(id);
+        Doctor doctor  = doctorRep.findOne(idDoctor);
+        if(doctor == null)
+            return new StatusResponse(Status.NOK,"O Médico escolhido não existe");
+
+        try{
+            doctorRep.delete(idDoctor);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new StatusResponse(Status.NOK,null);
+        }
+        return new StatusResponse(Status.OK,"Médico eliminado");
+    }
+
+
 }
