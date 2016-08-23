@@ -1,4 +1,4 @@
-package pt.vejasaude.facade;
+package pt.vejasaude.facade.CurriculumFacade;
 
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
 import pt.vejasaude.web.services.curriculumVitae.request.CreateNewCurriculumRequest;

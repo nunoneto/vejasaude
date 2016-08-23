@@ -1,4 +1,4 @@
-package pt.vejasaude.facade;
+package pt.vejasaude.facade.SpecialtyFacade;
 
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequest;

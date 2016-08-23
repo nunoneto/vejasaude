@@ -1,4 +1,4 @@
-package pt.vejasaude.facade;
+package pt.vejasaude.facade.DoctorFacade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
  * Created by fmorais on 15/06/2016.
  */
 @Service
-public class DoctorFacade implements IDoctorFacade{
+public class DoctorFacade implements IDoctorFacade {
     @Autowired
     private IDoctorRepository doctorDAO;
 

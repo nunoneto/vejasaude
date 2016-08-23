@@ -1,4 +1,4 @@
-package pt.vejasaude.facade;
+package pt.vejasaude.facade.DoctorFacade;
 
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;

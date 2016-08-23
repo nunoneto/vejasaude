@@ -9,8 +9,6 @@ import java.io.Serializable;
 @Entity
 @Table
 public class MedicalSpecialty implements Serializable {
-
-
     @Id
     @Column(name="idSpecialty")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,8 +23,7 @@ public class MedicalSpecialty implements Serializable {
         specialty = specialty;
     }
 
-    public MedicalSpecialty(CreateNewSpecialtyRequest request) {
-        specialty = request.getSpecialty();
+    public MedicalSpecialty(CreateNewSpecialtyRequest request) {specialty = request.getSpecialty();
     }
 
     public String getSpecialty() {return specialty;}

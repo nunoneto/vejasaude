@@ -1,4 +1,4 @@
-package pt.vejasaude.facade;
+package pt.vejasaude.facade.SpecialtyFacade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequ
  * Created by fmorais on 05/07/2016.
  */
 @Service
-public class SpecialtyFacade implements ISpecialtyFacade{
+public class SpecialtyFacade implements ISpecialtyFacade {
     @Autowired
     private IMedicalSpecialtyRepository specialtyDAO;
 

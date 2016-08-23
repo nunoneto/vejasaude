@@ -2,8 +2,8 @@ package pt.vejasaude.web.services.curriculumVitae;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pt.vejasaude.facade.CurriculumFacade;
-import pt.vejasaude.facade.ICurriculumFacade;
+import pt.vejasaude.facade.CurriculumFacade.CurriculumFacade.ICurriculumFacade;
+import pt.vejasaude.facade.CurriculumFacade.ICurriculumFacade;
 import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.CurriculumVitae.ICurriculumVitaeRepository;
 import pt.vejasaude.web.services.curriculumVitae.request.CreateNewCurriculumRequest;
@@ -11,6 +11,7 @@ import pt.vejasaude.web.services.curriculumVitae.response.CreateNewCurriculumRes
 import pt.vejasaude.web.services.curriculumVitae.response.UpdateCurriculumResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
+import pt.vejasaude.web.services.medicalSpecialty.request.UpdateSpecialtyRequest;
 import pt.vejasaude.web.services.medicalSpecialty.response.UpdateSpecialtyResponse;
 
 /**
@@ -45,7 +46,7 @@ public class CurriculumController {
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public StatusResponse<UpdateCurriculumResponse> updateSpecialty (
             @PathVariable String id,
-            @RequestBody UpdateSpecialtyResponse changes){
+            @RequestBody UpdateSpecialtyRequest changes){
         int idCurriculum = Integer.parseInt(id);
         CurriculumVitae curriculumVitae = curriculumVitaeRep.findOne(idCurriculum);
         if(curriculumVitae == null)
