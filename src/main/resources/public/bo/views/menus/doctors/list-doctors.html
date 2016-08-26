@@ -1,35 +1,9 @@
-<br>
-<div class="panel panel-default">
-<div class="panel-heading">Médicos</div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Especialidade</th>
-                <th>Currículo</th>
-                <th>Editar</th>
-                <th>Apagar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let doctor of doctors">
-                <td>
-                    {{doctor.name}}
-                </td>
-                <td>
-                    {{doctor.specialty.specialty}}
+ <div id="wrapper">
 
-                </td>
-                <td>
-                    <a class="fa fa-pencil" (click)="goToCurriculum(doctor)"></a>
-                </td>
-                <td>
-                    <a class="fa fa-pencil" (click)="editDoctor(doctor)"></a>
-                </td>
-                <td>
-                    <a class="fa fa-trash-o"></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div ng-include src="'views/menu_head.html'">
+
+    </div>
+    <div id="page-wrapper" >
+        <div ng-include src="'/views/menus/doctors/list.html'"></div>
+    </div>
 </div>

@@ -1,0 +1,35 @@
+<br>
+<div class="panel panel-default">
+<div class="panel-heading">Médicos</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Especialidade</th>
+                <th>Currículo</th>
+                <th>Editar</th>
+                <th>Apagar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="doctor in doctors">
+                <td>
+                    {{doctor.name}}
+                </td>
+                <td>
+                    {{doctor.specialty.specialty}}
+
+                </td>
+                <td>
+                    <a class="fa fa-pencil" ng-click="goToCurriculum(doctor)"></a>
+                </td>
+                <td>
+                    <a class="fa fa-pencil" ng-click="editDoctor(doctor)"></a>
+                </td>
+                <td>
+                    <a class="fa fa-trash-o"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

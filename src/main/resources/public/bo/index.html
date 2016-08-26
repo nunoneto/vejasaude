@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="vejaSaudeBo">
 
 <head>
 
@@ -9,20 +9,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <script>document.write('<base href="' + document.location + '" />');</script>
-
     <title>Veja Saude - Back Office</title>
 
-    <!-- Angular 2.0 -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <!-- 2. Configure SystemJS -->
-    <script src="systemjs.config.js"></script>
-    <script>
-        System.import('app').catch(function(err){ console.error(err); });
-    </script>
+    <!-- Angular 1 -->
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    
+    <!-- Angular Controllers -->
+    <script src="app/app.js"></script>
+    <script src="app/controller/MainController.js"></script>
+    <script src="app/controller/LoginController.js"></script>
+    <script src="app/controller/HomeController.js"></script>
+    <script src="app/controller/DoctorController.js"></script>
+
+    <!-- Angular Service -->
+    <script src="app/services/SessionService.js"></script>
+    <script src="app/services/DoctorService.js"></script>
+
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,8 +51,9 @@
 
 <body>
     
-    <vejasaude-bo></vejasaude-bo>
-    
+    <div id="wrapper" ng-view>
+
+    </div>
 
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
