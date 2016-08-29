@@ -1,7 +1,7 @@
 package pt.vejasaude.web.services.curriculumVitae.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
+import pt.vejasaude.unified.data.curriculumVitae.CurriculumVitae;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ public class CreateNewCurriculumResponse implements Serializable{
     @JsonProperty
     private int id;
     @JsonProperty
-    private String description;
+    private byte[] description;
 
     public static CreateNewCurriculumResponse of (CurriculumVitae curriculumVitae)
     {

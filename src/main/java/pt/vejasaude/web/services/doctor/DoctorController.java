@@ -2,11 +2,11 @@ package pt.vejasaude.web.services.doctor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pt.vejasaude.facade.DoctorFacade.DoctorFacade;
-import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
-import pt.vejasaude.unified.data.CurriculumVitae.ICurriculumVitaeRepository;
-import pt.vejasaude.unified.data.MedicalSpecialty.IMedicalSpecialtyRepository;
-import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
+import pt.vejasaude.facade.doctorFacade.DoctorFacade;
+import pt.vejasaude.unified.data.curriculumVitae.CurriculumVitae;
+import pt.vejasaude.unified.data.curriculumVitae.ICurriculumVitaeRepository;
+import pt.vejasaude.unified.data.medicalSpecialty.IMedicalSpecialtyRepository;
+import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.doctor.Doctor;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
 import pt.vejasaude.web.services.doctor.request.UpdateDoctorRequest;

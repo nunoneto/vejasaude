@@ -26,7 +26,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         //validates if there is a backoffice user session
         if(user == null){
             System.out.println(url);
-            System.out.println("Request with no session");
+            System.out.println("request with no session");
             httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
             httpServletResponse.sendRedirect("/api/v1/session/denied");
             return false;
