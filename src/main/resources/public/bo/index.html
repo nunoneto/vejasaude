@@ -14,17 +14,26 @@
     <!-- Angular 1 -->
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+    
     
     <!-- Angular Controllers -->
     <script src="app/app.js"></script>
     <script src="app/controller/MainController.js"></script>
     <script src="app/controller/LoginController.js"></script>
-    <script src="app/controller/HomeController.js"></script>
     <script src="app/controller/DoctorController.js"></script>
 
     <!-- Angular Service -->
     <script src="app/services/SessionService.js"></script>
     <script src="app/services/DoctorService.js"></script>
+    <script src="app/services/interceptor/SessionInterceptor.js"></script>
+
+    <!-- ngToast -->
+    <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.min.css">
+    <script src="bower_components/ngToast/dist/ngToast.min.js"></script>
+    <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast-animations.min.css">
+
 
 
     <!-- Bootstrap Core CSS -->

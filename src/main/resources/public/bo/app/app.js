@@ -1,9 +1,12 @@
-var vejaSaudeBo = angular.module('vejaSaudeBo', ['ngRoute']);
+var vejaSaudeBo = angular.module('vejaSaudeBo', ['ngRoute', 'ngAnimate','ngSanitize','ngToast'  ]);
 
-vejaSaudeBo.config(['$locationProvider', '$routeProvider',
-    function config($locationProvider, $routeProvider) {
+vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToastProvider',
+    function config($locationProvider, $routeProvider,$httpProvider, ngToastProvider) {
+
+      // validate session
+      $httpProvider.interceptors.push('SessionInterceptor');
+
       $locationProvider.hashPrefix('!');
-
       $routeProvider.
         when('/', {  
           controller: 'MainController',
@@ -19,6 +22,15 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider',
           templateUrl: 'views/menus/doctors/list-doctors.html'
         }).otherwise({
           redirectTo: '/'
+        });
+
+        ngToastProvider.configure({
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          maxNumber: 3,
+          dismissOnTimeout: 4000,
+          animation: 'slide' // or 'fade'
+
         });
       
     }

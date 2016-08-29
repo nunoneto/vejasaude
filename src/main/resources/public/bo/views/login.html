@@ -1,4 +1,6 @@
 <div class="container">
+    <toast></toast>
+
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
@@ -6,10 +8,7 @@
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    
-                    <alert [alert]="alert"></alert>
-                    
-                    <form role="form">
+                    <form role="form" ng-submit="doLogin()">
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" type="text" autofocus ng-model="username"/>
@@ -19,12 +18,11 @@
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input name="remember" type="checkbox" value="Remember Me" >Remember Me
+                                    <input type="checkbox" value="Remember Me" ng-model="rememberMe" ng-click="remember($event)">Remember Me
                                 </label>
                             </div>
-
-                            <a ng-click=doLogin(); class="btn btn-lg btn-success btn-block">Login</a>
                         </fieldset>
+                        <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
                     </form>
                 </div>
             </div>  

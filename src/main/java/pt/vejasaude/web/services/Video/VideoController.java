@@ -1,6 +1,5 @@
 package pt.vejasaude.web.services.Video;
 
-import com.sun.deploy.security.X509Extended7DeployTrustManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pt.vejasaude.facade.VideoFacade.IVideoFacade;

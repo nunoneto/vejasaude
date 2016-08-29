@@ -1,6 +1,7 @@
 package pt.vejasaude.facade.VideoFacade;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pt.vejasaude.unified.data.Video.IVideoRepository;
 import pt.vejasaude.unified.data.Video.Video;
 import pt.vejasaude.web.services.Video.Request.VideoRequest;
@@ -8,6 +9,7 @@ import pt.vejasaude.web.services.Video.Request.VideoRequest;
 /**
  * Created by fmorais on 23/08/2016.
  */
+@Service
 public class VideoFacade implements IVideoFacade {
     @Autowired
     private IVideoRepository videoDAO;

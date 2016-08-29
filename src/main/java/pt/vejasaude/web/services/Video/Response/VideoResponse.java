@@ -27,5 +27,6 @@ public class VideoResponse implements Serializable {
         videoResponse.linkVideo = video.getVideoLink();
         videoResponse.author = video.getAuthor();
         videoResponse.date = video.getDate();
+        return  videoResponse;
     }
 }
