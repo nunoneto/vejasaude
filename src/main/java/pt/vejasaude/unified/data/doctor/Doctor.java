@@ -1,11 +1,10 @@
 package pt.vejasaude.unified.data.doctor;
 
-import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
-import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
+import pt.vejasaude.unified.data.curriculumVitae.CurriculumVitae;
+import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
 
 import javax.persistence.*;
-import javax.print.Doc;
 import java.io.Serializable;
 
 /**
@@ -23,7 +22,7 @@ public class Doctor implements Serializable {
     @Column
     private String name;
 
-    @ManyToOne
+    //@ManyToOne
     @JoinColumn(name="idSpecialty")
     private MedicalSpecialty specialty;
 

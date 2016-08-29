@@ -1,0 +1,15 @@
+package pt.vejasaude.facade.specialtyFacade;
+
+import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
+import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequest;
+
+
+/**
+ * Created by fmorais on 05/07/2016.
+ */
+public interface ISpecialtyFacade {
+
+    MedicalSpecialty createSpecialty (CreateNewSpecialtyRequest request);
+    Iterable<MedicalSpecialty> getAll();
+    MedicalSpecialty updateSpecialty(MedicalSpecialty changes);
+}

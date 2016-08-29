@@ -1,9 +1,9 @@
 package pt.vejasaude.web.services.medicalSpecialty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pt.vejasaude.facade.SpecialtyFacade.SpecialtyFacade.ISpecialtyFacade;
-import pt.vejasaude.unified.data.MedicalSpecialty.IMedicalSpecialtyRepository;
-import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
+import pt.vejasaude.facade.specialtyFacade.ISpecialtyFacade;
+import pt.vejasaude.unified.data.medicalSpecialty.IMedicalSpecialtyRepository;
+import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
 import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequest;

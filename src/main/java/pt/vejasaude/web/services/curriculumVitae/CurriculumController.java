@@ -2,17 +2,15 @@ package pt.vejasaude.web.services.curriculumVitae;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pt.vejasaude.facade.CurriculumFacade.CurriculumFacade.ICurriculumFacade;
-import pt.vejasaude.facade.CurriculumFacade.ICurriculumFacade;
-import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
-import pt.vejasaude.unified.data.CurriculumVitae.ICurriculumVitaeRepository;
+import pt.vejasaude.facade.curriculumFacade.ICurriculumFacade;
+import pt.vejasaude.unified.data.curriculumVitae.CurriculumVitae;
+import pt.vejasaude.unified.data.curriculumVitae.ICurriculumVitaeRepository;
 import pt.vejasaude.web.services.curriculumVitae.request.CreateNewCurriculumRequest;
 import pt.vejasaude.web.services.curriculumVitae.response.CreateNewCurriculumResponse;
 import pt.vejasaude.web.services.curriculumVitae.response.UpdateCurriculumResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
 import pt.vejasaude.web.services.medicalSpecialty.request.UpdateSpecialtyRequest;
-import pt.vejasaude.web.services.medicalSpecialty.response.UpdateSpecialtyResponse;
 
 /**
  * Created by fmorais on 19/07/2016.

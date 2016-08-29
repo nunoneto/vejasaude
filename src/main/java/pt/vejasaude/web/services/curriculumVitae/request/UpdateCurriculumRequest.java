@@ -4,8 +4,8 @@ package pt.vejasaude.web.services.curriculumVitae.request;
  * Created by fmorais on 19/08/2016.
  */
 public class UpdateCurriculumRequest {
-    private String description;
+    private byte[] description;
 
-    public String getDescription() {return description;}
-    public void setDescription(String description) {this.description = description;}
+    public byte[] getDescription() {return description;}
+    public void setDescription(byte[] description) {this.description = description;}
 }

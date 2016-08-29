@@ -1,7 +1,7 @@
 package pt.vejasaude.web.services.medicalSpecialty.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
+import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
 
 /**
  * Created by fmorais on 19/08/2016.

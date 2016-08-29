@@ -1,11 +1,9 @@
 package pt.vejasaude.web.services.doctor.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.stereotype.Service;
-import pt.vejasaude.unified.data.CurriculumVitae.CurriculumVitae;
-import pt.vejasaude.unified.data.MedicalSpecialty.MedicalSpecialty;
+import pt.vejasaude.unified.data.curriculumVitae.CurriculumVitae;
+import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.doctor.Doctor;
-import pt.vejasaude.web.services.doctor.request.UpdateDoctorRequest;
 
 import java.io.Serializable;
 
