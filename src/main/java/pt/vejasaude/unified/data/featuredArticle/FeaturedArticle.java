@@ -4,6 +4,7 @@ import pt.vejasaude.unified.data.attachment.Attachment;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by fmorais on 24/08/2016.
@@ -19,13 +20,13 @@ public class FeaturedArticle implements Serializable {
     @Column
     private byte[] description;
 
-    //@ManyToMany
+    @ManyToMany
     @JoinColumn (name = "idAttachment")
-    private Attachment attachment;
+    private List<Attachment> attachment;
 
     public FeaturedArticle() {}
 
-    public FeaturedArticle(int id, byte[] description, Attachment attachment) {
+    public FeaturedArticle(int id, byte[] description, List<Attachment> attachment) {
         this.id = id;
         this.description = description;
         this.attachment = attachment;
@@ -39,7 +40,7 @@ public class FeaturedArticle implements Serializable {
 
     public void setDescription(byte[] description) {this.description = description;}
 
-    public Attachment getAttachment() {return attachment;}
+    public List<Attachment>  getAttachment() {return attachment;}
 
-    public void setAttachment(Attachment attachment) {this.attachment = attachment;}
+    public void setAttachment(List<Attachment> attachment ) {this.attachment = attachment;}
 }

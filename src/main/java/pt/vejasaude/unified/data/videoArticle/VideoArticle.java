@@ -4,6 +4,7 @@ import pt.vejasaude.unified.data.attachment.Attachment;
 import pt.vejasaude.unified.data.video.Video;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by fmorais on 24/08/2016.
@@ -16,19 +17,19 @@ public class VideoArticle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
-    private byte[] description;
-    //@ManyToMany
+    private byte[] content;
+    @ManyToMany
     @JoinColumn (name = "idAttachment")
-    private Attachment attachment;
-    //@ManyToMany
+    private List<Attachment> attachment;
+    @ManyToMany
     @JoinColumn (name = "idVideo")
-    private Video video;
+    private List<Video> video;
 
     public VideoArticle() {}
 
-    public VideoArticle(int id, byte[] description, Attachment attachment, Video video) {
+    public VideoArticle(int id, byte[] content, List<Attachment> attachment, List<Video> video) {
         this.id = id;
-        this.description = description;
+        this.content = content;
         this.attachment = attachment;
         this.video = video;
     }
@@ -37,15 +38,15 @@ public class VideoArticle {
 
     public void setId(int id) {this.id = id;}
 
-    public byte[] getDescription() {return description;}
+    public byte[] getContent() {return content;}
 
-    public void setDescription(byte[] description) {this.description = description;}
+    public void setContent(byte[] content) {this.content = content;}
 
-    public Attachment getAttachment() {return attachment;}
+    public List<Attachment> getAttachment() {return attachment;}
 
-    public void setAttachment(Attachment attachment) {this.attachment = attachment;}
+    public void setAttachment(List<Attachment> attachment) {this.attachment = attachment;}
 
-    public Video getVideo() {return video;}
+    public List<Video> getVideo() {return video;}
 
-    public void setVideo(Video video) {this.video = video;}
+    public void setVideo(List<Video> video) {this.video = video;}
 }

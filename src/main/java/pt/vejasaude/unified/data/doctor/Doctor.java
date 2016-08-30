@@ -6,6 +6,7 @@ import pt.vejasaude.web.services.doctor.request.CreateNewDoctorRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by fmorais on 08/06/2016.
@@ -22,7 +23,7 @@ public class Doctor implements Serializable {
     @Column
     private String name;
 
-    //@ManyToOne
+    @ManyToOne
     @JoinColumn(name="idSpecialty")
     private MedicalSpecialty specialty;
 
