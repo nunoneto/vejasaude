@@ -15,7 +15,9 @@ public class UpdateDoctorResponse implements Serializable {
     private int id;
     @JsonProperty
     private String name;
+    @JsonProperty
     private MedicalSpecialty speciality;
+    @JsonProperty
     private CurriculumVitae curriculum;
 
     public static UpdateDoctorResponse of(Doctor doctor) {

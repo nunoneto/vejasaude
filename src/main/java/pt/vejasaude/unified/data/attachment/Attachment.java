@@ -1,5 +1,7 @@
 package pt.vejasaude.unified.data.attachment;
 
+
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -26,7 +28,6 @@ public class Attachment implements Serializable{
     }
 
     public Attachment(int id, String contentType, String fileName, long size, byte[] attachment) {
-        this.id = id;
         this.contentType = contentType;
         this.fileName = fileName;
         this.size = size;

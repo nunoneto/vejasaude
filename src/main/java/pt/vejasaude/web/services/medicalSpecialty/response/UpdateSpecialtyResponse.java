@@ -8,10 +8,14 @@ import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
  */
 public class UpdateSpecialtyResponse {
     @JsonProperty
+    private int id;
+    @JsonProperty
     private String specialty;
+
     public static UpdateSpecialtyResponse of (MedicalSpecialty specialty)
     {
         UpdateSpecialtyResponse specialtyResponse = new UpdateSpecialtyResponse();
+        specialtyResponse.id = specialty.getId();
         specialtyResponse.specialty = specialty.getSpecialty();
         return specialtyResponse;
     }

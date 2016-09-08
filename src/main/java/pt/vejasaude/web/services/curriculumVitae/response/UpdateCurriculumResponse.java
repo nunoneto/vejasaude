@@ -8,11 +8,12 @@ import pt.vejasaude.unified.data.curriculumVitae.CurriculumVitae;
  */
 public class UpdateCurriculumResponse {
     @JsonProperty
-    private byte [] description;
+    private String description;
     public static UpdateCurriculumResponse of (CurriculumVitae curriculumVitae)
     {
         UpdateCurriculumResponse curriculumResponse = new UpdateCurriculumResponse();
-        curriculumResponse.description = curriculumVitae.getDescription();
+
+        curriculumResponse.description = new String(curriculumVitae.getDescription());
 
         return curriculumResponse;
     }
