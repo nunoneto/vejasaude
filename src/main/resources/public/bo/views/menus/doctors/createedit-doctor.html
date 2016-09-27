@@ -25,19 +25,14 @@
 
                                         <div class="form-group">
                                             <label>Especialidade</label>
-                                            <select class="form-control">
-                                                <option></option>
+                                            <select class="form-control" ng-model="selectedSpeciality">
+                                                <option>--Selecione uma especialidade--</option>
                                                 <option value="new">--Nova Especialidade--</option>
                                                 <!-- change match of speciality to id basis-->
                                                 <option ng-repeat="speciality in specialities" 
-                                                        value="speciality.id"
-                                                        ng-attr-selected="{{specialty.specialty == doctor.specialty.specialty}}"
-                                                        ng-change="evalSpecialty()"
-                                                        ng-model="selectedSpecialty">
-                                                        {{speciality.specialty}} -- 
-                                                        {{doctor.specialty.specialty}} -- 
-                                                        {{specialty.specialty.trim() == doctor.specialty.specialty.trim()}}
-
+                                                        value="{{speciality.id}}"
+                                                        ng-selected="speciality.id == doctor.specialty.id">
+                                                        {{speciality.specialty}}
                                                 </option>
                                             </select>
                                         </div>
@@ -49,7 +44,7 @@
 
                                         </textarea>
 
-                                        <button type="submit" class="btn btn-default">Guardar</button>
+                                        <button type="submit" class="btn btn-default" ng-click="save()">Guardar</button>
 
                                     </div>
 

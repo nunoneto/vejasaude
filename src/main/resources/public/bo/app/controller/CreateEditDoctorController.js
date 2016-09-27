@@ -1,8 +1,8 @@
 (function(){
     angular
     .module("vejaSaudeBo")
-    .controller('CreateEditDoctorController', ['$scope','$location','DoctorService','SpecialityService','$routeParams', 
-        function($scope,$location,DoctorService,SpecialityService,$routeParams) {
+    .controller('CreateEditDoctorController', ['$scope','$location','DoctorService','SpecialityService','CurriculumService','$routeParams', 
+        function($scope,$location,DoctorService,SpecialityService,CurriculumService,$routeParams) {
             
             var doctorId = $routeParams.id;
             $scope.mode = $routeParams.mode;
@@ -41,6 +41,26 @@
 
             $scope.evalSpecialty = function() {
                 console.log($scope.selectedSpecialty);
+            }
+
+            $scope.save = function() {
+                //TODO save curriculum
+                if ($scope.doctor.id == null) {
+                    // create curriculum
+                }else{
+                    // update curriculum
+                    CurriculumService.update($scope.curriculumText,$scope.doctor.id);
+                }
+                
+                var update = {
+                    name: $scope.doctor.name, 
+                    idSpecialty: $scope.selectedSpeciality,
+                    idCurriculum: $scope.doctor.curriculum.id
+                }
+
+                console.log(update);
+
+
             }
             
     }]);
