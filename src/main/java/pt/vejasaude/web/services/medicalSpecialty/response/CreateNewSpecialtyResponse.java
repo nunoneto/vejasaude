@@ -8,10 +8,13 @@ import java.io.Serializable;
  */
 public class CreateNewSpecialtyResponse  implements Serializable{
     @JsonProperty
+    private int id;
+    @JsonProperty
     private String specialty;
     public static CreateNewSpecialtyResponse of (MedicalSpecialty specialty)
     {
        CreateNewSpecialtyResponse specialtyResponse = new CreateNewSpecialtyResponse();
+        specialtyResponse.id = specialty.getId();
         specialtyResponse.specialty = specialty.getSpecialty();
         return specialtyResponse;
     }

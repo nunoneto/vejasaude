@@ -16,8 +16,9 @@ public class CurriculumVitae implements Serializable{
     private int id;
     @Column
     private byte[] description;
+
     public CurriculumVitae(CreateNewCurriculumRequest request){
-        this.description = request.getDescription();
+        this.description = request.getDescription().getBytes();
     }
 
     public CurriculumVitae() {}

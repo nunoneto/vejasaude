@@ -12,13 +12,14 @@ public class CreateNewCurriculumResponse implements Serializable{
     @JsonProperty
     private int id;
     @JsonProperty
-    private byte[] description;
+    private String description;
 
     public static CreateNewCurriculumResponse of (CurriculumVitae curriculumVitae)
     {
         CreateNewCurriculumResponse curriculumResponse = new CreateNewCurriculumResponse();
         curriculumResponse.id = curriculumVitae.getId();
-        curriculumResponse.description = curriculumVitae.getDescription();
+
+        curriculumResponse.description = new String(curriculumVitae.getDescription());
 
         return curriculumResponse;
     }
