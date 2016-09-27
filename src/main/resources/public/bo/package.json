@@ -17,6 +17,7 @@
   "devDependencies": {
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
     "express": "^4.14.0",
     "lite-server": "^2.2.2",
     "request": "^2.74.0"
