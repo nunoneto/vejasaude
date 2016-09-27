@@ -1,4 +1,4 @@
-var vejaSaudeBo = angular.module('vejaSaudeBo', ['ngRoute', 'ngAnimate','ngSanitize','ngToast'  ]);
+var vejaSaudeBo = angular.module('vejaSaudeBo', ['ngRoute', 'ngAnimate','ngSanitize','ngToast']);
 
 vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToastProvider',
     function config($locationProvider, $routeProvider,$httpProvider, ngToastProvider) {
@@ -20,6 +20,9 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToa
         }).when('/home/doctors', {
           controller: 'DoctorController',
           templateUrl: 'views/menus/doctors/list-doctors.html'
+        }).when('/doctor/:id/:mode', {
+          controller: 'CreateEditDoctorController',
+          templateUrl: 'views/menus/doctors/createedit-doctor.html'
         }).otherwise({
           redirectTo: '/'
         });
@@ -28,11 +31,19 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToa
           verticalPosition: 'top',
           horizontalPosition: 'center',
           maxNumber: 3,
-          dismissOnTimeout: 4000,
+          dismissOnTimeout: 2500,
           animation: 'slide' // or 'fade'
 
         });
       
     }
   ]);
+
+  vejaSaudeBo.filter('capitalize', function() {
+    return function(input, all) {
+      var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
+      return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+    }
+  });
+
 

@@ -14,11 +14,11 @@
             );
 
             $scope.editDoctor = function(doctor){
-                location.path('home/doctors/'+doctor.id);
+                $location.path('/doctor/'+doctor.id+"/edit");
             }
 
             $scope.goToCurriculum = function(doctor){
-                location.path('home/curriculum/'+doctor.curriculum.id);
+                $location.path('/curriculum/'+doctor.curriculum.id);
             }
 
         
