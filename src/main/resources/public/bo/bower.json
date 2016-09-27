@@ -12,7 +12,7 @@
     "test",
     "tests"
   ],
-    "dependencies": {
+  "dependencies": {
     "bootstrap": "~3.3.6",
     "datatables": "~1.10.4",
     "datatables-plugins": "~1.0.1",
@@ -23,6 +23,7 @@
     "morrisjs": "~0.5.1",
     "datatables-responsive": "~1.0.3",
     "bootstrap-social": "~4.8.0",
-    "flot.tooltip": "~0.8.4"
+    "flot.tooltip": "~0.8.4",
+    "ngToast": "ngtoast#^2.0.0"
   }
 }

@@ -14,3 +14,4 @@ src/main/resources/public/bo/bower_components/
 src/main/resources/public/bo/node_modules/
 src/main/resources/public/bo/typings/
 src/main/resources/public/bo/npm-debug.log.*
+src/main/resources/public/bo/npm-debug.log
