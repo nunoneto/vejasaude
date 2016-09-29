@@ -22,7 +22,8 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToa
           templateUrl: 'views/menus/doctors/list-doctors.html'
         }).when('/doctor/:id/:mode', {
           controller: 'CreateEditDoctorController',
-          templateUrl: 'views/menus/doctors/createedit-doctor.html'
+          templateUrl: 'views/menus/doctors/createedit-doctor.html',
+          resolve: "CreateEditDoctorController.resolve"
         }).otherwise({
           redirectTo: '/'
         });

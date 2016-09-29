@@ -81,13 +81,32 @@
         });
     }
 
+    var update = function(update, doctorId){
+       
+        return $q(function(resolve, reject){
+             $http({
+                url: path+"/"+doctorId,
+                method: 'POST',
+                headers: {
+                'Content-Type': "application/json"
+                },
+                data: update
+            }).then(function successCallback(response) {
+                resolve(response.data);
+            }, function errorCallback(response) {
+                reject(response);
+            });
+        });
+    }
+
 
 
     
     return {
         getAll: getAll,
         find: find,
-        create: create  
+        create: create,
+        update: update
     };
 
   }]);

@@ -7,7 +7,7 @@
     var path= "/api/v1/curriculum",
         doctors = null;
 
-    var create = function(){
+    var create = function(text){
 
         return $q(function(resolve, reject){
 
@@ -16,11 +16,12 @@
                 method: 'POST',
                 headers: {
                 'Content-Type': "application/json"
-                }
+                },
+                data: JSON.stringify({description: text})
             }).then(function successCallback(response) {
-
+                resolve(response.data);
             }, function errorCallback(response) {
-
+                reject(response);
             });
         });
     };
@@ -35,9 +36,7 @@
                 headers: {
                 'Content-Type': "application/json"
                 },
-                data: {
-                   description: text 
-                }
+                data: JSON.stringify({description: text})
             }).then(function successCallback(response) {
                 resolve(response.data);
             }, function errorCallback(response) {

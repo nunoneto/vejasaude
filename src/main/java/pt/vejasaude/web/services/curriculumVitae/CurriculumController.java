@@ -6,6 +6,7 @@ import pt.vejasaude.facade.curriculumFacade.ICurriculumFacade;
 import pt.vejasaude.unified.data.curriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.curriculumVitae.ICurriculumVitaeRepository;
 import pt.vejasaude.web.services.curriculumVitae.request.CreateNewCurriculumRequest;
+import pt.vejasaude.web.services.curriculumVitae.request.UpdateCurriculumRequest;
 import pt.vejasaude.web.services.curriculumVitae.response.CreateNewCurriculumResponse;
 import pt.vejasaude.web.services.curriculumVitae.response.UpdateCurriculumResponse;
 import pt.vejasaude.web.services.generic.Status;
@@ -42,17 +43,19 @@ public class CurriculumController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public StatusResponse<UpdateCurriculumResponse> updateSpecialty (
+    public StatusResponse<UpdateCurriculumResponse> updateCurriculum (
             @PathVariable String id,
-            @RequestBody UpdateSpecialtyRequest changes){
+            @RequestBody UpdateCurriculumRequest changes){
         int idCurriculum = Integer.parseInt(id);
         CurriculumVitae curriculumVitae = curriculumVitaeRep.findOne(idCurriculum);
         if(curriculumVitae == null)
             return new StatusResponse(Status.NOK,"Curriculum não existe");
-        else
-            curriculumVitae.setDescription(curriculumVitae.getDescription());
+
+        if(changes.getDescription() == null)
+            return new StatusResponse(Status.NOK,"");
 
         try{
+            curriculumVitae.setDescription(changes.getDescription().getBytes());
             curriculumVitaeRep.save(curriculumVitae);
             UpdateCurriculumResponse updateCurriculumResponse = UpdateCurriculumResponse.of(curriculumVitae);
             return new StatusResponse<UpdateCurriculumResponse>(Status.OK,"Curriculum Alterado",updateCurriculumResponse);

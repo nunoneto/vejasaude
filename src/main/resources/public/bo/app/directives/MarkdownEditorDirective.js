@@ -3,6 +3,10 @@
     angular.module('vejaSaudeBo').directive('markdownEditor', function () {
         return {
             restrict: 'A',
+            scope: {
+                getValue: '='
+            },
+
             templateUrl: 'views/directives/markdown.html',
             link: function ($scope, element, attrs) { 
                 var simplemde = new SimpleMDE(
@@ -13,11 +17,14 @@
 
                 attrs.$observe('value', function(value){
                     console.log(value);
+                    simplemde.value(value);
                 });
 
-                $scope.setValue = function(value) {
-                    simplemde.value(value);
+                $scope.getValue = function(value) {
+                        return simplemde.value();
                 }
+
+                
             } 
         };
     });

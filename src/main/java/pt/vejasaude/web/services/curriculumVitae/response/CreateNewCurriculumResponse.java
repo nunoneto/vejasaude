@@ -19,7 +19,9 @@ public class CreateNewCurriculumResponse implements Serializable{
         CreateNewCurriculumResponse curriculumResponse = new CreateNewCurriculumResponse();
         curriculumResponse.id = curriculumVitae.getId();
 
-        curriculumResponse.description = new String(curriculumVitae.getDescription());
+        if (curriculumVitae.getDescription() != null)
+            curriculumResponse.description = new String(curriculumVitae.getDescription());
+
 
         return curriculumResponse;
     }

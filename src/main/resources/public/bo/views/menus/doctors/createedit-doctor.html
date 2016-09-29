@@ -25,7 +25,7 @@
 
                                         <div class="form-group">
                                             <label>Especialidade</label>
-                                            <select class="form-control" ng-model="selectedSpeciality">
+                                            <select class="form-control" ng-model="selectedSpeciality" ng-show="doctor">
                                                 <option>--Selecione uma especialidade--</option>
                                                 <option value="new">--Nova Especialidade--</option>
                                                 <!-- change match of speciality to id basis-->
@@ -40,7 +40,9 @@
                                     </div>
 
                                     <div class="col-lg-12">
-                                        <textarea markdown-editor value="{{doctor.curriculum.description || '' }}">
+                                        <textarea markdown-editor 
+                                                    value="{{doctor.curriculum.description}}"
+                                                    get-value="textEditor">
 
                                         </textarea>
 

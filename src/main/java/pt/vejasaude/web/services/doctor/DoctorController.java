@@ -16,6 +16,9 @@ import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
 import pt.vejasaude.unified.data.doctor.IDoctorRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by fmorais on 15/06/2016.
  */
@@ -70,7 +73,12 @@ public class DoctorController {
     @RequestMapping(method = RequestMethod.GET)
     public StatusResponse getAll() {
         Iterable<Doctor> doctors = doctorFacade.getAll ();
-        return new StatusResponse<Iterable<Doctor>>(Status.OK,null,doctors);
+
+        List doctorsFinal = new ArrayList<CreateDoctorResponse>();
+        for(Doctor d : doctors) {
+            doctorsFinal.add(CreateDoctorResponse.of(d));
+        }
+        return new StatusResponse<>(Status.OK,null,doctorsFinal);
     }
 
     @RequestMapping (value = "/{id}", method = RequestMethod.POST)

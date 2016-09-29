@@ -1,39 +1,11 @@
 (function(){
-    angular
+    var CreateEditDoctorController = angular
     .module("vejaSaudeBo")
-    .controller('CreateEditDoctorController', ['$scope','$location','DoctorService','SpecialityService','CurriculumService','$routeParams', 
-        function($scope,$location,DoctorService,SpecialityService,CurriculumService,$routeParams) {
+    .controller('CreateEditDoctorController', ['$scope','$location','DoctorService','SpecialityService','CurriculumService','$routeParams','ngToast', 
+        function($scope,$location,DoctorService,SpecialityService,CurriculumService,$routeParams,ngToast) {
             
             var doctorId = $routeParams.id;
             $scope.mode = $routeParams.mode;
-
-            SpecialityService.getAll().then(
-                function(specialities){
-                   $scope.specialities =  specialities;
-                },
-                function(err){
-                    console.log(err);
-                    ngToast.create({
-                        className: 'danger',
-                        content: 'Não foi possível carregar as especialidades. Tente mais tarde',
-                    });
-                    //TODO disable do submit
-                }
-            );
-
-
-            DoctorService.find(doctorId).then(
-                function(doctor){
-                    $scope.doctor = doctor;
-                },
-                function(err){
-                    console.log(err);
-                    ngToast.create({
-                        className: 'danger',
-                        content: 'Médico não encontrado',
-                    });
-                }
-            );
 
             $scope.submitDoctor = function(){
                 //TODO submit or update doctor
@@ -44,24 +16,74 @@
             }
 
             $scope.save = function() {
-                //TODO save curriculum
-                if ($scope.doctor.id == null) {
-                    // create curriculum
-                }else{
-                    // update curriculum
-                    CurriculumService.update($scope.curriculumText,$scope.doctor.id);
-                }
-                
+
                 var update = {
                     name: $scope.doctor.name, 
                     idSpecialty: $scope.selectedSpeciality,
-                    idCurriculum: $scope.doctor.curriculum.id
+                    idCurriculum: $scope.doctor.curriculum ? $scope.doctor.curriculum.id : null
                 }
 
-                console.log(update);
+                var updateDoctor = function(){
+                    DoctorService.update(update,$scope.doctor.id).then(
+                        function(data){
+                            console.log(data);
+                        },function(err){
 
+                        });
+                }
 
+                if ($scope.doctor.curriculum == null) {
+                    // create curriculum
+                    CurriculumService.create($scope.textEditor())
+                        .then(function(data){
+                            update.idCurriculum = data.content.id;
+                            updateDoctor();
+                        },function(err){
+
+                        });
+                }else{
+                    // update curriculum
+                    CurriculumService.update($scope.textEditor(),$scope.doctor.curriculum.id)
+                        .then(function(){
+                            updateDoctor();
+                        },function(err){
+                            
+                        });
+                }
+                
             }
-            
+
+
+            return {
+                resolve : {
+                    specialities : SpecialityService.getAll().then(
+                            function(specialities){
+                            $scope.specialities =  specialities;
+                            },
+                            function(err){
+                                console.log(err);
+                                ngToast.create({
+                                    className: 'danger',
+                                    content: 'Não foi possível carregar as especialidades. Tente mais tarde',
+                                });
+                                //TODO disable do submit
+                            }
+                        ),
+                    doctor: DoctorService.find(doctorId).then(
+                            function(doctor){
+                                $scope.doctor = doctor;
+                            },
+                            function(err){
+                                console.log(err);
+                                ngToast.create({
+                                    className: 'danger',
+                                    content: 'Médico não encontrado',
+                                });
+                            }
+                        )
+                }
+            }
     }]);
+
+
 }())
