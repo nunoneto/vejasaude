@@ -8,6 +8,6 @@ import java.util.List;
  * Created by fmorais on 30/08/2016.
  */
 public class UpdateFeaturedArticleRequest {
-    private byte[] description;
-    private List<Attachment> attachment;
+    private String description;
+    private int[] idAttachments;
 }
