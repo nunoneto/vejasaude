@@ -11,6 +11,7 @@ public class CreateNewSpecialtyResponse  implements Serializable{
     private int id;
     @JsonProperty
     private String specialty;
+
     public static CreateNewSpecialtyResponse of (MedicalSpecialty specialty)
     {
        CreateNewSpecialtyResponse specialtyResponse = new CreateNewSpecialtyResponse();

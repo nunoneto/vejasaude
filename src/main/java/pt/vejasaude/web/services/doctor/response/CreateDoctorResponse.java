@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import pt.vejasaude.unified.data.curriculumVitae.CurriculumVitae;
 import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.doctor.Doctor;
+import pt.vejasaude.web.services.attachment.response.CreateNewAttachmentResponse;
+import pt.vejasaude.web.services.curriculumVitae.response.CreateNewCurriculumResponse;
 
 import java.io.Serializable;
 
@@ -18,8 +20,8 @@ public class CreateDoctorResponse implements Serializable {
     private String name;
     @JsonProperty
     private MedicalSpecialty speciality;
-    @JsonProperty
-    private CurriculumVitae curriculum;
+
+    private CreateNewCurriculumResponse curriculum;
 
     public static CreateDoctorResponse of(Doctor doctor)
     {
@@ -27,7 +29,7 @@ public class CreateDoctorResponse implements Serializable {
 
         doctorResponse.id = doctor.getId();
         doctorResponse.name = doctor.getName();
-        doctorResponse.curriculum = doctor.getCurriculum();
+        doctorResponse.curriculum = CreateNewCurriculumResponse.of(doctor.getCurriculum());
         doctorResponse.speciality = doctor.getSpecialty();
 
         return doctorResponse;
