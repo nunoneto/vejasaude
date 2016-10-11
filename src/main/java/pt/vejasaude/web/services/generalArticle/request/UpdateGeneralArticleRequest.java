@@ -3,7 +3,7 @@ package pt.vejasaude.web.services.generalArticle.request;
 /**
  * Created by fmorais on 11/10/2016.
  */
-public class UpdateGeneralArticle {
+public class UpdateGeneralArticleRequest {
     private String description;
     private int[] listIdAttachments;
 

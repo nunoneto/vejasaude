@@ -5,15 +5,12 @@ import pt.vejasaude.unified.data.attachment.Attachment;
 import pt.vejasaude.unified.data.generalArticle.GeneralArticle;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Created by fmorais on 28/09/2016.
  */
-public class CreateNewGeneralArticleResponse {
+public class CreateGeneralArticleResponse {
     @JsonProperty
     private int id;
     @JsonProperty
@@ -21,7 +18,7 @@ public class CreateNewGeneralArticleResponse {
     @JsonProperty
     private List<Integer> idAttachment;
 
-    public CreateNewGeneralArticleResponse(int id, String description) {
+    public CreateGeneralArticleResponse(int id, String description) {
         this.id = id;
         this.description = description;
     }
@@ -30,17 +27,17 @@ public class CreateNewGeneralArticleResponse {
         this.idAttachment = idAttachment;
     }
 
-    public static CreateNewGeneralArticleResponse of (GeneralArticle generalArticles){
+    public static CreateGeneralArticleResponse of (GeneralArticle generalArticles){
 
-        CreateNewGeneralArticleResponse createNewGeneralArticleResponse = new CreateNewGeneralArticleResponse(generalArticles.getId(),new String(generalArticles.getDescription()));
+        CreateGeneralArticleResponse createGeneralArticleResponse = new CreateGeneralArticleResponse(generalArticles.getId(),new String(generalArticles.getDescription()));
         List attachments = new ArrayList<Integer>();
 
         for (Attachment att:generalArticles.getAttachment()) {
             attachments.add(att.getId());
         }
 
-        createNewGeneralArticleResponse.setIdAttachment(attachments);
+        createGeneralArticleResponse.setIdAttachment(attachments);
 
-        return createNewGeneralArticleResponse;
+        return createGeneralArticleResponse;
     }
 }
