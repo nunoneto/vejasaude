@@ -7,10 +7,10 @@
         var path = "/api/v1/bouser",
             users = null;
 
-        var _findUser = function(id){
+        var _findUser = function(username){
             var _user = null;
             angular.forEach(users, function(user){
-                if(user.id == id){
+                if(user.username == username){
                     _user = user;
                 }
             });
@@ -39,17 +39,17 @@
             });
         };
 
-        var find = function(id){
+        var find = function(username){
             return $q(function(resolve, reject){
                 if(users != null){
-                    var user = _findUser(id);
+                    var user = _findUser(username);
                     user ? resolve(user) : reject("error: user not found");
                     return;
                 }
 
                 getAll().then(
                     function(data){
-                        resolve(_findUser(id));
+                        resolve(_findUser(username));
                     },
                     function(err){
                         reject(err);
@@ -81,11 +81,11 @@
             });
         };
 
-        var updateUser = function(email, name, username, password, id){
+        var updateUser = function(email, name, username, password){
             return $q(function(resolve, reject){
 
                 $http({
-                    url: path + '/' + id,
+                    url: path + '/' + username,
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json'
@@ -104,11 +104,11 @@
             });
         };     
 
-        var deleteUser = function(id){
+        var deleteUser = function(username){
             return $q(function(resolve, reject){
 
                 $http({
-                    url: path + '/' + id,
+                    url: path + '/' + username,
                     method: 'DELETE',
                     headers:  {
                         'Content-Type' : 'application/json'
