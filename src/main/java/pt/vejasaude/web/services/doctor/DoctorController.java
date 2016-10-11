@@ -36,7 +36,7 @@ public class DoctorController {
 
     @RequestMapping(method = RequestMethod.POST)
     public StatusResponse<CreateDoctorResponse> createDoctor(@RequestBody CreateNewDoctorRequest request) {
-
+        Doctor doctor = null;
         if (request.getName().isEmpty())
             return new StatusResponse<>(Status.NOK, "Preencha os campos obrigatórios");
 
@@ -58,11 +58,10 @@ public class DoctorController {
             return new StatusResponse<CreateDoctorResponse>(Status.NOK, "Curriculo não existe");
         }
 
-        Doctor doctor = doctorFacade.createDoctor(request, specialty, curriculum);
-        CreateDoctorResponse createDoctorResponse = CreateDoctorResponse.of(doctor);
-
         try {
-            doctorFacade.createDoctor(request, specialty, curriculum);
+
+            doctor = doctorFacade.createDoctor(request, specialty, curriculum);
+            CreateDoctorResponse createDoctorResponse = CreateDoctorResponse.of(doctor);
             return new StatusResponse<>(Status.OK, null, createDoctorResponse);
         } catch (Exception e) {
             e.printStackTrace();
