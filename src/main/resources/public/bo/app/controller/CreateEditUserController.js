@@ -4,11 +4,11 @@
     .controller('CreateEditUserController', ['$scope','$location','UserService', '$routeParams',
         function($scope, $location, UserService, $routeParams) {
 
-            var userId     = $routeParams.id;
+            var username   = $routeParams.username;
             $scope.mode    = $routeParams.mode;
 
-            //Encontrar utilizador pelo ID
-            UserService.find(userId).then(
+            //Encontrar utilizador pelo username
+            UserService.find(username).then(
                 function(user){
                     $scope.user = user;
                 },
@@ -28,16 +28,16 @@
 
             //Atualizar utilizador
             $scope.editUser = function(){
-                if($scope.user.id == null){
+                if($scope.user.username == null){
                     //TODO error
                 } else {
-                    UserService.update($scope.user.email, $scope.user.name, $scope.user.username, $scope.user.password, $scope.user.id)
+                    UserService.update($scope.user.email, $scope.user.name, $scope.user.username, $scope.user.password)
                 }
             }
 
             //Eliminar utilizador
             $scope.deleteUser = function(){
-                if($scope.user.id == null){
+                if($scope.user.username == null){
                     //TODO error
                 } else {
                     UserService.delete($scope.user.id);

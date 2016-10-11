@@ -21,12 +21,12 @@
 
             //Edit user
             $scope.editUser = function(user){
-                $location.path('/user/'+user.id+'/edit');
+                $location.path('/user/'+user.username+'/edit');
             }
 
             //Delete User
             $scope.deleteUser = function(user){
-                $location.path('/user/'+user.id+'/delete')
+                $location.path('/user/'+user.username+'/delete')
             }
             
         }]);
