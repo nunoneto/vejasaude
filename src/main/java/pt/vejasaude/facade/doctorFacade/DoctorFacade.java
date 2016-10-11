@@ -53,14 +53,12 @@ public class DoctorFacade implements IDoctorFacade {
     @Override
     public Doctor updateDoctor(Doctor changes)
     {
-        Doctor updateDoctor = null;
         try{
-            updateDoctor = new Doctor(changes.getName(),changes.getSpecialty(),changes.getCurriculum());
-            updateDoctor = doctorDAO.save(updateDoctor);
+            return doctorDAO.save(changes);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return updateDoctor;
+        return null;
 
     }
 }
