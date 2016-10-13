@@ -15,11 +15,11 @@
                 console.log($scope.selectedSpecialty);
             }
 
-            $scope.save = function() {
+            $scope.saveOrUpdate = function() {
 
                 var update = {
                     name: $scope.doctor.name, 
-                    idSpecialty: $scope.selectedSpeciality,
+                    idSpecialty: $scope.doctor.speciality.id,
                     idCurriculum: $scope.doctor.curriculum ? $scope.doctor.curriculum.id : null
                 }
 
@@ -39,7 +39,10 @@
                             update.idCurriculum = data.content.id;
                             updateDoctor();
                         },function(err){
-
+                            ngToast.create({
+                                className: 'danger',
+                                content: 'Não foi possível guardar o currículo. Tente mais tarde',
+                            });
                         });
                 }else{
                     // update curriculum
@@ -47,7 +50,10 @@
                         .then(function(){
                             updateDoctor();
                         },function(err){
-                            
+                            ngToast.create({
+                                className: 'danger',
+                                content: 'Não foi possível atualizar o currículo. Tente mais tarde',
+                            });
                         });
                 }
                 

@@ -103,7 +103,7 @@ public class DoctorController {
         if (specialty != null)
             doctor.setSpecialty(specialty);
         doctorFacade.updateDoctor(doctor);
-        return new StatusResponse<UpdateDoctorResponse> (Status.NOK, null);
+        return new StatusResponse<UpdateDoctorResponse> (Status.OK, null,UpdateDoctorResponse.of(doctor));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
