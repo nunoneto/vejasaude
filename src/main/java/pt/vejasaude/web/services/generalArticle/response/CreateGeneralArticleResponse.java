@@ -30,14 +30,15 @@ public class CreateGeneralArticleResponse {
     public static CreateGeneralArticleResponse of (GeneralArticle generalArticles){
 
         CreateGeneralArticleResponse createGeneralArticleResponse = new CreateGeneralArticleResponse(generalArticles.getId(),new String(generalArticles.getDescription()));
-        List attachments = new ArrayList<Integer>();
+        if(generalArticles.getAttachment() != null) {
+            List attachments = new ArrayList<Integer>();
 
-        for (Attachment att:generalArticles.getAttachment()) {
-            attachments.add(att.getId());
+            for (Attachment att : generalArticles.getAttachment()) {
+                attachments.add(att.getId());
+            }
+
+            createGeneralArticleResponse.setIdAttachment(attachments);
         }
-
-        createGeneralArticleResponse.setIdAttachment(attachments);
-
         return createGeneralArticleResponse;
     }
 }

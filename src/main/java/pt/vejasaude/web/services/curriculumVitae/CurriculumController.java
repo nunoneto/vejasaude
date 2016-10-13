@@ -26,10 +26,10 @@ public class CurriculumController {
 
     @RequestMapping (method = RequestMethod.POST)
     public StatusResponse<CreateNewCurriculumResponse> createCurriculum (@RequestBody CreateNewCurriculumRequest request) {
-        CurriculumVitae curriculumVitae = curriculumFacade.createCurriculum(request);
-        CreateNewCurriculumResponse createCurriculumResponse = CreateNewCurriculumResponse.of(curriculumVitae);
+        CurriculumVitae curriculumVitae = null;
         try{
-            curriculumFacade.createCurriculum(request);
+            curriculumVitae = curriculumFacade.createCurriculum(request);
+            CreateNewCurriculumResponse createCurriculumResponse = CreateNewCurriculumResponse.of(curriculumVitae);
             return new StatusResponse<CreateNewCurriculumResponse>(Status.OK, null, createCurriculumResponse);
         }catch (Exception e){
             e.printStackTrace();
