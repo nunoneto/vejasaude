@@ -17,7 +17,7 @@
             updateUI();
 
             $scope.editDoctor = function(doctor){
-                $location.path('/doctor/'+doctor.id+"/edit");
+                $location.path('/doctor/edit/'+doctor.id);
             }
 
             $scope.newDoctor = function(doctor){

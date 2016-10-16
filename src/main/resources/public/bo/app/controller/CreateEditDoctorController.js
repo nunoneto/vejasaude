@@ -91,9 +91,7 @@
                                 //TODO disable do submit
                             }
                         ),
-                    doctor: function(){
-                        if($routeParams.mode != "new") {
-                           DoctorService.find(doctorId).then(
+                    doctor: DoctorService.find(doctorId).then(
                                 function(doctor){
                                     $scope.doctor = doctor;
                                 },
@@ -104,9 +102,8 @@
                                         content: 'Médico não encontrado',
                                     });
                                 }
-                            ) 
-                        }
-                    }
+                            )  
+                    
                 }
             }
     }]);
