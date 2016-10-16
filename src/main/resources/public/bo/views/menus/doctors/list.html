@@ -6,7 +6,6 @@
             <tr>
                 <th>Nome</th>
                 <th>Especialidade</th>
-                <th>Currículo</th>
                 <th>Editar</th>
                 <th>Apagar</th>
             </tr>
@@ -17,19 +16,17 @@
                     {{doctor.name}}
                 </td>
                 <td>
-                    {{doctor.specialty.specialty}}
+                    {{doctor.speciality.specialty}}
 
-                </td>
-                <td>
-                    <a class="fa fa-pencil" ng-click="goToCurriculum(doctor)"></a>
                 </td>
                 <td>
                     <a class="fa fa-pencil" ng-click="editDoctor(doctor)"></a>
                 </td>
                 <td>
-                    <a class="fa fa-trash-o"></a>
+                    <a class="fa fa-trash-o" ng-click="deleteDoctor(doctor)"></a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+<a ng-click="newDoctor()" class="btn btn-primary pull-right">Novo Médico</a>

@@ -17,8 +17,6 @@
         return _doctor;
     }
 
-
-
     var getAll = function(forceUpdate){
 
         return $q(function(resolve, reject){
@@ -63,6 +61,25 @@
         });
     }
 
+    var create = function(data){
+       
+        return $q(function(resolve, reject){
+             $http({
+                url: path+"/",
+                method: 'POST',
+                headers: {
+                'Content-Type': "application/json"
+                },
+                data: data
+            }).then(function successCallback(response) {
+                _resetCache();
+                resolve(response.data);
+            }, function errorCallback(response) {
+                reject(response);
+            });
+        });
+    }
+
     var update = function(update, doctorId){
        
         return $q(function(resolve, reject){
@@ -74,6 +91,7 @@
                 },
                 data: update
             }).then(function successCallback(response) {
+                _resetCache();
                 resolve(response.data);
             }, function errorCallback(response) {
                 reject(response);
@@ -82,12 +100,35 @@
     }
 
 
+    var deleteDoctor = function(doctorId) {
+        return $q(function(resolve,reject){
+            $http({
+                url: path+"/"+doctorId,
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': "application/json"
+                },
+            }).then(function success(response){
+                _resetCache();
+                resolve(response.data);
+            },function err(err){
+                resolve(response);
+            });
+        });
+    }
+
+    var _resetCache = function(){
+        doctors = null;
+    }
+
 
     
     return {
         getAll: getAll,
         find: find,
-        update: update
+        create: create,
+        update: update,
+        remove: deleteDoctor
     };
 
   }]);

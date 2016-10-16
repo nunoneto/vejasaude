@@ -1,19 +1,12 @@
 (function(){
     var CreateEditDoctorController = angular
     .module("vejaSaudeBo")
-    .controller('CreateEditDoctorController', ['$scope','$location','DoctorService','SpecialityService','CurriculumService','$routeParams','ngToast', 
-        function($scope,$location,DoctorService,SpecialityService,CurriculumService,$routeParams,ngToast) {
+    .controller('CreateEditDoctorController', ['$scope','$location','DoctorService','SpecialityService','CurriculumService','$routeParams','ngToast','dialogs', 
+        function($scope,$location,DoctorService,SpecialityService,CurriculumService,$routeParams,ngToast,dialogs) {
             
             var doctorId = $routeParams.id;
             $scope.mode = $routeParams.mode;
 
-            $scope.submitDoctor = function(){
-                //TODO submit or update doctor
-            }
-
-            $scope.evalSpecialty = function() {
-                console.log($scope.selectedSpecialty);
-            }
 
             $scope.saveOrUpdate = function() {
 
@@ -23,13 +16,35 @@
                     idCurriculum: $scope.doctor.curriculum ? $scope.doctor.curriculum.id : null
                 }
 
-                var updateDoctor = function(){
-                    DoctorService.update(update,$scope.doctor.id).then(
-                        function(data){
-                            console.log(data);
-                        },function(err){
+                var create = {
+                        name: $scope.doctor.name,
+                        idSpecialty: $scope.doctor.speciality.id,
+                    }
 
+
+                var saveUpdateDoctor = function(){
+                    if ($scope.doctor.id) {
+                        DoctorService.update(update,$scope.doctor.id).then(
+                        function(data){
+                            dialogs.notify("Médico","Médico atualizado com sucesso").result.then(function(){
+                                $location.path("home/doctors");
+                            })
+                        },function(err){
+                            var msg = err.data.statusMessage ? err.data.statusMessage : "Não foi possível atualizar o médico. Tente mais tarde";
+                            dialogs.error("Médico",msg);
                         });
+                    } else {
+                        DoctorService.create(create).then(
+                            function(data){
+                            dialogs.notify("Médico","Médico criado com sucesso").result.then(function(){
+                                $location.path("home/doctors");
+                            })
+                            },function(err){
+                                var msg = err.data.statusMessage ? err.data.statusMessage : "Não foi possível criar o médico. Tente mais tarde";
+                                dialogs.error("Médico",msg);
+                            });
+                    }
+                    
                 }
 
                 if ($scope.doctor.curriculum == null) {
@@ -37,7 +52,8 @@
                     CurriculumService.create($scope.textEditor())
                         .then(function(data){
                             update.idCurriculum = data.content.id;
-                            updateDoctor();
+                            create.idCurriculum = data.content.id;
+                            saveUpdateDoctor();
                         },function(err){
                             ngToast.create({
                                 className: 'danger',
@@ -48,7 +64,7 @@
                     // update curriculum
                     CurriculumService.update($scope.textEditor(),$scope.doctor.curriculum.id)
                         .then(function(){
-                            updateDoctor();
+                            saveUpdateDoctor();
                         },function(err){
                             ngToast.create({
                                 className: 'danger',
@@ -75,18 +91,22 @@
                                 //TODO disable do submit
                             }
                         ),
-                    doctor: DoctorService.find(doctorId).then(
-                            function(doctor){
-                                $scope.doctor = doctor;
-                            },
-                            function(err){
-                                console.log(err);
-                                ngToast.create({
-                                    className: 'danger',
-                                    content: 'Médico não encontrado',
-                                });
-                            }
-                        )
+                    doctor: function(){
+                        if($routeParams.mode != "new") {
+                           DoctorService.find(doctorId).then(
+                                function(doctor){
+                                    $scope.doctor = doctor;
+                                },
+                                function(err){
+                                    console.log(err);
+                                    ngToast.create({
+                                        className: 'danger',
+                                        content: 'Médico não encontrado',
+                                    });
+                                }
+                            ) 
+                        }
+                    }
                 }
             }
     }]);

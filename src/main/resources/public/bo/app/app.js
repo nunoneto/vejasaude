@@ -1,4 +1,4 @@
-var vejaSaudeBo = angular.module('vejaSaudeBo', ['ngRoute', 'ngAnimate','ngSanitize','ngToast']);
+var vejaSaudeBo = angular.module('vejaSaudeBo', ['ngRoute', 'ngAnimate','ngSanitize','ngToast','ui.bootstrap','dialogs.main']);
 
 vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToastProvider',
     function config($locationProvider, $routeProvider,$httpProvider, ngToastProvider) {
@@ -26,7 +26,7 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToa
         }).when('/home/doctors', {
           controller: 'DoctorController',
           templateUrl: 'views/menus/doctors/list-doctors.html'
-        }).when('/doctor/:id/:mode', {
+        }).when('/doctor/:mode/:id?', {
           controller: 'CreateEditDoctorController',
           templateUrl: 'views/menus/doctors/createedit-doctor.html',
           resolve: "CreateEditDoctorController.resolve"
