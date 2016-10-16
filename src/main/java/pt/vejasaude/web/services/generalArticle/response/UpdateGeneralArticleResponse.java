@@ -30,14 +30,14 @@ public class UpdateGeneralArticleResponse {
     public static UpdateGeneralArticleResponse of (GeneralArticle generalArticles){
 
         UpdateGeneralArticleResponse updateGeneralArticleResponse = new UpdateGeneralArticleResponse(generalArticles.getId(),new String(generalArticles.getDescription()));
-        List attachments = new ArrayList<Integer>();
+        if(generalArticles.getAttachment() != null) {
+            List attachments = new ArrayList<Integer>();
+            for (Attachment att : generalArticles.getAttachment()) {
+                attachments.add(att.getId());
+            }
 
-        for (Attachment att:generalArticles.getAttachment()) {
-            attachments.add(att.getId());
+            updateGeneralArticleResponse.setIdAttachment(attachments);
         }
-
-        updateGeneralArticleResponse.setIdAttachment(attachments);
-
         return updateGeneralArticleResponse;
     }
 

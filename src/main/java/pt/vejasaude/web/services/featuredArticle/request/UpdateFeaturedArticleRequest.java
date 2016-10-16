@@ -9,5 +9,11 @@ import java.util.List;
  */
 public class UpdateFeaturedArticleRequest {
     private String description;
-    private int[] idAttachments;
+    private int[] listIdAttachments;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int[] getlistIdAttachments() {return listIdAttachments;}
 }

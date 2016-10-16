@@ -49,7 +49,7 @@ public class GeneralArticleController {
         try{
             gereralArticleRepository.save(generalArticle);
             CreateGeneralArticleResponse createGeneralArticleResponse = CreateGeneralArticleResponse.of(generalArticle);
-            return new StatusResponse<CreateGeneralArticleResponse>(Status.OK,null,createGeneralArticleResponse);
+            return new StatusResponse<CreateGeneralArticleResponse>(Status.OK,"Criação efetuada com Sucesso",createGeneralArticleResponse);
         }catch (Exception e){
             e.printStackTrace();
             return new StatusResponse<CreateGeneralArticleResponse>(Status.NOK,null);
@@ -90,7 +90,7 @@ public class GeneralArticleController {
         try{
             gereralArticleRepository.save(generalArticle);
             UpdateGeneralArticleResponse updateGeneralArticleResponse = UpdateGeneralArticleResponse.of(generalArticle);
-            return new StatusResponse<UpdateGeneralArticleResponse>(Status.OK,null,updateGeneralArticleResponse);
+            return new StatusResponse<UpdateGeneralArticleResponse>(Status.OK,"Alteração efetuada com sucesso.",updateGeneralArticleResponse);
         }catch (Exception e){
             e.printStackTrace();
             return new StatusResponse<UpdateGeneralArticleResponse>(Status.NOK,null);
