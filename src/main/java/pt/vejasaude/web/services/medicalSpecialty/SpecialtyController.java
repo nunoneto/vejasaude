@@ -27,10 +27,9 @@ public class SpecialtyController {
         if (request.getSpecialty().isEmpty()) {
             return new StatusResponse<CreateNewSpecialtyResponse>(Status.NOK, "Preencha os campos obrigatórios");
         }
-        MedicalSpecialty specialty = specialtyFacade.createSpecialty(request);
-        CreateNewSpecialtyResponse createSpecialtyResponse = CreateNewSpecialtyResponse.of(specialty);
         try {
-            specialtyFacade.createSpecialty(request);
+            MedicalSpecialty specialty = specialtyFacade.createSpecialty(request);
+            CreateNewSpecialtyResponse createSpecialtyResponse = CreateNewSpecialtyResponse.of(specialty);
             return new StatusResponse<CreateNewSpecialtyResponse>(Status.OK, null, createSpecialtyResponse);
         } catch (Exception e) {
             e.printStackTrace();

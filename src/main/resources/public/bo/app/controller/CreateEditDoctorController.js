@@ -15,11 +15,14 @@
              
                 if($scope.doctor.speciality.id == -1) {
                     var dlg = dialogs.create('/views/dialogs/create-speciality.html','CreateSpecialityDialogController',{},'lg');
-                    dlg.result.then(function(name){
-                        console.log(name);
-                        $scope.name = name;
-                    },function(){
-
+                    dlg.result.then(
+                        function(newSpeciality){
+                            loadSpecialities(function(){
+                                $scope.doctor.speciality = $scope.specialities[$scope.specialities.length-1]; 
+                            });
+                        },
+                        function(){
+                            
                     });
                 }
             }
@@ -87,33 +90,43 @@
                 
             }
 
+            var loadSpecialities = function(successCallback){
+                SpecialityService.getAll().then(
+                    function(specialities){
+                        $scope.specialities =  specialities;
+                        $scope.specialities.splice(0,0,{id:-1,specialty:"--Nova Especialidade--"})
+                        if (successCallback != null && typeof successCallback === "function") {
+                            successCallback();
+                        }
+                    },
+                    function(err){
+                        ngToast.create({
+                            className: 'danger',
+                            content: 'Não foi possível carregar as especialidades. Tente mais tarde',
+                        });
+                        //TODO disable do submit
+                    }
+                );
+
+            }
+            var loadDoctor = function(){
+                DoctorService.find(doctorId).then(
+                    function(doctor){
+                        $scope.doctor = doctor;
+                    },
+                    function(err){
+                        ngToast.create({
+                            className: 'danger',
+                            content: 'Médico não encontrado',
+                        });
+                    }
+                );
+            }
 
             return {
                 resolve : {
-                    specialities : SpecialityService.getAll().then(
-                            function(specialities){
-                                $scope.specialities =  specialities;
-                                $scope.specialities.splice(0,0,{id:-1,specialty:"--Nova Especialidade--"})
-                            },
-                            function(err){
-                                ngToast.create({
-                                    className: 'danger',
-                                    content: 'Não foi possível carregar as especialidades. Tente mais tarde',
-                                });
-                                //TODO disable do submit
-                            }
-                        ),
-                    doctor: DoctorService.find(doctorId).then(
-                                function(doctor){
-                                    $scope.doctor = doctor;
-                                },
-                                function(err){
-                                    ngToast.create({
-                                        className: 'danger',
-                                        content: 'Médico não encontrado',
-                                    });
-                                }
-                            )  
+                    specialities : loadSpecialities(),
+                    doctor: loadDoctor() 
                     
                 }
             }
@@ -121,15 +134,22 @@
 
     angular
         .module("vejaSaudeBo")
-        .controller('CreateSpecialityDialogController', ['$scope','$uibModalInstance',
-            function($scope,$uibModalInstance) {
+        .controller('CreateSpecialityDialogController', ['$scope','$uibModalInstance','SpecialityService',
+            function($scope,$uibModalInstance,SpecialityService) {
 
                 $scope.save = function() {
-                    $uibModalInstance.dismiss();
+
+                    SpecialityService.create($scope.name).then(
+                        function(data){
+                            $uibModalInstance.close(data);
+                        },function(err){
+                            $uibModalInstance.dismiss();
+                        }
+                    );
                 }
                 
                 $scope.cancel = function() {
-                    $uibModalInstance.close(null);
+                    $uibModalInstance.dismiss();
                 }
 
         }]);

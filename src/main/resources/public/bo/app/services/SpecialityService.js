@@ -63,10 +63,32 @@
             });
     }
 
+    var create = function(specialty){
+        return $q(function(resolve,reject){
+            $http({
+                url: path,
+                method: 'POST',
+                headers: {
+                'Content-Type': "application/json"
+                },
+                data: {
+                    specialty: specialty
+                }
+            }).then(function successCallback(response) {
+                specialities = null;
+                resolve(response.data.content);
+            }, function errorCallback(response) {
+                reject(response);
+            });
+
+        });
+    }
+
     
     return {
         getAll: getAll,
-        find: find    
+        find: find,
+        create: create  
     };
 
   }]);
