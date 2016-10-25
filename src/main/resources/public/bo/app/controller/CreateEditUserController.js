@@ -35,13 +35,30 @@
                 }
             }
 
+            console.log($scope);
+
             //Eliminar utilizador
-            $scope.deleteUser = function(){
-                if($scope.user.username == null){
+            $scope.deleteUserOption = function() {             
+                if($scope.user.username == null) {
                     //TODO error
                 } else {
-                    UserService.delete($scope.user.id);
+                    var dlg = dialogs.create('/views/dialogs/delete-user.html','CreateDeleteDialogController',{},'lg');
+                    dlg.result.then(
+                        function(){
+                            console.log('Deleting user...');
+                            UserService.delete($scope.user.username);
+                    });
                 }
-            }
+                    var dlg = dialogs.create('/views/dialogs/create-speciality.html','CreateSpecialityDialogController',{},'lg');
+                    dlg.result.then(
+                        function(newSpeciality){
+                            loadSpecialities(function(){
+                                $scope.doctor.speciality = $scope.specialities[$scope.specialities.length-1]; 
+                            });
+                        },
+                        function(){
+                            
+                    });
+                }            
     }]);
 }())
