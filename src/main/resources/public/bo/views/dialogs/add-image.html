@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title"><span class="glyphicon glyphicon-star"></span> Selecione uma imagem</h4>
+</div>
+<div class="modal-body">
+    <form name="imageForm" ng-submit="save()" novalidate>
+        <div class="form-group">
+            <input type="file" ng-model="file" name="file" class="form-control" required accept=".jpg,.jpeg,.png,.gif" />
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancelar</button>
+    <button type="button" class="btn btn-primary" ng-click="save()" 
+            ng-disabled="imageForm.$invalid">Adicionar</button>
+</div>
