@@ -4,7 +4,7 @@
     <h4 class="modal-title"><span class="glyphicon glyphicon-star"></span> Nova Especialidade</h4>
 </div>
 <div class="modal-body">
-    <ng-form name="specialityForm" ng-submit="save()" novalidate/>
+    <form name="specialityForm" ng-submit="save()" novalidate>
         <div class="form-group">
             <label>Insira o nome:</label>
             <input type="text" ng-model="name" name="name" class="form-control" ng-minlength="3" ng-maxlength="30" required/>

@@ -6,6 +6,7 @@
             
             var doctorId = $routeParams.id;
             $scope.mode = $routeParams.mode;
+            var originalDoctor;
 
             var goToDoctors = function(){
                 $location.path("home/doctors");
@@ -13,7 +14,7 @@
 
             $scope.isNewSpecialityOption = function() {
              
-                if($scope.doctor.speciality.id == -1) {
+                if($scope.doctor.speciality && $scope.doctor.speciality.id == -1) {
                     var dlg = dialogs.create('/views/dialogs/create-speciality.html','CreateSpecialityDialogController',{},'lg');
                     dlg.result.then(
                         function(newSpeciality){
@@ -22,7 +23,8 @@
                             });
                         },
                         function(){
-                            
+                            $scope.doctor.speciality = originalDoctor ? originalDoctor.speciality : null; 
+
                     });
                 }
             }
@@ -93,7 +95,8 @@
             var loadSpecialities = function(successCallback){
                 SpecialityService.getAll().then(
                     function(specialities){
-                        $scope.specialities =  specialities;
+                        var selectSpecialities = specialities.slice(0);
+                        $scope.specialities =  selectSpecialities;
                         $scope.specialities.splice(0,0,{id:-1,specialty:"--Nova Especialidade--"})
                         if (successCallback != null && typeof successCallback === "function") {
                             successCallback();
@@ -112,6 +115,7 @@
             var loadDoctor = function(){
                 DoctorService.find(doctorId).then(
                     function(doctor){
+                        originalDoctor = angular.copy(doctor,originalDoctor);
                         $scope.doctor = doctor;
                     },
                     function(err){

@@ -27,9 +27,16 @@
             $scope.deleteDoctor = function(doctor){
                 var diagPromise = dialogs.confirm("Apagar Médico", "Tem a certeza que quer apagar o médico '"+doctor.name+"'?", null);
                 diagPromise.result.then(function(btn){
-                    DoctorService.remove(doctor.id);
-                    updateUI();
+                    DoctorService.remove(doctor.id).then(
+                        function(data){
+                             updateUI();
+                        },function(err){
+                            
+                        }
+                    );
+                   
                 },function(btn){
+                    // do nothing
                 });    
             }
 
