@@ -11,6 +11,9 @@ import pt.vejasaude.web.services.video.request.VideoRequest;
 import pt.vejasaude.web.services.video.response.VideoResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
+import pt.vejasaude.web.services.videoArticle.response.CreateVideoArticleResponse;
+
+import javax.print.Doc;
 
 /**
  * Created by fmorais on 23/08/2016.
@@ -27,11 +30,20 @@ public class VideoController {
 
     @RequestMapping (method = RequestMethod.POST)
     public StatusResponse<VideoResponse> createVideo (@RequestBody VideoRequest request){
-        Video video = videoFacade.createVideo(request);
-        VideoResponse createVideoResponse = VideoResponse.of(video);
+        Doctor author = new Doctor();
+        if (request.getLinkVideo() == null)
+            return new StatusResponse<VideoResponse>(Status.NOK,"Por favor indique o URL do vídeo.");
+        if (request.getAuthor() == null)
+            return new StatusResponse<VideoResponse>(Status.NOK,"Por favor indique o Autor.");
+        else
+            author = doctorRep.findOne(request.getAuthor());
+
+        Video video = new Video(request.getLinkVideo(),request.getDate(),author);
+
         try{
-            videoFacade.createVideo(request);
-            return new StatusResponse<VideoResponse>(Status.OK,null,createVideoResponse);
+            videoRep.save(video);
+            VideoResponse createVideoResponse = VideoResponse.of(video);
+            return new StatusResponse<VideoResponse>(Status.OK,"Video criado com sucesso!",createVideoResponse);
         }catch (Exception e){
             e.printStackTrace();
             return new StatusResponse<VideoResponse>(Status.NOK,null);
@@ -64,7 +76,7 @@ public class VideoController {
         try {
             videoRep.save(video);
             VideoResponse updatedVideoResponse = VideoResponse.of(video);
-            return new StatusResponse<VideoResponse>(Status.OK,"video Alterado",updatedVideoResponse);
+            return new StatusResponse<VideoResponse>(Status.OK,"Vídeo Alterado",updatedVideoResponse);
         }catch (Exception e){
             e.printStackTrace();
             return  new StatusResponse(Status.NOK,e.getMessage());

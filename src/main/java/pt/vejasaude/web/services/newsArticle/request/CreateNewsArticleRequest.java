@@ -1,9 +1,9 @@
-package pt.vejasaude.web.services.featuredArticle.request;
+package pt.vejasaude.web.services.newsArticle.request;
 
 /**
  * Created by fmorais on 28/09/2016.
  */
-public class CreateFeaturedArticleRequest {
+public class CreateNewsArticleRequest {
     private String description;
     private int[] listIdAttachments;
 

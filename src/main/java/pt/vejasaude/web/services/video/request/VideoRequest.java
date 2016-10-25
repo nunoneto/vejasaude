@@ -12,13 +12,8 @@ public class VideoRequest {
 
     public String getLinkVideo() {return linkVideo;}
 
-    public void setLinkVideo(String linkVideo) {this.linkVideo = linkVideo;}
-
     public Date getDate() {return date;}
-
-    public void setDate(Date date) {this.date = date;}
 
     public Integer getAuthor() {return author;}
 
-    public void setAuthor(Integer author) {this.author = author;}
 }

@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Created by fmorais on 24/08/2016.
  */
-public interface IVideoArticle extends CrudRepository<VideoArticle,Integer>{
+public interface IVideoArticleRepository extends CrudRepository<VideoArticle,Integer>{
 }

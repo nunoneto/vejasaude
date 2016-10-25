@@ -8,5 +8,4 @@ import pt.vejasaude.web.services.video.request.VideoRequest;
  */
 public interface IVideoFacade {
 
-    Video createVideo(VideoRequest request);
 }

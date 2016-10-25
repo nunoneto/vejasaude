@@ -1,9 +1,9 @@
-package pt.vejasaude.web.services.featuredArticle.response;
+package pt.vejasaude.web.services.newsArticle.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import pt.vejasaude.unified.data.attachment.Attachment;
 import pt.vejasaude.unified.data.featuredArticle.FeaturedArticle;
-import pt.vejasaude.web.services.attachment.response.CreateNewAttachmentResponse;
+import pt.vejasaude.unified.data.newsArticle.NewsArticle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by fmorais on 30/08/2016.
  */
-public class CreateFeaturedArticleResponse implements Serializable {
+public class CreateNewsArticleResponse implements Serializable {
     @JsonProperty
     private int id;
     @JsonProperty
@@ -20,21 +20,21 @@ public class CreateFeaturedArticleResponse implements Serializable {
     @JsonProperty
     private List<Integer> attachments;
 
-    public CreateFeaturedArticleResponse(int id, String description) {
+    public CreateNewsArticleResponse(int id, String description) {
         this.id = id;
         this.description = description;
     }
     public void setAttachments (List<Integer> attachments) {this.attachments = attachments; }
 
-    public  static CreateFeaturedArticleResponse of (FeaturedArticle featuredArticle){
-        CreateFeaturedArticleResponse createFeaturedArticleResponse = new CreateFeaturedArticleResponse(featuredArticle.getId(),new String(featuredArticle.getDescription()));
-        if(featuredArticle.getAttachment() != null){
+    public  static CreateNewsArticleResponse of (NewsArticle newsArticle){
+        CreateNewsArticleResponse createNewsArticleResponse = new CreateNewsArticleResponse(newsArticle.getId(),new String(newsArticle.getDescription()));
+        if(newsArticle.getAttachment() != null){
             List attachments = new ArrayList<Integer>();
-            for (Attachment att:featuredArticle.getAttachment()){
+            for (Attachment att:newsArticle.getAttachment()){
                 attachments.add((att.getId()));
             }
-            createFeaturedArticleResponse.setAttachments(attachments);
+            createNewsArticleResponse.setAttachments(attachments);
         }
-        return createFeaturedArticleResponse;
+        return createNewsArticleResponse;
     }
 }

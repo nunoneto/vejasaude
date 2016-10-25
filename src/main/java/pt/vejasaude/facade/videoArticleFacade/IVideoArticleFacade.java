@@ -1,7 +1,7 @@
-package pt.vejasaude.facade.newsArticleFacade;
+package pt.vejasaude.facade.videoArticleFacade;
 
 /**
  * Created by fmorais on 24/08/2016.
  */
-public interface INewsArticleFacade {
+public interface IVideoArticleFacade {
 }

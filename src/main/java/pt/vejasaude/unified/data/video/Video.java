@@ -31,9 +31,12 @@ public class Video implements Serializable{
         this.date = date;
         this.author = author;
     }
-
-    public Video(VideoRequest request) {
-
+    public Video (Video vid){
+        this.videoLink = vid.getVideoLink();
+        this.date = vid.getDate();
+        this.author = vid.getAuthor();
+    }
+    public Video() {
     }
 
     public int getId() {return id;}

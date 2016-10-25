@@ -11,18 +11,5 @@ import pt.vejasaude.web.services.video.request.VideoRequest;
  */
 @Service
 public class VideoFacade implements IVideoFacade {
-    @Autowired
-    private IVideoRepository videoDAO;
 
-    @Override
-    public Video createVideo (VideoRequest request){
-            Video newVideo = null;
-        try{
-            newVideo = new Video(request);
-            videoDAO.save(newVideo);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return  newVideo;
-    }
 }
