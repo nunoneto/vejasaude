@@ -20,7 +20,7 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToa
         }).when('/home/users', {
           controller:   'UserController',
           templateUrl:  'views/menus/users/list-users.html'
-        }).when('/user/:username/:mode', {
+        }).when('/user/:mode/:username?', {
           controller:   'CreateEditUserController',
           templateUrl:  'views/menus/users/edit-user.html'
         }).when('/home/doctors', {
