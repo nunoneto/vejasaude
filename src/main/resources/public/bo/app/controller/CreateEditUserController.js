@@ -1,8 +1,8 @@
 (function(){
     angular
     .module("vejaSaudeBo")
-    .controller('CreateEditUserController', ['$scope','$location','UserService', '$routeParams',
-        function($scope, $location, UserService, $routeParams) {
+    .controller('CreateEditUserController', ['$scope','$location','UserService', '$routeParams', 'ngToast', 'dialogs',
+        function($scope, $location, UserService, $routeParams, ngToast, dialogs) {
 
             var username   = $routeParams.username;
             $scope.mode    = $routeParams.mode;
@@ -21,44 +21,39 @@
                 }
             );
 
-            //Criar utilizador
-            $scope.createUser = function(){
-                UserService.create($scope.user.email, $scope.user.name, $scope.user.username, $scope.user.password)
-            }
+            var goToUsers = function(){
+                $location.path("home/users");
+            };
 
-            //Atualizar utilizador
-            $scope.editUser = function(){
-                if($scope.user.username == null){
-                    //TODO error
-                } else {
-                    UserService.update($scope.user.email, $scope.user.name, $scope.user.username, $scope.user.password)
-                }
-            }
+            //Criar / Atualizar utilizador
+             $scope.saveUpdate = function() {
 
-            console.log($scope);
+                 var update = {
+                     email: $scope.user.email,
+                     prettyName: $scope.user.prettyName,
+                     password: $scope.user.password
+                 }
 
-            //Eliminar utilizador
-            $scope.deleteUserOption = function() {             
-                if($scope.user.username == null) {
-                    //TODO error
-                } else {
-                    var dlg = dialogs.create('/views/dialogs/delete-user.html','CreateDeleteDialogController',{},'lg');
-                    dlg.result.then(
-                        function(){
-                            console.log('Deleting user...');
-                            UserService.delete($scope.user.username);
-                    });
-                }
-                    var dlg = dialogs.create('/views/dialogs/create-speciality.html','CreateSpecialityDialogController',{},'lg');
-                    dlg.result.then(
-                        function(newSpeciality){
-                            loadSpecialities(function(){
-                                $scope.doctor.speciality = $scope.specialities[$scope.specialities.length-1]; 
-                            });
-                        },
-                        function(){
-                            
-                    });
-                }            
+                 var create = {
+                     email: $scope.user.email,
+                     prettyName: $scope.user.prettyName,
+                     username: $scope.user.username,
+                     password: $scope.user.password
+                 }                                
+
+                var saveUpdateUser = function(){
+                    if ($scope.user.username) {
+                        UserService.update(update,$scope.user.username).then(
+                        function(data){
+                            dialogs.notify("Utilizador","Utilizador atualizado com sucesso").result.then(goToUsers,goToUsers);
+                        },function(err){
+                            var msg = err.data.statusMessage ? err.data.statusMessage : "Não foi possível atualizar o utilizador. Tente mais tarde";
+                            dialogs.error("Utilizador",msg);
+                        });
+                    } else {
+                        //TODO: Create
+                    }
+                }                  
+            }           
     }]);
 }())

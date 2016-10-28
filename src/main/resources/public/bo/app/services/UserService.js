@@ -81,28 +81,24 @@
             });
         };
 
-        var updateUser = function(email, name, username, password){
+        var updateUser = function(update, username){
+       
             return $q(function(resolve, reject){
-
                 $http({
-                    url: path + '/' + username,
+                    url: path + "/" + username,
                     method: 'POST',
                     headers: {
-                        'Content-Type' : 'application/json'
+                        'Content-Type': "application/json"
                     },
-                    data: {
-                        email: email,
-                        prettyname: name,
-                        username: username,
-                        password: password
-                    }
-                }).then(function successCallback(response){
+                    data: update
+                }).then(function successCallback(response) {
+                    _resetCache();
                     resolve(response.data);
-                }, function errorCallback(response){
+                }, function errorCallback(response) {
                     reject(response);
                 });
-            });
-        };     
+          });
+        }
 
         var deleteUser = function(username){
             return $q(function(resolve, reject){

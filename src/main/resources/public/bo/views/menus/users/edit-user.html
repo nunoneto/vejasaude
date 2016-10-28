@@ -13,17 +13,27 @@
                     <div clas="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" ng-submit="editUser()"/>
+                                <form role="form" name="userForm" ng-submit="saveUpdate()" novalidate/>
                                     <div class="col-lg-6">
                                         <div class="form-group">
+                                            <span ng-if="mode == 'create'">
+                                                <label>Username</label>
+                                                <input type="text" name="username" ng-model="user.username" class="form-control" ng-minlength="3" ng-maxlength="10" required/>            
+                                                <p ng-show="userForm.username.$invalid" class="help-block">Insira o username.</p>                                     
+                                            </span>
                                             <label>Nome</label>
-                                            <input type="text" ng-model="user.prettyName" class="form-control"/>
+                                            <input type="text" name="name" ng-model="user.prettyName" class="form-control" ng-minlength="3" ng-maxlength="30" required/>
+                                            <p ng-show="userForm.name.$invalid" class="help-block">Insira o nome do utilizador.</p>      
                                             <label>Endereço de Email</label>
-                                            <input type="text" ng-model="user.email" class="form-control"/>
-                                            <label>Palavra Chave</label>
-                                            <input type="password" ng-model="user.password" class="form-control"/>
+                                            <input type="text" name="email" ng-model="user.email" class="form-control" required/>
+                                            <p ng-show="userForm.email.$invalid" class="help-block">Insira o Endereço de Email.</p>      
+                                            <label>Palavra-Chave</label>
+                                            <input type="password" name="password" ng-model="user.password" class="form-control" required/>                                      
+                                            <p ng-show="userForm.password.$invalid" class="help-block">Insira a Palavra-Chave.</p>   
+
                                             <br>
-                                            <button type="submit" class="btn btn-default" ng-click="save()">Guardar</button>
+
+                                            <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid">Guardar</button>                                         
                                         </div>
                                     </div>
                                 </form>
