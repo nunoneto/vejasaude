@@ -4,7 +4,7 @@
 <div class="modal-body">
     <form name="imageForm" ng-submit="save()" novalidate>
         <div class="form-group">
-            <input type="file" ng-model="file" name="file" class="form-control" required accept=".jpg,.jpeg,.png,.gif" />
+            <div file-element bind="files"/>
         </div>
 
     </form>

@@ -1,6 +1,6 @@
 (function(){
     
-    angular.module('vejaSaudeBo').directive('markdownEditor', ['dialogs',function (dialogs) {
+    angular.module('vejaSaudeBo').directive('markdownEditor', ['dialogs','FileService',function (dialogs,FileService) {
         return {
             restrict: 'A',
             scope: {
@@ -29,15 +29,33 @@
                 });
 
                 $scope.getValue = function(value) {
-                        return simplemde.value();
+                    return simplemde.value();
                 }
 
                 function addImage() {
                     var dlg = dialogs.create('/views/dialogs/add-image.html','AddImageDialogController',{},'lg');
                     dlg.result.then(
-                        function(newSpeciality){
+                        function(files){
+                            if (files) {
+                                FileService.upload(files.item(0)).then(
+                                    function(resp){
+                                        if (resp.data.content && resp.data.content.attachmentList && resp.data.content.attachmentList[0]) {
+                                            var url = document.location.origin + "/api/v1/attachment/"+resp.data.content.attachmentList[0].id;
+                                            url = '![alt text]('+url+' "")';
+
+                                            simplemde.value(simplemde.value()+"\n"+url);
+                                        }
+                                    },
+                                    function(err){
+
+                                    }
+                                );
+                            }else{
+                                //TODO error message
+                            }
                         },
                         function(){
+
                     });
 
                 }
@@ -54,7 +72,7 @@
             function($scope,$uibModalInstance) {
 
                 $scope.save = function() {
-                    
+                    $uibModalInstance.close($scope.files());
                 }
                 
                 $scope.cancel = function() {

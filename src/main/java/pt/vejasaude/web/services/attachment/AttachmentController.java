@@ -11,7 +11,9 @@ import pt.vejasaude.web.services.attachment.response.CreateNewAttachmentResponse
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,14 +54,35 @@ public class AttachmentController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public StatusResponse findAttachment(@PathVariable String id){
+    public void findAttachment(@PathVariable String id, HttpServletResponse response){
         int idAttachment= Integer.parseInt(id);
-        List<Attachment> attachmentList = null;
-                attachmentList.add(attachmentRepository.findOne(idAttachment));
-        if (attachmentList == null)
-            return new StatusResponse(Status.NOK,"O anexo não existe");
-        CreateNewAttachmentResponse attachmentResponse = CreateNewAttachmentResponse.of(attachmentList);
-        return new StatusResponse<CreateNewAttachmentResponse> (Status.OK,null,attachmentResponse);
+        Attachment attachment = attachmentRepository.findOne(idAttachment);
+
+        if (attachment == null || attachment.getAttach().length <= 0) {
+            return;
+        }
+
+        response.setContentType(attachment.getContentType());
+        response.setContentLength(attachment.getAttach().length);
+
+        OutputStream outputStream = null;
+        try {
+            outputStream = response.getOutputStream();
+            outputStream.write(attachment.getAttach());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
