@@ -11,7 +11,6 @@ import pt.vejasaude.web.services.video.request.VideoRequest;
 import pt.vejasaude.web.services.video.response.VideoResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
-import pt.vejasaude.web.services.videoArticle.response.CreateVideoArticleResponse;
 
 import javax.print.Doc;
 
