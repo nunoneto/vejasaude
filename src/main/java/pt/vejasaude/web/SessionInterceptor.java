@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import pt.vejasaude.unified.data.backofficeuser.BackOfficeUser;
+import pt.vejasaude.web.services.session.SessionController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 
         HttpSession s = request.getSession();
         String url = request.getRequestURI();
-        BackOfficeUser user =(BackOfficeUser)s.getAttribute(pt.vejasaude.web.services.session.Session.BO_SESSION);
+        BackOfficeUser user =(BackOfficeUser)s.getAttribute(SessionController.BO_SESSION);
 
         //validates if there is a backoffice user session
         if(user == null){

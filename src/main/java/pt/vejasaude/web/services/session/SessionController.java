@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping("/api/v1/session")
-public class Session {
+public class SessionController {
 
     @Autowired
     IBackOfficeUserRepository userRepo;

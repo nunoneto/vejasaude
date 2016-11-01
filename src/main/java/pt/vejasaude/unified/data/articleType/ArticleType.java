@@ -19,6 +19,9 @@ public class ArticleType {
     @JsonProperty
     private String articleType;
 
+    @Column
+    private String humanReadableType;
+
     public ArticleType() {}
 
     public ArticleType(int id, String articleType) {
@@ -33,4 +36,9 @@ public class ArticleType {
     public void setId(int id) {this.id = id;}
 
     public void setArticleType(String articleType) {this.articleType = articleType;}
+
+    public String getHumanReadableType() {
+        return humanReadableType;
+    }
+
 }

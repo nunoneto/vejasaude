@@ -31,6 +31,24 @@
         });
     };
 
+    var find = function(articleId) {
+        return $q(function(resolve, reject){
+            
+            $http({
+                url: path+"/"+articleId,
+                method: 'GET',
+                headers: {
+                    'Content-Type': "application/json"
+                }
+            }).then(function successCallback(response) {
+                resolve(response.content);
+            }, function errorCallback(response) {
+                reject(response);
+
+            });
+        });
+    };
+
     var create = function(article){
 
         return $q(function(resolve, reject){
@@ -69,11 +87,31 @@
         });
     };
 
+    var remove = function(id){
+
+        return $q(function(resolve, reject){
+
+            $http({
+                url: path+"/"+id,
+                method: 'DELETE',
+                headers: {
+                'Content-Type': "application/json"
+                },
+            }).then(function successCallback(response) {
+                resolve(response.data);
+            }, function errorCallback(response) {
+                reject(response);
+            });
+        });
+    };
+
     
     return {
+        find: find,
         getAll: getAll,
         create: create,
-        update: update  
+        update: update,
+        remove: remove  
     };
 
   }]);
