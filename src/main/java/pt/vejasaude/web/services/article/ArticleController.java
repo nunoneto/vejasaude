@@ -8,6 +8,7 @@ import pt.vejasaude.unified.data.attachment.Attachment;
 import pt.vejasaude.unified.data.attachment.IAttachmentRepository;
 import pt.vejasaude.unified.data.article.Article;
 import pt.vejasaude.unified.data.article.IArticleRepository;
+import pt.vejasaude.unified.data.backofficeuser.BackOfficeUser;
 import pt.vejasaude.unified.data.doctor.Doctor;
 import pt.vejasaude.unified.data.doctor.IDoctorRepository;
 import pt.vejasaude.unified.data.medicalSpecialty.IMedicalSpecialtyRepository;
@@ -23,6 +24,7 @@ import pt.vejasaude.web.services.article.response.UpdateGeneralArticleResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +48,11 @@ public class ArticleController {
     private IReferenceLinkRepository referenceLinkRepository;
     @Autowired
     private IArticleTypeRepository  articleTypeRepository;
+
+    public final static String BO_SESSION = "BO_SESSION";
+
     @RequestMapping(method = RequestMethod.POST)
-    public StatusResponse<CreateArticleResponse> createGeneralArticle(@RequestBody CreateArticleRequest request)
+    public StatusResponse<CreateArticleResponse> createGeneralArticle(@RequestBody CreateArticleRequest request, HttpSession session)
     {
         Article article = new Article();
 
@@ -122,6 +127,12 @@ public class ArticleController {
             }
            article.setReferenceLinks(listReferenceLinks);
        }
+
+        BackOfficeUser user = (BackOfficeUser) session.getAttribute(BO_SESSION);
+        if (user == null)
+            return new StatusResponse<>(Status.NOK,"Autor não encontrado");
+        else
+            article.setUser(user);
 
         try{
             articleRepository.save(article);

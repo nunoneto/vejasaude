@@ -2,6 +2,7 @@ package pt.vejasaude.unified.data.article;
 
 import pt.vejasaude.unified.data.articleType.ArticleType;
 import pt.vejasaude.unified.data.attachment.Attachment;
+import pt.vejasaude.unified.data.backofficeuser.BackOfficeUser;
 import pt.vejasaude.unified.data.doctor.Doctor;
 import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.referenceLink.ReferenceLink;
@@ -48,11 +49,15 @@ public class Article implements Serializable{
     @ManyToMany
     @JoinColumn (name = "idReferenceLink")
     private List<ReferenceLink> referenceLinks;
+    @ManyToOne
+    @JoinColumn(name = "username")
+    private BackOfficeUser user;
 
     public Article() {
     }
 
-    public Article(int id, String title,ArticleType articleType, byte[] description, MedicalSpecialty specialty, SubSpecialty subSpecialty, Doctor doctor, List<Attachment> attachment, Date createdDate, List<ReferenceLink> referenceLinks) {
+    public Article(int id, String title,ArticleType articleType, byte[] description, MedicalSpecialty specialty, SubSpecialty subSpecialty, Doctor doctor, List<Attachment> attachment,
+                   Date createdDate, List<ReferenceLink> referenceLinks, BackOfficeUser user) {
         this.id = id;
         this.title = title;
         this.articleType = articleType;
@@ -63,6 +68,7 @@ public class Article implements Serializable{
         this.attachment = attachment;
         this.createdDate = createdDate;
         this.referenceLinks = referenceLinks;
+        this.user = user;
     }
 
     public int getId() {return id;}
@@ -85,6 +91,8 @@ public class Article implements Serializable{
 
     public ArticleType getTypeArticle() {return articleType;}
 
+    public BackOfficeUser getUser() {return user;}
+
     public void setId(int id) {this.id = id;}
 
     public void setTitle(String title) {this.title = title;}
@@ -104,4 +112,6 @@ public class Article implements Serializable{
     public void setReferenceLinks(List<ReferenceLink> referenceLinks) {this.referenceLinks = referenceLinks;}
 
     public void setArticleType(ArticleType articleType) {this.articleType = articleType;}
+
+    public void setUser(BackOfficeUser user) {this.user = user;}
 }

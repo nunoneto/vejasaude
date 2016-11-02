@@ -13,6 +13,7 @@ public class CreateArticleRequest {
     private int[] listIdAttachments;
     private Date createdDate;
     private int [] referenceLinks;
+    private String user;
 
     public Integer getTypeArticle() {return typeArticle;}
     public String getTitle() {return title;}
@@ -23,4 +24,5 @@ public class CreateArticleRequest {
     public int[] getListIdAttachments() {return listIdAttachments;}
     public Date getCreatedDate() {return createdDate;}
     public int[] getReferenceLinks() {return referenceLinks;}
+    public String getUser() {return user;}
 }

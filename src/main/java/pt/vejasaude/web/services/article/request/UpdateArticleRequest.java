@@ -15,4 +15,5 @@ public class UpdateArticleRequest {
     private int[] listIdAttachments;
     private Date createdDate;
     private String [] referenceLinks;
+    private String user;
 }
