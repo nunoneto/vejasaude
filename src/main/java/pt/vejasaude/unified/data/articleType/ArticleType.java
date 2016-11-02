@@ -41,4 +41,5 @@ public class ArticleType {
         return humanReadableType;
     }
 
+    public void setHumanReadableType(String humanReadableType) {this.humanReadableType = humanReadableType;}
 }

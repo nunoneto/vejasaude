@@ -30,10 +30,12 @@ public class ArticleTypeController {
     public StatusResponse<CreateArticleTypeResponse> createArticleType (@RequestBody CreateArticleTypeRequest request)
     {
         ArticleType articleType = new ArticleType();
-        if (request.getArticleType() == null)
-            return new StatusResponse<>(Status.NOK,"Preencha os campos obrigatórios");
-        else
+        if (request.getArticleType() == null && request.getHumanReadableType() == null) {
+            return new StatusResponse<>(Status.NOK, "Preencha os campos obrigatórios");
+        }else {
             articleType.setArticleType(request.getArticleType());
+            articleType.setHumanReadableType(request.getArticleType());
+        }
         try{
             articleTypeRepository.save(articleType);
             CreateArticleTypeResponse createArticleTypeResponse = CreateArticleTypeResponse.of(articleType);

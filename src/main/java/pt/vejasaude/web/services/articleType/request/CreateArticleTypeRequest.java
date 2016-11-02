@@ -5,8 +5,7 @@ package pt.vejasaude.web.services.articleType.request;
  */
 public class CreateArticleTypeRequest {
     private String articleType;
-
-    public String getArticleType() {
-        return articleType;
-    }
+    private String humanReadableType;
+    public String getArticleType() {return articleType;}
+    public String getHumanReadableType() {return humanReadableType;}
 }
