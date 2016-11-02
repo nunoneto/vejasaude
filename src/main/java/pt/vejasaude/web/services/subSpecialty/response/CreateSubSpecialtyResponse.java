@@ -5,6 +5,7 @@ import pt.vejasaude.unified.data.articleType.ArticleType;
 import pt.vejasaude.unified.data.medicalSpecialty.MedicalSpecialty;
 import pt.vejasaude.unified.data.subSpecialty.SubSpecialty;
 import pt.vejasaude.web.services.medicalSpecialty.SpecialtyController;
+import pt.vejasaude.web.services.medicalSpecialty.response.CreateNewSpecialtyResponse;
 
 /**
  * Created by fmorais on 26/10/2016.
@@ -13,7 +14,7 @@ public class CreateSubSpecialtyResponse {
     @JsonProperty
     private int id;
     @JsonProperty
-    private MedicalSpecialty specialty;
+    private CreateNewSpecialtyResponse specialty;
     @JsonProperty
     private String subSpecialty;
 
@@ -22,7 +23,7 @@ public class CreateSubSpecialtyResponse {
 
         subSpecialtyResponse.id = subSpecialty.getId();
         subSpecialtyResponse.subSpecialty = subSpecialty.getSubSpecialty();
-        subSpecialtyResponse.specialty = subSpecialty.getSpecialty();
+        subSpecialtyResponse.specialty = CreateNewSpecialtyResponse.of(subSpecialty.getSpecialty());
 
         return subSpecialtyResponse;
     }

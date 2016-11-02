@@ -11,6 +11,11 @@ import pt.vejasaude.web.services.medicalSpecialty.request.UpdateSpecialtyRequest
 import pt.vejasaude.web.services.medicalSpecialty.response.CreateNewSpecialtyResponse;
 import pt.vejasaude.web.services.medicalSpecialty.response.UpdateSpecialtyResponse;
 
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 /**
  * Created by fmorais on 16/08/2016.
  */
@@ -37,8 +42,17 @@ public class SpecialtyController {
         }
     }
     @RequestMapping(method = RequestMethod.GET)
-    public StatusResponse<Iterable<MedicalSpecialty>> getAll(){
-        return new StatusResponse<>(Status.OK,null,specialtyFacade.getAll());
+    public StatusResponse<Iterable<CreateNewSpecialtyResponse>> getAll(){
+
+        List<CreateNewSpecialtyResponse> specialtyResponse = StreamSupport.stream(specialtyFacade.getAll().spliterator(),false)
+                .map(new Function<MedicalSpecialty, CreateNewSpecialtyResponse>() {
+                    @Override
+                    public CreateNewSpecialtyResponse apply(MedicalSpecialty medicalSpecialty) {
+                        return CreateNewSpecialtyResponse.of(medicalSpecialty);
+                    }
+                }).collect(Collectors.toList());
+
+        return new StatusResponse<>(Status.OK,null,specialtyResponse);
     }
 
     @RequestMapping (value = "/{id}", method = RequestMethod.POST)

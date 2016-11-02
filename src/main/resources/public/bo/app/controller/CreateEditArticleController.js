@@ -2,18 +2,43 @@
     var CreateEditArticleController = angular
     .module("vejaSaudeBo")
     .controller('CreateEditArticleController', 
-        ['$scope','$location','DoctorService','SpecialityService','CurriculumService','$routeParams','ngToast','dialogs','ArticleService','ArticleTypeService', 
-        function($scope,$location,DoctorService,SpecialityService,CurriculumService,$routeParams,ngToast,dialogs,ArticleService,ArticleTypeService) {
+        ['$scope','$location','DoctorService','SpecialityService','CurriculumService',
+        '$routeParams','ngToast','dialogs','ArticleService','ArticleTypeService','SubSpecialtyService', 
+        function($scope,$location,DoctorService,SpecialityService,CurriculumService,
+        $routeParams,ngToast,dialogs,ArticleService,ArticleTypeService,SubSpecialtyService) {
             
-            var articleId = $routeParams.articleId;
+            var originalArticle, 
+                articleId = $routeParams.articleId;
             $scope.mode = $routeParams.mode;
+
+            switch($scope.mode) {
+                case 'new':
+                    $scope.article = {};
+                    break;
+                case 'edit':
+                    
+                    break;
+            }
             
-            var originalArticle;
 
             var goToArticles = function(){
                 $location.path("home/articles");
             };
 
+            $scope.onSpecialityChanged = function(){
+                if ($scope.article.specialty && $scope.article.specialty.id) {
+                    SubSpecialtyService.findBySpeciality($scope.article.specialty.id).then(
+                        function(data){
+                            $scope.subSpecialties = data;
+                        },function(err){
+                            //TODO handle err
+                        }
+                    );
+                } else {
+                    $scope.subSpecialties = [];
+                }
+
+            }
 
             $scope.saveOrUpdate = function() {
 
@@ -48,10 +73,32 @@
                 );
             }
 
+            var loadDoctors = function(){
+                DoctorService.getAll().then(
+                    function(data){
+                        $scope.doctors = data;
+                    },function(err){
+                        //TODO error message
+                    }
+                );
+            }
+
+            var loadSpecialities = function(){
+                SpecialityService.getAll().then(
+                    function(data){
+                        $scope.specialties = data;
+                    },function(err){
+                        //TODO error message
+                    }
+                );
+            }
+
             return {
                 resolve : {
                     article:        loadArticle(),
-                    articleTypes:   loadArticleTypes()
+                    articleTypes:   loadArticleTypes(),
+                    doctors:        loadDoctors(),
+                    specialities:   loadSpecialities()
                 }
             }
     }]);

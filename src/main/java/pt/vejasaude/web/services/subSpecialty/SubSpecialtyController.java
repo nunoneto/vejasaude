@@ -13,6 +13,10 @@ import pt.vejasaude.web.services.generic.StatusResponse;
 import pt.vejasaude.web.services.subSpecialty.request.CreateSubSpecialtyRequest;
 import pt.vejasaude.web.services.subSpecialty.response.CreateSubSpecialtyResponse;
 
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 /**
  * Created by fmorais on 26/10/2016.
  */
@@ -23,6 +27,7 @@ public class SubSpecialtyController {
     private ISubSpecialtyRepository subSpecialtyRepository;
     @Autowired
     private IMedicalSpecialtyRepository medicalSpecialtyRepository;
+
     @RequestMapping(method = RequestMethod.POST)
     public StatusResponse<CreateSubSpecialtyResponse> createSubSpecialty
             (@RequestBody CreateSubSpecialtyRequest request){
@@ -46,6 +51,28 @@ public class SubSpecialtyController {
             e.printStackTrace();
             return new StatusResponse<CreateSubSpecialtyResponse>(Status.NOK, null);
         }
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public StatusResponse<List<CreateSubSpecialtyResponse>> getSubSpecialityBySpeciality(@RequestParam int specialtyId) {
+
+        MedicalSpecialty medicalSpecialty = medicalSpecialtyRepository.findOne(specialtyId);
+        if (medicalSpecialty == null) {
+            return new StatusResponse<>(Status.NOK,"A especialidade escolhida não existe!");
+        }
+
+        List<CreateSubSpecialtyResponse> subSpecialtyResponse = medicalSpecialty
+                .getSubSpecialties()
+                .stream()
+                .map(new Function<SubSpecialty, CreateSubSpecialtyResponse>() {
+                    @Override
+                    public CreateSubSpecialtyResponse apply(SubSpecialty subSpecialty) {
+                        return CreateSubSpecialtyResponse.of(subSpecialty);
+                    }
+                }).collect(Collectors.toList());
+
+        return new StatusResponse<>(Status.OK,"",subSpecialtyResponse);
 
     }
+
 }

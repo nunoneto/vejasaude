@@ -21,6 +21,7 @@ import pt.vejasaude.web.services.article.request.CreateArticleRequest;
 import pt.vejasaude.web.services.article.request.UpdateArticleRequest;
 import pt.vejasaude.web.services.article.response.ArticleResponse;
 import pt.vejasaude.web.services.article.response.CreateArticleResponse;
+import pt.vejasaude.web.services.article.response.FullArticleResponse;
 import pt.vejasaude.web.services.article.response.UpdateGeneralArticleResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
@@ -163,15 +164,15 @@ public class ArticleController {
             return new StatusResponse<CreateArticleResponse>(Status.NOK,null);
         }
     }
-    @RequestMapping (value = "/{id}")
+    @RequestMapping (value = "/{id}", method = RequestMethod.GET)
     public StatusResponse findOne(
             @PathVariable String id)
     {
         int idArticle = Integer.parseInt(id);
         Article article = articleRepository.findOne(idArticle);
 
-        UpdateGeneralArticleResponse updateGeneralArticleResponse = UpdateGeneralArticleResponse.of(article);
-        return new StatusResponse<UpdateGeneralArticleResponse>(Status.OK,null,updateGeneralArticleResponse);
+        FullArticleResponse fullArticleResponse = FullArticleResponse.of(article);
+        return new StatusResponse<FullArticleResponse>(Status.OK,null,fullArticleResponse);
     }
 
     /*@RequestMapping(value = "/{id}", method = RequestMethod.POST)

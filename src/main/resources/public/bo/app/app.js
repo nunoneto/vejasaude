@@ -43,9 +43,7 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToa
         }).when('/article/:mode/:articleId?', {
           controller:   'CreateEditArticleController',
           templateUrl:  'views/menus/articles/createedit-article.html'
-        }).otherwise({
-          redirectTo: '/'
-        });
+        })
 
         ngToastProvider.configure({
           verticalPosition: 'top',

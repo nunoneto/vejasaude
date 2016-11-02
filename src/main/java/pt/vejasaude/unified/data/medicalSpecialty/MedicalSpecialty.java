@@ -1,7 +1,9 @@
 package pt.vejasaude.unified.data.medicalSpecialty;
+import pt.vejasaude.unified.data.subSpecialty.SubSpecialty;
 import pt.vejasaude.web.services.medicalSpecialty.request.CreateNewSpecialtyRequest;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by fmorais on 08/06/2016.
@@ -18,6 +20,11 @@ public class MedicalSpecialty implements Serializable {
 
     @Column
     private String specialty;
+
+    @JoinColumn(name = "idSubSpecialty")
+    @OneToMany
+    private List<SubSpecialty> subSpecialties;
+
     public MedicalSpecialty() {}
 
     public MedicalSpecialty(int idSpecialty, String specialty, String description) {
@@ -32,4 +39,12 @@ public class MedicalSpecialty implements Serializable {
     public String getSpecialty() {return specialty;}
 
     public void setSpecialty(String pSpecialty) {specialty = pSpecialty;}
+
+    public List<SubSpecialty> getSubSpecialties() {
+        return subSpecialties;
+    }
+
+    public void setSubSpecialties(List<SubSpecialty> subSpecialties) {
+        this.subSpecialties = subSpecialties;
+    }
 }

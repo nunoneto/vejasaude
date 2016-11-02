@@ -92,6 +92,7 @@
                 
             }
 
+            // Resolvers
             var loadSpecialities = function(successCallback){
                 SpecialityService.getAll().then(
                     function(specialities){
