@@ -11,12 +11,15 @@ public class CreateArticleTypeResponse {
     private int id;
     @JsonProperty
     private String articleType;
+    @JsonProperty
+    private String humanReadableType;
 
     public static  CreateArticleTypeResponse of (ArticleType articleType){
         CreateArticleTypeResponse articleTypeResponse = new CreateArticleTypeResponse();
 
         articleTypeResponse.id = articleType.getId();
         articleTypeResponse.articleType = articleType.getArticleType();
+        articleTypeResponse.humanReadableType = articleType.getHumanReadableType();
 
         return articleTypeResponse;
     }

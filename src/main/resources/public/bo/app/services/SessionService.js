@@ -24,6 +24,7 @@
                         username: username,
                         password: password 
                     }),
+
                     headers: {
                     'Content-Type': "application/json"
                     }
@@ -56,8 +57,45 @@
                 });
 
             });
+        },
+        terminate: function(){
+            
+            return $q(function(resolve, reject){
+                $http({
+                    method: 'DELETE',
+                    url: path
+                }).then(
+                    function(response){
+                        resolve(response.data.content);
+                    },function(err){
+                        reject(err);
+                    }
+                );
+            });
+        },
+        changePassword: function(oldPassword, newPassword){
+            return $q(function(resolve, reject){
+                
+                var data = JSON.stringify({
+                    newPassword: newPassword,
+                    currentPassword: oldPassword
+                });
 
+                $http({
+                    method: 'POST',
+                    url: path+"/password",
+                    data: data
+                }).then(
+                    function(response){
+                        resolve(response.data);
+                    },function(err){
+                        reject(err);
+                    }
+                );
+            });
         }
+
+
     };
     
     return api;

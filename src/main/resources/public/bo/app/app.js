@@ -1,4 +1,5 @@
-var vejaSaudeBo = angular.module('vejaSaudeBo', ['ngRoute', 'ngAnimate','ngSanitize','ngToast','ui.bootstrap','dialogs.main']);
+var vejaSaudeBo = angular.module('vejaSaudeBo', 
+['ngRoute','ngAnimate','ngSanitize','ngToast','ui.bootstrap','dialogs.main']);
 
 vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToastProvider',
     function config($locationProvider, $routeProvider,$httpProvider, ngToastProvider) {
@@ -17,19 +18,31 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToa
         }).when('/home', {
           controller: 'MainController',
           templateUrl: 'views/home.html'
-        }).when('/home/users', {
+        })
+        // User
+        .when('/home/users', {
           controller:   'UserController',
           templateUrl:  'views/menus/users/list-users.html'
         }).when('/user/:mode/:username?', {
           controller:   'CreateEditUserController',
           templateUrl:  'views/menus/users/edit-user.html'
-        }).when('/home/doctors', {
+        })
+        // Doctor
+        .when('/home/doctors', {
           controller: 'DoctorController',
           templateUrl: 'views/menus/doctors/list-doctors.html'
         }).when('/doctor/:mode/:id?', {
           controller: 'CreateEditDoctorController',
           templateUrl: 'views/menus/doctors/createedit-doctor.html',
           resolve: "CreateEditDoctorController.resolve"
+        })
+        // Article
+        .when('/home/articles', {
+          controller:   'ArticleController',
+          templateUrl:  'views/menus/articles/list.html'
+        }).when('/article/:mode/:articleId?', {
+          controller:   'CreateEditArticleController',
+          templateUrl:  'views/menus/articles/createedit-article.html'
         }).otherwise({
           redirectTo: '/'
         });

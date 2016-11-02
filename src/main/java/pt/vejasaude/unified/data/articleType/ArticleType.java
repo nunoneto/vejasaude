@@ -1,5 +1,7 @@
 package pt.vejasaude.unified.data.articleType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 /**
@@ -14,7 +16,11 @@ public class ArticleType {
     private int id;
 
     @Column
+    @JsonProperty
     private String articleType;
+
+    @Column
+    private String humanReadableType;
 
     public ArticleType() {}
 
@@ -30,4 +36,9 @@ public class ArticleType {
     public void setId(int id) {this.id = id;}
 
     public void setArticleType(String articleType) {this.articleType = articleType;}
+
+    public String getHumanReadableType() {
+        return humanReadableType;
+    }
+
 }

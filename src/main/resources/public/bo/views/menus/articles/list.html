@@ -1,0 +1,47 @@
+ <div id="wrapper">
+
+    <div ng-include src="'views/menu_head.html'">
+
+    </div>
+    <div id="page-wrapper" >
+        <br>
+        <div class="panel panel-default">
+        <div class="panel-heading">Artigos</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Criado em</th>
+                        <th>Criado por</th>
+                        <th>Editar</th>
+                        <th>Apagar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="article in articles">
+                        <td>
+                            {{article.name}}
+                        </td>
+                        <td>
+                            {{article.articleType.articleType}}
+                        </td>
+                        <td>
+                            {{article.createdDate}}
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <a class="fa fa-pencil" ng-click="editArticle(article)"></a>
+                        </td>
+                        <td>
+                            <a class="fa fa-trash-o" ng-click="deleteArticle(article)"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a ng-click="createArticle()" class="btn btn-primary pull-right">Novo Artigo</a>
+    </div>
+</div>

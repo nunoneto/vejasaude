@@ -1,5 +1,6 @@
 package pt.vejasaude.web.services.article;
 
+import javafx.scene.shape.Arc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pt.vejasaude.unified.data.articleType.ArticleType;
@@ -19,6 +20,7 @@ import pt.vejasaude.unified.data.subSpecialty.ISubSpecialtyRepository;
 import pt.vejasaude.unified.data.subSpecialty.SubSpecialty;
 import pt.vejasaude.web.services.article.request.CreateArticleRequest;
 import pt.vejasaude.web.services.article.request.UpdateArticleRequest;
+import pt.vejasaude.web.services.article.response.ArticleResponse;
 import pt.vejasaude.web.services.article.response.CreateArticleResponse;
 import pt.vejasaude.web.services.article.response.UpdateGeneralArticleResponse;
 import pt.vejasaude.web.services.generic.Status;
@@ -27,6 +29,9 @@ import pt.vejasaude.web.services.generic.StatusResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by fmorais on 28/09/2016.
@@ -49,7 +54,34 @@ public class ArticleController {
     @Autowired
     private IArticleTypeRepository  articleTypeRepository;
 
+<<<<<<< HEAD
     public final static String BO_SESSION = "BO_SESSION";
+=======
+
+    @RequestMapping(method = RequestMethod.GET)
+    public StatusResponse<List<ArticleResponse>> getAll(){
+
+        Iterable<Article> articles = articleRepository.findAll();
+
+        if (articles == null) {
+            return new StatusResponse<List<ArticleResponse>>(Status.NOK,"");
+        }
+
+        List<ArticleResponse> articleList = new ArrayList<>();
+        StreamSupport
+                .stream(articles.spliterator(), false)
+                .map(new Function<Article, ArticleResponse>() {
+                    @Override
+                    public ArticleResponse apply(Article article) {
+                        return ArticleResponse.of(article);
+                    }
+                })
+                .collect(Collectors.<ArticleResponse> toList());
+
+        return new StatusResponse<List<ArticleResponse>>(Status.OK,"",articleList);
+    }
+
+>>>>>>> b1250fe10fc7a9e056f6f4123c612a3dc5b652f0
 
     @RequestMapping(method = RequestMethod.POST)
     public StatusResponse<CreateArticleResponse> createGeneralArticle(@RequestBody CreateArticleRequest request, HttpSession session)
