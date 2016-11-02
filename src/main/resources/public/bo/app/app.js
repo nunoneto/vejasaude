@@ -1,4 +1,5 @@
-var vejaSaudeBo = angular.module('vejaSaudeBo', ['ngRoute', 'ngAnimate','ngSanitize','ngToast','ui.bootstrap','dialogs.main']);
+var vejaSaudeBo = angular.module('vejaSaudeBo', 
+['ngRoute','ngAnimate','ngSanitize','ngToast','ui.bootstrap','dialogs.main']);
 
 vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToastProvider',
     function config($locationProvider, $routeProvider,$httpProvider, ngToastProvider) {
