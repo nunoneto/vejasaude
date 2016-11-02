@@ -54,9 +54,7 @@ public class ArticleController {
     @Autowired
     private IArticleTypeRepository  articleTypeRepository;
 
-<<<<<<< HEAD
     public final static String BO_SESSION = "BO_SESSION";
-=======
 
     @RequestMapping(method = RequestMethod.GET)
     public StatusResponse<List<ArticleResponse>> getAll(){
@@ -80,8 +78,6 @@ public class ArticleController {
 
         return new StatusResponse<List<ArticleResponse>>(Status.OK,"",articleList);
     }
-
->>>>>>> b1250fe10fc7a9e056f6f4123c612a3dc5b652f0
 
     @RequestMapping(method = RequestMethod.POST)
     public StatusResponse<CreateArticleResponse> createGeneralArticle(@RequestBody CreateArticleRequest request, HttpSession session)
