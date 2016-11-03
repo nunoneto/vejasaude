@@ -2,8 +2,7 @@
     angular
     .module("vejaSaudeBo")
     .controller('DoctorController', ['$scope','$location','DoctorService','dialogs', 
-        function($scope,$location,DoctorService,dialogs) {
-            
+        function($scope,$location,DoctorService,dialogs) {            
             var updateUI = function(){
                 DoctorService.getAll().then(
                     function(data){

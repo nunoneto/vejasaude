@@ -11,7 +11,7 @@
         var _speciality = null;
         angular.forEach(specialities,function(speciality){
             if(speciality.id == id){
-                _speciality = doctor;
+                _speciality = speciality;
             }
         });
         return _speciality;

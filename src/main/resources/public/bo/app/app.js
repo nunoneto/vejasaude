@@ -44,6 +44,11 @@ vejaSaudeBo.config(['$locationProvider', '$routeProvider','$httpProvider','ngToa
           controller:   'CreateEditArticleController',
           templateUrl:  'views/menus/articles/createedit-article.html'
         })
+        // Specialties
+        .when('/home/specialties', {
+          controller: 'SpecialtyController',
+          templateUrl: 'views/menus/specialties/list-specialties.html'
+        })
 
         ngToastProvider.configure({
           verticalPosition: 'top',
