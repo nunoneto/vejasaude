@@ -58,7 +58,7 @@
             });
         };
 
-        var createUser = function(email, name, username, password){
+        var create = function(data){
             return $q(function(resolve, reject){
 
                 $http({
@@ -67,13 +67,9 @@
                     headers: {
                         'Content-Type' : 'application/json'
                     },
-                    data: {
-                        email: email,
-                        prettyname: name,
-                        username: username,
-                        password: password
-                    }
+                    data: data
                 }).then(function successCallback(response){
+                    _resetCache();
                     resolve(response.data);
                 }, function errorCallback(response){
                     reject(response);
@@ -81,7 +77,9 @@
             });
         };
 
-        var updateUser = function(update, username){
+        var update = function(update, username){
+
+            console.log(update);
        
             return $q(function(resolve, reject){
                 $http({
@@ -115,14 +113,19 @@
                     reject(response);
                 });
             });
-        };
+        }
+
+        var _resetCache = function(){
+            users = null;
+        }
 
         return {
             getAll: getAll,
             find:   find,
-            create: createUser,
-            update: updateUser,
+            create: create,
+            update: update,
             delete: deleteUser
         };  
     }]);
-;}());
+
+}());

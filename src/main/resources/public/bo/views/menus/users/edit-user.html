@@ -13,32 +13,63 @@
                     <div clas="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" name="userForm" ng-submit="saveUpdate()" novalidate/>
+                                <form role="form" name="userForm" ng-submit="saveOrUpdate()" novalidate/>
                                     <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <span ng-if="mode == 'create'">
-                                                <label>Username</label>
-                                                <input type="text" name="username" ng-model="user.username" class="form-control" ng-minlength="3" ng-maxlength="10" required/>            
-                                                <p ng-show="userForm.username.$invalid" class="help-block">Insira o username.</p>                                     
-                                            </span>
-                                            <label>Nome</label>
-                                            <input type="text" name="name" ng-model="user.prettyName" class="form-control" ng-minlength="3" ng-maxlength="30" required/>
-                                            <p ng-show="userForm.name.$invalid" class="help-block">Insira o nome do utilizador.</p>      
-                                            <label>Endereço de Email</label>
-                                            <input type="text" name="email" ng-model="user.email" class="form-control" required/>
-                                            <p ng-show="userForm.email.$invalid" class="help-block">Insira o Endereço de Email.</p>      
-                                            <label>Palavra-Chave</label>
-                                            <input type="password" name="password" ng-model="user.password" class="form-control" required/>                                      
-                                            <p ng-show="userForm.password.$invalid" class="help-block">Insira a Palavra-Chave.</p>   
-
-                                            <br>
-
-                                            <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid">Guardar</button>                                         
+                                        <!-- Username -->
+                                        <div class="form-group" ng-show="mode == 'create'">
+                                            <label>Username</label>
+                                            <input type="text" name="username" ng-model="user.username" class="form-control" ng-minlength="3" ng-maxlength="10" required/>            
+                                                <!-- Mensagens -->
+                                                <div ng-messages="userForm.username.$error" ng-if="userForm.username.$dirty && !userForm.username.$valid" role="alert">
+                                                    <div ng-message="required">Insira o nome do utilizador.</div>
+                                                </div>   
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+
+                                        <!-- Nome do utlizador -->
+                                        <div class="form-group">
+                                            <label>Nome:</label>
+                                            <input type="text" name="name" ng-model="user.prettyName" class="form-control" ng-minlength="3" ng-maxlength="40" required/>
+                                                <!-- Mensagens -->
+                                                <div ng-messages="userForm.name.$error" ng-if="userForm.name.$dirty && !userForm.name.$valid" role="alert">
+                                                    <div ng-message="required">Insira o nome do utilizador.</div>
+                                                </div> 
+                                        </div>  
+
+                                        <!-- Endereço de Email -->   
+                                        <div class="form-group">
+                                            <label>Endereço de Email:</label>
+                                            <input type="text" name="email" ng-model="user.email" class="form-control" required/>
+                                                <!-- Mensagens -->
+                                                <div ng-messages="userForm.email.$error" ng-if="userForm.email.$dirty && !userForm.email.$valid" role="alert">
+                                                    <div ng-message="required">Insira o email do utilizador.</div>
+                                                </div>   
+                                        </div>  
+
+                                        <!-- Password -->
+                                        <div class="form-group">
+                                            <label>Password:</label>
+                                            <input type="password" name="password" ng-model="user.password" class="form-control" ng-minlength="8" ng-maxlength="30" required/>                                      
+                                                <!-- Mensagens -->
+                                                <div ng-messages="userForm.password.$error" ng-if="userForm.password.$dirty && !userForm.password.$valid" role="alert">
+                                                    <div ng-message="minlength">A password deve ter no mínimo 8 caracteres e no máximo 30 caracteres.</div>
+                                                </div>
+                                        </div> 
+
+                                        <!-- Confirmar Password -->
+                                        <div class="form-group">
+                                            <label>Confirmar Password:</label>
+                                            <input type="password" name="confirmPassword" ng-model="user.confirmPassword" class="form-control" ng-minlength="8" ng-maxlength="30" required/>
+                                                <!-- Mensagens -->
+                                                <p  ng-show="user.confirmPassword != user.password && userForm.confirmPassword.$dirty 
+                                                                && userForm.password.$dirty && userForm.password.$valid && userForm.confirmPassword.$valid" class="help-block">As passwords não coincidem!</p>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" ng-click="cancel()">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Guardar</button>
+                                </div>  
+                             </form>
+                        </div>                                                         
                     </div>
                 </div>
             </div>
