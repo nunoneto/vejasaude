@@ -52,6 +52,8 @@ public class Article implements Serializable{
     @ManyToOne
     @JoinColumn(name = "username")
     private BackOfficeUser user;
+    @Column
+    private String videoLink;
 
     public Article() {
     }
@@ -114,4 +116,16 @@ public class Article implements Serializable{
     public void setArticleType(ArticleType articleType) {this.articleType = articleType;}
 
     public void setUser(BackOfficeUser user) {this.user = user;}
+
+    public ArticleType getArticleType() {
+        return articleType;
+    }
+
+    public String getVideoLink() {
+        return videoLink;
+    }
+
+    public void setVideoLink(String videoLink) {
+        this.videoLink = videoLink;
+    }
 }

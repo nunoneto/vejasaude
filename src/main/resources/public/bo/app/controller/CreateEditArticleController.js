@@ -9,17 +9,7 @@
             
             var originalArticle, 
                 articleId = $routeParams.articleId;
-            $scope.mode = $routeParams.mode;
-
-            switch($scope.mode) {
-                case 'new':
-                    $scope.article = {};
-                    break;
-                case 'edit':
-                    
-                    break;
-            }
-            
+            $scope.mode = $routeParams.mode;            
 
             var goToArticles = function(){
                 $location.path("home/articles");
@@ -42,7 +32,70 @@
 
             $scope.saveOrUpdate = function() {
 
+                if ($scope.article.id) {
+                    // update article
+
+
+                } else {
+                    // create article
+                    ArticleService.create($scope.article).then(
+                        function(data) {
+                            
+                        },
+                        function(err) {
+
+                        }
+                    );
+                }
+                
             }
+
+            // Reference Links 
+
+            $scope.deleteReferenceLink = function(referenceLink, index) {
+                dialogs.confirm("Link de Referência","Deseja mesmo apagar o link '"+referenceLink.referenceLink+"'?")
+                    .result
+                    .then(function(){
+                        $scope.article.referenceLinks.splice(index,1);
+                    },null);
+            }
+
+            var addReferenceLink = function() {
+                if ($scope.article && !$scope.article.referenceLinks) {
+                    $scope.article.referenceLinks = [];
+                }
+
+                if ($scope.article.referenceLinks.length > 0) {
+                    var areFieldsToFill = false; 
+                    angular.forEach($scope.article.referenceLinks, function(value){
+                        if ((!value.id && value.referenceLink === "") || (value.id && value.referenceLink === "")) {
+                            areFieldsToFill = true;
+                        }
+                    });
+                    if (areFieldsToFill && $scope.articleForm['reference'+new String($scope.article.referenceLinks.length-1)].$valid) {
+                        dialogs.notify("Erro","Verifique se os links que já inseriu são válidos");
+                        return;
+                    }
+                        
+                }
+
+                $scope.article.referenceLinks.push({referenceLink:""});
+            }
+
+            $scope.addReferenceLink = addReferenceLink;
+
+
+            // Inits
+
+            switch($scope.mode) {
+                case 'new':
+                    $scope.article = {};
+                    addReferenceLink();
+                    break;
+                case 'edit':
+                    break;
+            }
+
 
             // Resolvers
             var loadArticle = function(){

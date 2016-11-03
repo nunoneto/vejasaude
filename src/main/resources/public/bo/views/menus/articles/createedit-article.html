@@ -59,37 +59,37 @@
                                     <div class="col-lg-12">
 
                                             
+                                        <div class="row">
+                                            <div class="col-lg-12">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                
-                                                                <div class="form-group">
-                                                                    <label>Título</label>
-                                                                    <input type="text" name="title" ng-model="article.title" class="form-control" ng-minlength="3" ng-maxlength="30" required/>
-                                                                </div>
-                                                                
-                                                                <div class="form-group">
-                                                                    <label>Médico</label>
-                                                                    <select 
-                                                                        name="doctor"
-                                                                        class="form-control" 
-                                                                        ng-model="article.doctor"
-                                                                        ng-change="onDoctorChanged"
-                                                                        ng-options="doc.name for doc in doctors track by doc.id"
-                                                                        required>
-                                                                        <option value=""></option>
-                                                                    </select>
-                                                                    <p ng-show="articleForm.doctor.$invalid && !articleForm.doctor.$pristine" 
-                                                                    class="help-block">Escolha um médico</p>
-                                                                </div>
-
-                                                            </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <label>Título</label>
+                                                            <input type="text" name="title" ng-model="article.title" class="form-control" ng-minlength="3" ng-maxlength="30" required/>
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <label>Médico</label>
+                                                            <select 
+                                                                name="doctor"
+                                                                class="form-control" 
+                                                                ng-model="article.doctor"
+                                                                ng-change="onDoctorChanged"
+                                                                ng-options="doc.name for doc in doctors track by doc.id"
+                                                                required>
+                                                                <option value=""></option>
+                                                            </select>
+                                                            <p ng-show="articleForm.doctor.$invalid && !articleForm.doctor.$pristine" 
+                                                            class="help-block">Escolha um médico</p>
                                                         </div>
 
                                                     </div>
                                                 </div>
+
                                             </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -107,58 +107,179 @@
                                 <div class="row">
                                     <div class="col-lg-12">
 
-                                            
+                                    
+                                        <div class="row">
+                                            <div class="col-lg-12">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                
-                                                                <div class="form-group">
-                                                                    <label>Especialidade</label>
-                                                                    <select 
-                                                                        name="specialty"
-                                                                        class="form-control" 
-                                                                        ng-model="article.specialty"
-                                                                        ng-change="onSpecialityChanged()"
-                                                                        ng-options="sp.specialty for sp in specialties track by sp.id"
-                                                                        required>
-                                                                        <option value=""></option>
-                                                                    </select>
-                                                                    <p ng-show="articleForm.specialty.$invalid && !articleForm.specialty.$pristine" 
-                                                                    class="help-block">Escolha uma especialidade</p>
-                                                                </div>
-                                                                
-                                                                <div class="form-group">
-                                                                    <label>Sub-Especialidade</label>
-                                                                    <select 
-                                                                        name="subSpecialty"
-                                                                        class="form-control" 
-                                                                        ng-model="article.subSpecialty"
-                                                                        ng-options="subSp.subSpecialty for subSp in subSpecialties track by subSp.id">
-                                                                        <option value=""></option>
-                                                                    </select>
-                                                                    <p ng-show="articleForm.subSpecialty.$invalid && !articleForm.subSpecialty.$pristine" 
-                                                                    class="help-block">Escolha uma opção</p>
-                                                                </div>
-
-                                                            </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <label>Especialidade</label>
+                                                            <select 
+                                                                name="specialty"
+                                                                class="form-control" 
+                                                                ng-model="article.specialty"
+                                                                ng-change="onSpecialityChanged()"
+                                                                ng-options="sp.specialty for sp in specialties track by sp.id"
+                                                                required>
+                                                                <option value=""></option>
+                                                            </select>
+                                                            <p ng-show="articleForm.specialty.$invalid && !articleForm.specialty.$pristine" 
+                                                            class="help-block">Escolha uma especialidade</p>
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <label>Sub-Especialidade</label>
+                                                            <select 
+                                                                name="subSpecialty"
+                                                                class="form-control" 
+                                                                ng-model="article.subSpecialty"
+                                                                ng-options="subSp.subSpecialty for subSp in subSpecialties track by subSp.id">
+                                                                <option value=""></option>
+                                                            </select>
+                                                            <p ng-show="articleForm.subSpecialty.$invalid && !articleForm.subSpecialty.$pristine" 
+                                                            class="help-block">Escolha uma opção</p>
                                                         </div>
 
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Video -->
+                <div class="row" ng-if="article.articleType.articleType === 'VIDEO'">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                            
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        
+                                                        <div class="form-group">
+
+                                                            <label>Vídeo</label>                                                                
+                                                            <input type="url" class="form-control" ng-model="article.videoLink" name="videoLink">
+                                                            <p ng-show="articleForm.refevideoLink.$invalid" 
+                                                                    class="alert alert-danger">Insira um link válido para o vídeo! O mesmo deve começar por http://...</p>                                                                
+                                                        
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 3rd Section -->
+                <!-- Article Text -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                            
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        
+                                                        <div class="form-group">
+                                                            <textarea markdown-editor 
+                                                                value="{{article.description}}"
+                                                                get-value="textEditor">
+                                                            </textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- 4th Section -->
+                <!-- Reference Links -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                            
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        
+                                                        <div class="form-group">
+
+                                                            <label>Links de Referência</label>
+                                                            <br><br>
+                                                            
+                                                            <div class="form-group"
+                                                                ng-if="article.referenceLinks.length > 0"
+                                                                ng-repeat="ref in article.referenceLinks">
+                                                                 <div class="input-group">
+                                                                    <input type="url" class="form-control" ng-model="ref.referenceLink" name="reference{{$index}}">
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-default" type="button" ng-click="deleteReferenceLink(ref,$index)">
+                                                                            <i class="fa fa-trash-o"></i>
+                                                                        </button>
+                                                                    </span>
+                                                                </div>
+                                                                <p ng-show="articleForm.reference{{$index}}.$invalid" 
+                                                                        class=" alert alert-danger">O link inserido é inválido! O mesmo deve começar por http://...</p>                                                                
+                                                            </div>
+
+                                                            <br><br>
+                                                            <button type="button" class="btn btn-primary pull-right" ng-click="addReferenceLink()">Adicionar Link</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-
+            <button type="submit" class="btn btn-primary pull-right" ng-disabled="!articleForm.$valid">{{ mode == 'new' ? "Criar" : "Guardar Alterações" }}</button>
+            <br><br><br>
         </div>
+        
 
     </form>        
 

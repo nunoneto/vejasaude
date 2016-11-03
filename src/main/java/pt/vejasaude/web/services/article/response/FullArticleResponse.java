@@ -40,6 +40,8 @@ public class FullArticleResponse {
     private CreateSubSpecialtyResponse subSpecialty;
     @JsonProperty
     private DoctorResponse doctor;
+    @JsonProperty
+    private String videoLink;
 
     public static class DoctorResponse {
 
@@ -82,6 +84,7 @@ public class FullArticleResponse {
         articleResponse.doctor = DoctorResponse.of(article.getDoctor());
         articleResponse.specialty = CreateNewSpecialtyResponse.of(article.getSpecialty());
         articleResponse.subSpecialty = CreateSubSpecialtyResponse.of(article.getSubSpecialty());
+        articleResponse.videoLink = article.getVideoLink();
         articleResponse.referenceLinks = article.getReferenceLinks()
                                                 .stream()
                                                 .map(new Function<ReferenceLink, ReferenceLinkResponse>() {

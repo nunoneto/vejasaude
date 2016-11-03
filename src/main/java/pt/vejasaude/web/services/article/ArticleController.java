@@ -185,7 +185,7 @@ public class ArticleController {
 
     /*@RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public StatusResponse <UpdateGeneralArticleResponse> updateGeneralArticle (
-            @PathVariable String id,
+            @PathVariable String id,A
             @RequestBody UpdateArticleRequest request) {
         int idArticle = Integer.parseInt(id);
         Article article = articleRepository.findOne(idArticle);
