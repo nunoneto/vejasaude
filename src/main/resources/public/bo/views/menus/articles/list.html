@@ -10,7 +10,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th>Título</th>
                         <th>Tipo</th>
                         <th>Criado em</th>
                         <th>Criado por</th>
@@ -21,16 +21,16 @@
                 <tbody>
                     <tr ng-repeat="article in articles">
                         <td>
-                            {{article.name}}
+                            {{article.title}}
                         </td>
                         <td>
-                            {{article.articleType.articleType}}
+                            {{article.articleType.humanReadableType}}
                         </td>
                         <td>
-                            {{article.createdDate}}
+                            {{article.createdDate | date:'dd-MM-yyyy HH:mm'}}
                         </td>
                         <td>
-
+                            {{article.createdBy.prettyName}}
                         </td>
                         <td>
                             <a class="fa fa-pencil" ng-click="editArticle(article)"></a>

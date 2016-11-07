@@ -26,9 +26,12 @@ import pt.vejasaude.web.services.article.response.FullArticleResponse;
 import pt.vejasaude.web.services.article.response.UpdateGeneralArticleResponse;
 import pt.vejasaude.web.services.generic.Status;
 import pt.vejasaude.web.services.generic.StatusResponse;
+import pt.vejasaude.web.services.referenceLink.request.ReferenceLinkRequest;
+import pt.vejasaude.web.services.session.SessionController;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -55,8 +58,6 @@ public class ArticleController {
     @Autowired
     private IArticleTypeRepository  articleTypeRepository;
 
-    public final static String BO_SESSION = "BO_SESSION";
-
     @RequestMapping(method = RequestMethod.GET)
     public StatusResponse<List<ArticleResponse>> getAll(){
 
@@ -67,7 +68,7 @@ public class ArticleController {
         }
 
         List<ArticleResponse> articleList = new ArrayList<>();
-        StreamSupport
+        articleList = StreamSupport
                 .stream(articles.spliterator(), false)
                 .map(new Function<Article, ArticleResponse>() {
                     @Override
@@ -114,24 +115,22 @@ public class ArticleController {
                 article.setSpecialty(specialty);
             }
         }
-        if (request.getSubSpecialty() == null) {
-            return new StatusResponse<>(Status.NOK, "Preencha os campos obrigatórios");
-        } else {
+        if (request.getSubSpecialty() != null) {
             SubSpecialty subSpecialty = subSpecialtyRepository.findOne(request.getSubSpecialty());
 
             if (subSpecialty == null){
-                return new StatusResponse<>(Status.NOK,"Subespecialdidade não encontrada");
+                return new StatusResponse<>(Status.NOK,"Sub especialdidade não encontrada");
             }else {
                 article.setSubSpecialty(subSpecialty);
             }
         }
-        if (request.getAuthor() == null) {
+        if (request.getDoctor() == null) {
             return new StatusResponse<>(Status.NOK, "Preencha os campos obrigatórios");
         } else {
-            Doctor author = doctorRepository.findOne(request.getAuthor());
+            Doctor author = doctorRepository.findOne(request.getDoctor());
 
             if (author == null){
-                return new StatusResponse<>(Status.NOK,"Autor não encontrado");
+                return new StatusResponse<>(Status.NOK,"Medico não encontrado");
             }else {
                 article.setDoctor(author);
             }
@@ -139,33 +138,44 @@ public class ArticleController {
 
         if (request.getListIdAttachments().length > 0) {
             List<Attachment> listAttachment = new ArrayList<Attachment>();
-            for (int att:request.getListIdAttachments()) {
+            for (int att : request.getListIdAttachments()) {
                 Attachment attachment = attachmentRepository.findOne(att);
                 listAttachment.add(attachment);
             }
             article.setAttachment(listAttachment);
         }
 
-        article.setCreatedDate(request.getCreatedDate());
+        article.setCreatedDate(new Date());
 
-        if(request.getReferenceLinks().length>0) {
+        if(request.getReferenceLinks().size() > 0) {
             List<ReferenceLink> listReferenceLinks = new ArrayList<ReferenceLink>();
-            for (int ref:request.getReferenceLinks()){
-                ReferenceLink referenceLink = referenceLinkRepository.findOne(ref);
-                listReferenceLinks.add(referenceLink);
+            for (ReferenceLinkRequest ref : request.getReferenceLinks()){
+                if (ref.getId() == null || referenceLinkRepository.findOne(ref.getId()) == null) {
+                    // create
+                    ReferenceLink newReferenceLink = new ReferenceLink();
+                    newReferenceLink.setReferenceLink(ref.getReferenceLink());
+                    ReferenceLink referenceLink = referenceLinkRepository.save(newReferenceLink);
+                    listReferenceLinks.add(referenceLink);
+                } else {
+                    // attach
+                    ReferenceLink referenceLink = referenceLinkRepository.findOne(ref.getId());
+                    referenceLink.setReferenceLink(ref.getReferenceLink());
+                    referenceLinkRepository.save(referenceLink);
+                    listReferenceLinks.add(referenceLink);
+                }
             }
            article.setReferenceLinks(listReferenceLinks);
        }
 
-        BackOfficeUser user = (BackOfficeUser) session.getAttribute(BO_SESSION);
+        BackOfficeUser user = (BackOfficeUser) session.getAttribute(SessionController.BO_SESSION);
         if (user == null)
             return new StatusResponse<>(Status.NOK,"Autor não encontrado");
         else
             article.setUser(user);
 
         try{
-            articleRepository.save(article);
-            CreateArticleResponse createArticleResponse = CreateArticleResponse.of(article);
+
+            CreateArticleResponse createArticleResponse = CreateArticleResponse.of(articleRepository.save(article));
             return new StatusResponse<CreateArticleResponse>(Status.OK,"Criação efetuada com Sucesso", createArticleResponse);
         }catch (Exception e){
             e.printStackTrace();

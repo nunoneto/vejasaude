@@ -7,7 +7,7 @@
             function loadArticles() {
                 ArticleService.getAll().then(
                     function(result){
-                        $scope.articles = result.content.articles;
+                        $scope.articles = result.content;
                     },function(err){
                         //TODO error     
                     });

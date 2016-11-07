@@ -52,6 +52,7 @@ public class Article implements Serializable{
     @ManyToOne
     @JoinColumn(name = "username")
     private BackOfficeUser user;
+
     @Column
     private String videoLink;
 

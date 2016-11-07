@@ -3,9 +3,9 @@
     .module("vejaSaudeBo")
     .controller('CreateEditArticleController', 
         ['$scope','$location','DoctorService','SpecialityService','CurriculumService',
-        '$routeParams','ngToast','dialogs','ArticleService','ArticleTypeService','SubSpecialtyService', 
+        '$routeParams','ngToast','dialogs','ArticleService','ArticleTypeService','SubSpecialtyService','ReferenceLinkService', 
         function($scope,$location,DoctorService,SpecialityService,CurriculumService,
-        $routeParams,ngToast,dialogs,ArticleService,ArticleTypeService,SubSpecialtyService) {
+        $routeParams,ngToast,dialogs,ArticleService,ArticleTypeService,SubSpecialtyService,ReferenceLinkService) {
             
             var originalArticle, 
                 articleId = $routeParams.articleId;
@@ -33,12 +33,29 @@
             $scope.saveOrUpdate = function() {
 
                 if ($scope.article.id) {
-                    // update article
+                // update article
 
 
                 } else {
                     // create article
-                    ArticleService.create($scope.article).then(
+                    var createRequest = {
+                        typeArticle:        $scope.article.articleType.id,
+                        title:              $scope.article.title,
+                        description:        $scope.textEditor(),
+                        specialty:          $scope.article.specialty.id,
+                        doctor:             $scope.article.doctor.id,
+                        referenceLinks:     $scope.article.referenceLinks,
+                        listIdAttachments:  []
+                    }
+
+                    if ($scope.article.subSpecialty) {
+                        createRequest.subSpecialty = $scope.article.subSpecialty.id;
+                    }
+                    
+                    if ($scope.article.videoLink) 
+                        createRequest.videoLink = $scope.article.videoLink;
+                    
+                    ArticleService.create(createRequest).then(
                         function(data) {
                             
                         },
@@ -47,6 +64,7 @@
                         }
                     );
                 }
+               
                 
             }
 
