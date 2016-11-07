@@ -1,15 +1,18 @@
 (function(){
     angular
     .module("vejaSaudeBo")
-    .controller('DoctorController', ['$scope','$location','DoctorService','dialogs', 
-        function($scope,$location,DoctorService,dialogs) {            
+    .controller('DoctorController', ['$scope','$location','DoctorService','dialogs','ngToast', 
+        function($scope,$location,DoctorService,dialogs,ngToast) {            
             var updateUI = function(){
                 DoctorService.getAll().then(
                     function(data){
                         $scope.doctors = data;
                     },
                     function(err){
-                        //TODO show warning
+                        ngToast.create({
+                            className: 'danger',
+                            content: 'Não foi possível carregar os médicos. Tente novamente mais tarde',
+                        });
                     }
                 );
             }

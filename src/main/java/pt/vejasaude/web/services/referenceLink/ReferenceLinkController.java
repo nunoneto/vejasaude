@@ -1,10 +1,7 @@
 package pt.vejasaude.web.services.referenceLink;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pt.vejasaude.unified.data.referenceLink.IReferenceLinkRepository;
 import pt.vejasaude.unified.data.referenceLink.ReferenceLink;
 import pt.vejasaude.web.services.generic.Status;
@@ -33,6 +30,18 @@ public class ReferenceLinkController {
             e.printStackTrace();
             return new StatusResponse<ReferenceLinkResponse>(Status.NOK,null);
         }
+    }
+
+    @RequestMapping (value = "/{referenceId}", method = RequestMethod.DELETE)
+    public StatusResponse removeReferenceLink (@PathVariable Integer referenceId) {
+
+        if (referenceLinkRepository.findOne(referenceId) != null) {
+            referenceLinkRepository.delete(referenceId);
+            return new StatusResponse(Status.OK, "");
+        } else {
+            return new StatusResponse(Status.NOK, "A referência escolhida já não existe");
+        }
+
     }
 
 }

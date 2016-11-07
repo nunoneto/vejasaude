@@ -41,7 +41,7 @@
                     'Content-Type': "application/json"
                 }
             }).then(function successCallback(response) {
-                resolve(response.content);
+                resolve(response.data);
             }, function errorCallback(response) {
                 reject(response);
 

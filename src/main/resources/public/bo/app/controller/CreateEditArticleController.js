@@ -21,7 +21,10 @@
                         function(data){
                             $scope.subSpecialties = data;
                         },function(err){
-                            //TODO handle err
+                            ngToast.create({
+                                className: 'danger',
+                                content: 'Não foi possível carregar as sub-especialidades. Tente novamente mais tarde',
+                            });
                         }
                     );
                 } else {
@@ -60,7 +63,10 @@
                             
                         },
                         function(err) {
-
+                            ngToast.create({
+                                className: 'danger',
+                                content: 'Não foi possível criar o artigo. Tente novamente mais tarde',
+                            });
                         }
                     );
                 }
@@ -74,7 +80,21 @@
                 dialogs.confirm("Link de Referência","Deseja mesmo apagar o link '"+referenceLink.referenceLink+"'?")
                     .result
                     .then(function(){
-                        $scope.article.referenceLinks.splice(index,1);
+                        if (!$scope.article.referenceLinks[index].id) {
+                            $scope.article.referenceLinks.splice(index,1);
+                            return;
+                        }
+
+                        ReferenceLinkService.remove($scope.article.referenceLinks[index].id).then(
+                            function(data){
+                                $scope.article.referenceLinks.splice(index,1);
+                            },function(err){
+                                ngToast.create({
+                                    className: 'danger',
+                                    content: 'Não foi possível apagar a referência indicada. Tente novamente mais tarde',
+                                });
+                            }
+                        );
                     },null);
             }
 
@@ -120,8 +140,8 @@
                 if (articleId) {
                     ArticleService.find(articleId).then(
                         function(article){
-                            originalArticle = angular.copy(article,originalArticle);
-                            $scope.article = article;
+                            originalArticle = angular.copy(article.content,originalArticle);
+                            $scope.article = article.content;
                         },
                         function(err){
                             ngToast.create({
@@ -139,7 +159,10 @@
                         $scope.articleTypes = data;
                     },
                     function(err){
-                        //TODO error message
+                        ngToast.create({
+                            className: 'danger',
+                            content: 'Não foi possível carregar os tipos de artigos. Tente novamente mais tarde',
+                        });
                     }
                 );
             }
@@ -149,7 +172,10 @@
                     function(data){
                         $scope.doctors = data;
                     },function(err){
-                        //TODO error message
+                        ngToast.create({
+                            className: 'danger',
+                            content: 'Não foi possível carregar os médicos. Tente novamente mais tarde',
+                        });
                     }
                 );
             }
@@ -159,7 +185,10 @@
                     function(data){
                         $scope.specialties = data;
                     },function(err){
-                        //TODO error message
+                        ngToast.create({
+                            className: 'danger',
+                            content: 'Não foi possível carregar as especialidades. Tente novamente mais tarde',
+                        });
                     }
                 );
             }

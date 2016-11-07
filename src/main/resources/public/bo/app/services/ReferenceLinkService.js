@@ -25,8 +25,26 @@
         });
     }
     
+    var remove = function(referenceId){
+       
+        return $q(function(resolve, reject){
+             $http({
+                url: path+"/"+referenceId,
+                method: 'DELETE',
+                headers: {
+                'Content-Type': "application/json"
+                }
+            }).then(function successCallback(response) {
+                resolve(response.data);
+            }, function errorCallback(response) {
+                reject(response);
+            });
+        });
+    }
+    
     return {
-        create: create
+        create: create,
+        remove: remove
     };
 
   }]);
